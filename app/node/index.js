@@ -122,3 +122,4 @@ app.post('/api/invoiceout/update', InvoiceOut.updateInvoice);
 app.post('/api/invoiceout/delete', InvoiceOut.removeInvoice);
 
 app.get('/api/invoiceout/drop', InvoiceOut.removeAllInvoices);
+*/
