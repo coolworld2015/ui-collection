@@ -1,4 +1,4 @@
-# UI Horoscope
+# UI Collection
 git clone https://github.com/coolworld2015/ui-collection.git
 -------------------------------------------------------------------------------------------------
 npm i
