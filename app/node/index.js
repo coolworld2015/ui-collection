@@ -23,13 +23,13 @@ app.use(function (req, res, next) {
 });
 
 //------------------------------------------------------------------------
-var Test = require('./test').Test;
-app.get('/api/get', Test.getAll); 
-app.get('/api/findId/:id', Test.findById);
-app.get('/api/findName/:name', Test.findByName);
-app.post('/api/add', Test.addItem);
-app.post('/api/delete', Test.removeItem);
-app.post('/api/update', Test.updateItem);
+var Collection = require('./collection').Collection;
+app.get('/api/get', Collection.getAll); 
+app.get('/api/findId/:id', Collection.findById);
+app.get('/api/findName/:name', Collection.findByName);
+app.post('/api/add', Collection.addItem);
+app.post('/api/delete', Collection.removeItem);
+app.post('/api/update', Collection.updateItem);
 
 //------------------------------------------------------------------------
 /*
