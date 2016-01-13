@@ -24,8 +24,8 @@ gulp.task('index', function () {
 });
 
 gulp.task('pic', function () {
-    return gulp.src('./app/pic/*.*')
-        .pipe(gulp.dest('./build/Pic'))
+    return gulp.src('./app/*.jpg')
+        .pipe(gulp.dest('./build'))
 });
 
 gulp.task('css', function () {
