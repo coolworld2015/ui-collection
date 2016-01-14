@@ -102,7 +102,7 @@
                                 '</table>' +
                                 '</div>',
                                 resolve: {
-                                    results: resolveResource('api/get')
+                                    results: resolveResource('api/clients/get')
                                 },
                                 controller: 'CollectionCtrl',
                                 controllerAs: 'collectionCtrl'
@@ -160,7 +160,7 @@
 						resolve: {
 							results: ['$http','$stateParams','$rootScope', function($http, $stateParams, $rootScope) {
 								var api,url;
-								api = 'api/findName/';
+								api = 'api/clients/findName/';
 								if ($rootScope.mode == 'Heroku') {
 									url = $rootScope.myConfig.heroku + api;
 								} else {
@@ -319,7 +319,7 @@
 			
             function editItem(item) {
 				var url, api;
-				api = 'api/update';
+				api = 'api/clients/update';
 				if ($rootScope.mode == 'Heroku') {
 					url = $rootScope.myConfig.heroku + api;
 				} else {
@@ -344,7 +344,7 @@
 			
             function delItem(item) {
 				var url, api;
-				api = 'api/delete';
+				api = 'api/clients/delete';
 				if ($rootScope.mode == 'Heroku') {
 					url = $rootScope.myConfig.heroku + api;
 				} else {
@@ -367,7 +367,7 @@
 			
             function addItem() {
 				var url, api;
-				api = 'api/add';
+				api = 'api/clients/add';
 				if ($rootScope.mode == 'Heroku') {
 					url = $rootScope.myConfig.heroku + api;
 				} else {

@@ -32,7 +32,7 @@
 		init();
 
         function init() {
-            vm.title = 'Customers';
+            vm.title = 'Contacts';
             vm.sort = 'name';
 			vm.clients = clients;
 			vm.clientsFilter = [];

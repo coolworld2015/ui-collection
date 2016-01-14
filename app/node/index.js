@@ -24,12 +24,12 @@ app.use(function (req, res, next) {
 
 //------------------------------------------------------------------------
 var Collection = require('./collection').Collection;
-app.get('/api/get', Collection.getAll); 
-app.get('/api/findId/:id', Collection.findById);
-app.get('/api/findName/:name', Collection.findByName);
-app.post('/api/add', Collection.addItem);
-app.post('/api/delete', Collection.removeItem);
-app.post('/api/update', Collection.updateItem);
+app.get('/api/clients/get', Collection.getAll); 
+app.get('/api/clients/findId/:id', Collection.findById);
+app.get('/api/clients/findName/:name', Collection.findByName);
+app.post('/api/clients/add', Collection.addItem);
+app.post('/api/clients/delete', Collection.removeItem);
+app.post('/api/clients/update', Collection.updateItem);
 
 //------------------------------------------------------------------------
 /*

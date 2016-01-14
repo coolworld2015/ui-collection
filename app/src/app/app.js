@@ -29,20 +29,22 @@
     function init($rootScope) {
 		var mode;
 		if ($rootScope.mode === undefined) {
-			mode = localStorage.getItem('warehouse_mode');
+			mode = localStorage.getItem('ui-collection.mode');
 			mode = JSON.parse(mode);
 			$rootScope.mode = mode;
 		}
 		
 		if ($rootScope.mode === null) {
 			mode = 'OFF-LINE (LocalStorage)';
-			localStorage.setItem('warehouse_mode', JSON.stringify(mode));
+			localStorage.setItem('ui-collection.mode', JSON.stringify(mode));
 			$rootScope.mode = mode;
 		}
 		
+		$rootScope.mode = 'ON-LINE (Heroku)'; //TODO remove it !!!
+		
         $rootScope.myConfig = {
-            webUrl: 'http://coolworld2015a1.herokuapp.com/' //TODO change URL
-            //webUrl: 'http://localhost:3000/'
+            //webUrl: 'http://coolworld2015a1.herokuapp.com/' //TODO change URL
+            webUrl: 'http://localhost:3000/'
         };
     }
 
