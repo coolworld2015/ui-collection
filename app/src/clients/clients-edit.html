@@ -1,12 +1,24 @@
-<center ng-init="clientsEditCtrl.init()">
+<center>
 	<form ng-submit="clientsEditCtrl.clientsSubmit()" novalidate name="clientsEditCtrl.form">
-		<div class="header">{{clientsEditCtrl.name}}&nbsp</div>
+		<div class="header">&nbsp;{{clientsEditCtrl.name}}</div>
 		<br><br>
+		<div 
+			style="border-color: white;
+				border-style: solid;
+				border-width: thick;
+				width: 210px;">
+			<img ng-src="{{clientsEditCtrl.pic}}" style="width:200px; height:210px;">
+		</div>
+		<br>
 		<table class="table table-bordered">
 			<tr>
 				<td>
 					<input type="text" class="form-control input" required
-						   placeholder="Customers name" name="name"
+						   style="font-size:20px; 
+						   color: white; 
+						   background-color: black;
+						   border-style: none;"
+						   placeholder="Name" name="name"
 						   ng-model="clientsEditCtrl.name">
 
 					<div ng-if="clientsEditCtrl.form.$submitted">
@@ -14,56 +26,27 @@
 					</div>
 				</td>
 			</tr>
-
+		
 			<tr>
 				<td>
-					<input type="text" class="form-control input" required
-						   placeholder="Customers address" name="address"
-						   ng-model="clientsEditCtrl.address">
-
-					<div ng-if="clientsEditCtrl.form.$submitted">
-						<div ng-show="clientsEditCtrl.form.address.$error.required" class="valid">Value required</div>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-					<input type="text" class="form-control input" required
-						   placeholder="Customers phone" name="phone"
-						   ng-model="clientsEditCtrl.phone">
-
-					<div ng-if="clientsEditCtrl.form.$submitted">
-						<div ng-show="clientsEditCtrl.form.phone.$error.required" class="valid">Value required</div>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-					<input type="text" class="form-control input" required
-						   placeholder="Customers description" name="description"
+					<textarea rows=5 type="text" class="form-control input" required
+						   style="font-size:20px; 
+						   color: white; 
+						   background-color: black;
+						   border-style: none;"					
+						   placeholder="Description" name="description"
 						   ng-model="clientsEditCtrl.description">
-
+					</textarea>
 					<div ng-if="clientsEditCtrl.form.$submitted">
 						<div ng-show="clientsEditCtrl.form.description.$error.required" class="valid">Value required</div>
 					</div>
 				</td>
 			</tr>
-
-			<tr>
-				<td>
-					<input type="text" class="form-control input"
-						   readonly
-						   style="background-color:white"
-						   value={{clientsEditCtrl.total}}>
-				</td>
-			</tr>
 		</table>
 
 		<button type="submit" class="btn btn-primary button">Submit</button>&nbsp
-		<button type="button" class="btn btn-primary button" ng-click="clientsEditCtrl.clientsDialog()">Delete</button>
-		<br><br>
+		<button type="button" class="btn btn-primary button" ng-click="clientsEditCtrl.clientsDialog()">Delete</button><br><br>
 		<button type="button" class="btn btn-primary button" ng-click="clientsEditCtrl.clientsEditBack()">Back</button>
 	</form>
+	<br><br>
 </center>

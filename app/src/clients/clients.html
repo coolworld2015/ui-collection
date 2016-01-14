@@ -19,9 +19,8 @@
 	
 	<table class="table table-striped input" style="font-size:20px; color: white; background-color: black;">
 		<tr ng-repeat="item in filteredClients | orderBy:clientsCtrl.sort:clientsCtrl.rev |
-			filter:clientsCtrl.query as clientsFilter track by $index"
-		ng-click="clientsCtrl.clientsEditForm(item)">
-			<td ng-click="usersCtrl.usersEditForm(item)" style="font-size:20px; color: white; background-color: black;">
+			filter:clientsCtrl.query as clientsFilter track by $index">
+			<td ng-click="clientsCtrl.clientsEditForm(item)" style="font-size:20px; color: white; background-color: black;">
 				<div style="border-style: solid;
 						border-width: thick;
 						float: left;">

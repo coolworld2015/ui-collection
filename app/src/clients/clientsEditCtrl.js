@@ -35,21 +35,19 @@
             var item = {
                 id: vm.id,
                 name: vm.name,
-                address: vm.address,
-                phone: vm.phone,
-                sum: vm.sum,
+                pic: vm.pic,
                 description: vm.description
             };
 			if ($rootScope.mode == 'ON-LINE (Heroku)') {
 				ClientsService.editItem(item)
 					.then(function () {
 						$rootScope.myError = false;
-						$state.go('main.clients');
+						$state.go('clients');
 					})
 					.catch(errorHandler);;
 			} else {
 				ClientsLocalStorage.editItem(item);
-				$state.go('main.clients');
+				$state.go('clients');
 			}
         }
 
@@ -58,12 +56,12 @@
                 id: vm.id,
                 name: vm.name
             };
-            $state.go('main.clients-dialog', {item: obj});
+            $state.go('clients-dialog', {item: obj});
         }
 
         function clientsEditBack() {
 			$rootScope.loading = true;
-            $state.go('main.clients');
+            $state.go('clients');
         }
 		
 		function errorHandler() {

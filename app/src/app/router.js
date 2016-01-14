@@ -49,28 +49,7 @@
         function sort1(a, b) {
             return parseInt(a.number) - parseInt(b.number);
         }
-		
-		function resolver(paramDate) {
-			getHoroscope.$inject =['$rootScope', '$http', '$stateParams', 'ShowService'];
-			function getHoroscope($rootScope, $http, $stateParams, ShowService) {
-				var webUrl = $rootScope.myConfig.webUrl;
-				var d = new Date;
-				var todayDate = d.getMonth() + 1 + '/' + (d.getDate()) + '/' + d.getFullYear();
-				var signName = $stateParams.signName;
-				var param = "&sign=" + signName + "&date=" + ShowService.paramDate(paramDate);
-				var url = webUrl + param + '&callback=JSON_CALLBACK';
-				return $http.jsonp(url)
-					.then(function (result) {
-						var details = result.data[0].details.scope;
-						details = details.replace(/’/g, "'");
-						return details;
-					})
-					.catch(function() {
-					});
-			}
-			return getHoroscope;
-		}
-						
+								
         $urlRouterProvider.otherwise('/main');
 		
         $stateProvider
@@ -94,35 +73,28 @@
                 }
             })
 				
-            .state('users', {
-                url: '/users',
-				templateUrl: 'users/users.html',
-				controller: 'UsersCtrl',
-				controllerAs: 'usersCtrl'  
-            })
-
-            .state('users-add', {
-                url: '/users-add',
+            .state('clients-add', {
+                url: '/clients-add',
                 params: {item:{}},
-				templateUrl: 'users/users-add.html',
-				controller: 'UsersAddCtrl',
-				controllerAs: 'usersAddCtrl'
+				templateUrl: 'clients/clients-add.html',
+				controller: 'ClientsAddCtrl',
+				controllerAs: 'clientsAddCtrl'
             })
 			
-			.state('users-edit', {
-                url: '/users-edit',
+			.state('clients-edit', {
+                url: '/clients-edit',
                 params: {item:{}},
-				templateUrl: 'users/users-edit.html',
-				controller: 'UsersEditCtrl',
-				controllerAs: 'usersEditCtrl'
+				templateUrl: 'clients/clients-edit.html',
+				controller: 'ClientsEditCtrl',
+				controllerAs: 'clientsEditCtrl'
             })
 
-            .state('users-dialog', {
-                url: '/users-dialog',
+            .state('clients-dialog', {
+                url: '/clients-dialog',
                 params: {item:{}},
-				templateUrl: 'users/users-dialog.html',
-				controller: 'UsersDialogCtrl',
-				controllerAs: 'usersDialogCtrl'
+				templateUrl: 'clients/clients-dialog.html',
+				controller: 'ClientsDialogCtrl',
+				controllerAs: 'clientsDialogCtrl'
             })
     }
 })();

@@ -1,8 +1,17 @@
 <center>
-	<div class="header">Customers</div>
+	<div class="header">Collection</div>
+	<br><br>
+	<img ng-src="logo.jpg" width=150 height=150 ng-click="clientsDialogCtrl.goToBack()">
+	<hr>
+		<br>
+		<span style="font-size:24px; color: white;">
+			<strong>
+				Are you sure you want to delete {{clientsDialogCtrl.name}}?
+			</strong>					
+		</span>
 		<br><br>
-			<h3>Are you sure you want to delete customer {{clientsDialogCtrl.name}}?</h3>
+			<hr>
 		<br><br>
-	<button class="btn btn-primary button" ng-click="clientsDialogCtrl.clientsDelete()">Yes</button>
+	<button class="btn btn-primary button" ng-click="clientsDialogCtrl.clientsDelete()">Yes</button>&nbsp
 	<button class="btn btn-primary button" ng-click="clientsDialogCtrl.clientsEditBack()">No</button>
 </center>

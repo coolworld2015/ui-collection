@@ -26,17 +26,17 @@
 				ClientsService.deleteItem(vm.id)
 					.then(function () {
 						$rootScope.myError = false;
-						$state.go('main.clients');
+						$state.go('clients');
 					})
 					.catch(errorHandler);
 			} else {
                 ClientsLocalStorage.deleteItem(vm.id);
-                $state.go('main.clients');
+                $state.go('clients');
             }
         }
 
         function clientsEditBack() {
-            $state.go('main.clients');
+            $state.go('clients');
         }
 		
 		function errorHandler() {

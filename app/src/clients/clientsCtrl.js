@@ -68,8 +68,8 @@
         }
 
         function clientsAdd() {
-			console.log(vm.clients);
-			localStorage.setItem('ui-collection.clients', JSON.stringify(vm.clients));
+			//console.log(vm.clients);
+			//localStorage.setItem('ui-collection.clients', JSON.stringify(vm.clients));
             $state.go('clients-add');
         }
 
