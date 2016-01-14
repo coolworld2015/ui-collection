@@ -9,6 +9,47 @@
 
     function routeConfig($stateProvider, $urlRouterProvider) {
 	
+		function resolveResource(url, state ,sort) {
+			resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage'];
+			function resolver($http, $q, $rootScope, ClientsLocalStorage) {
+				var data;
+				if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
+					if (state == 'clients') {
+						data = ClientsLocalStorage.getClients();
+						return data;
+					}
+				}
+				var webUrl = $rootScope.myConfig.webUrl + url;
+				return $http.get(webUrl)
+                    .then(function (result) {
+                        $rootScope.loading = false;
+                        return result.data.sort(sort);
+                    })
+                    .catch(function (reject) {
+                        $rootScope.loading = false;
+                        $rootScope.myError = true;
+                        return $q.reject(reject);
+                    });
+			}
+
+			return resolver;
+		}
+		
+		function sort(a, b) {
+            var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+            if (nameA < nameB) {
+                return -1
+            }
+            if (nameA > nameB) {
+                return 1
+            }
+            return 0;
+        }
+
+        function sort1(a, b) {
+            return parseInt(a.number) - parseInt(b.number);
+        }
+		
 		function resolver(paramDate) {
 			getHoroscope.$inject =['$rootScope', '$http', '$stateParams', 'ShowService'];
 			function getHoroscope($rootScope, $http, $stateParams, ShowService) {
@@ -43,62 +84,16 @@
                 }
             })
 			
-            .state('signs', {
-                url: '/signs',
-                templateUrl: 'signs/signs.html',
-                controller: 'SignsCtrl',
-                controllerAs: 'signsCtrl',
-                data: {
-                    requireLogin: false
+            .state('clients', {
+                url: '/clients',
+				templateUrl: 'clients/clients.html',
+				controller: 'ClientsCtrl',
+				controllerAs: 'clientsCtrl',
+                resolve: {
+                    clients: resolveResource('api/clients/get', 'clients', sort)
                 }
             })
-
-            .state('show-today', {
-                url: '/show-today?signName?friends',
-                templateUrl: 'show/show-today.html',
-                controller: 'ShowTodayCtrl',
-                controllerAs: 'showTodayCtrl',
-                data: {
-                    requireLogin: false
-                },
-				resolve: {
-					today: resolver('today')
-				}
-            })
-
-            .state('show-yesterday', {
-                url: '/show-yesterday?signName?friends',
-                templateUrl: 'show/show-yesterday.html',
-                controller: 'ShowYesterdayCtrl',
-                controllerAs: 'showYesterdayCtrl',
-                data: {
-                    requireLogin: false
-                },
-				resolve: {
-					yesterday: resolver('yesterday')
-				}
-            })
-
-            .state('show-tomorrow', {
-                url: '/show-tomorrow?signName?friends',
-                templateUrl: 'show/show-tomorrow.html',
-                controller: 'ShowTomorrowCtrl',
-                controllerAs: 'showTomorrowCtrl',
-                data: {
-                    requireLogin: false
-                },
-				resolve: {
-					tomorrow: resolver('tomorrow')
-				}
-            })
-			
-            .state('friends', {
-                url: '/friends',
-				templateUrl: 'friends/friends.html',
-				controller: 'FriendsCtrl',
-				controllerAs: 'friendsCtrl'  
-            })
-			
+				
             .state('users', {
                 url: '/users',
 				templateUrl: 'users/users.html',

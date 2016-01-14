@@ -2,7 +2,7 @@
     'use strict';
     
     angular
-        .module('app', ['ui.router']);
+        .module('app', ['ui.router', 'ui.bootstrap']);
 	
     angular
         .module('app')
@@ -27,9 +27,22 @@
     init.$inject = ['$rootScope'];
 	
     function init($rootScope) {
-		$rootScope.mode = '';
+		var mode;
+		if ($rootScope.mode === undefined) {
+			mode = localStorage.getItem('warehouse_mode');
+			mode = JSON.parse(mode);
+			$rootScope.mode = mode;
+		}
+		
+		if ($rootScope.mode === null) {
+			mode = 'OFF-LINE (LocalStorage)';
+			localStorage.setItem('warehouse_mode', JSON.stringify(mode));
+			$rootScope.mode = mode;
+		}
+		
         $rootScope.myConfig = {
-            webUrl: 'http://m-api.californiapsychics.com/horoscope?format=json'
+            webUrl: 'http://coolworld2015a1.herokuapp.com/' //TODO change URL
+            //webUrl: 'http://localhost:3000/'
         };
     }
 
