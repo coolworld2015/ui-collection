@@ -13,6 +13,7 @@
 		
         angular.extend(vm, {
 			convertPicToJSON: convertPicToJSON,
+			openPic: openPic,
             clientsSubmit: clientsSubmit,
             clientsDialog: clientsDialog,
             clientsEditBack: clientsEditBack,
@@ -39,7 +40,12 @@
 			console.log(file);
 			reader.readAsDataURL(file);
 		}
-			
+		
+		function openPic() {
+			window.open(vm.pic); 
+			return false;
+		}
+		
         function clientsSubmit() {
             if (vm.form.$invalid) {
                 return;
