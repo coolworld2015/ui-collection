@@ -5,13 +5,15 @@
         .module('app')
         .controller('ClientsEditCtrl', ClientsEditCtrl);
 
-    ClientsEditCtrl.$inject = ['$state', '$rootScope', '$filter', 'ClientsService', 'ClientsLocalStorage', '$stateParams'];
+    ClientsEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$filter', 'ClientsService', 'ClientsLocalStorage', '$stateParams'];
 
-    function ClientsEditCtrl($state, $rootScope, $filter, ClientsService, ClientsLocalStorage, $stateParams) {
+    function ClientsEditCtrl($scope, $state, $rootScope, $filter, ClientsService, ClientsLocalStorage, $stateParams) {
         var vm = this;
-
+		$scope.convertPicToJSON = convertPicToJSON;
+		
         angular.extend(vm, {
             init: init,
+			convertPicToJSON: convertPicToJSON,
             clientsSubmit: clientsSubmit,
             clientsDialog: clientsDialog,
             clientsEditBack: clientsEditBack,
@@ -23,7 +25,21 @@
         function init() {
             vm.total = $filter('number')(vm.sum, 2);
         }
-
+		
+		function convertPicToJSON() {
+			var fileInput = document.getElementById("picFileInput");
+			var files = fileInput.files;
+			var file = files[0];
+			var reader = new FileReader();
+			reader.onload = function () {
+				  $scope.$apply(function() {
+					  vm.pic = reader.result;
+				  });
+			};
+			console.log(file);
+			reader.readAsDataURL(file);
+		}
+			
         function clientsSubmit() {
             if (vm.form.$invalid) {
                 return;
