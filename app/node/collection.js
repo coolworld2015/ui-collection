@@ -44,7 +44,8 @@ function addItem(req, res) {
 	var obj = {
 		id:req.body.id,
 		pic:req.body.pic,
-		name:req.body.name
+		name:req.body.name,
+		description:req.body.description
 	}
 	myJson.push(obj);
 	fs.writeFile(fileName, JSON.stringify(myJson), "utf8", function(){});
@@ -56,7 +57,8 @@ function updateItem(req, res) {
 	var obj = {
 		id:req.body.id,
 		pic:req.body.pic,
-		name:req.body.name
+		name:req.body.name,
+		description:req.body.description
 	}
 	for (var i = 0; i < myJson.length; i++) {
 		if (myJson[i].id == id) {

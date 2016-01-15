@@ -40,7 +40,7 @@
 			$rootScope.mode = mode;
 		}
 		
-		//$rootScope.mode = 'ON-LINE (Heroku)'; //TODO remove it !!!
+		$rootScope.mode = 'ON-LINE (Heroku)'; //TODO remove it !!!
 		
         $rootScope.myConfig = {
             //webUrl: 'http://coolworld2015a1.herokuapp.com/' //TODO change URL
