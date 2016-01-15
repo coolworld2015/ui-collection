@@ -26,7 +26,7 @@
         });
 
         $timeout(function () {
-            $scope.$broadcast('_scrollHere');
+            window.scrollTo(0,0);
         });
 		
 		init();

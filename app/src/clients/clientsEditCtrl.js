@@ -5,14 +5,13 @@
         .module('app')
         .controller('ClientsEditCtrl', ClientsEditCtrl);
 
-    ClientsEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$filter', 'ClientsService', 'ClientsLocalStorage', '$stateParams'];
+    ClientsEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'ClientsService', 'ClientsLocalStorage', '$stateParams'];
 
-    function ClientsEditCtrl($scope, $state, $rootScope, $filter, ClientsService, ClientsLocalStorage, $stateParams) {
+    function ClientsEditCtrl($scope, $state, $rootScope, $timeout, ClientsService, ClientsLocalStorage, $stateParams) {
 		$scope.convertPicToJSON = convertPicToJSON;
         var vm = this;
 		
         angular.extend(vm, {
-            init: init,
 			convertPicToJSON: convertPicToJSON,
             clientsSubmit: clientsSubmit,
             clientsDialog: clientsDialog,
@@ -21,10 +20,11 @@
         });
 
         angular.extend(vm, $stateParams.item);
-
-        function init() {
-            vm.total = $filter('number')(vm.sum, 2);
-        }
+		
+        $timeout(function () {
+            window.scrollTo(0,0);
+        });
+		
 		
 		function convertPicToJSON() {
 			var fileInput = document.getElementById("picFileInput");

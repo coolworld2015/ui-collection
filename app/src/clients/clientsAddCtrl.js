@@ -5,9 +5,9 @@
         .module('app')
         .controller('ClientsAddCtrl', ClientsAddCtrl);
 
-    ClientsAddCtrl.$inject = ['$state', '$rootScope', 'ClientsService', 'ClientsLocalStorage'];
+    ClientsAddCtrl.$inject = ['$state', '$rootScope', '$timeout', 'ClientsService', 'ClientsLocalStorage'];
 
-    function ClientsAddCtrl($state, $rootScope, ClientsService, ClientsLocalStorage) {
+    function ClientsAddCtrl($state, $rootScope, $timeout, ClientsService, ClientsLocalStorage) {
         var vm = this;
 
         angular.extend(vm, {
@@ -16,6 +16,10 @@
             clientsAddBack: clientsAddBack,
 			_errorHandler: errorHandler
         });
+		
+        $timeout(function () {
+            window.scrollTo(0,0);
+        });		
 		
 		init();
 		
