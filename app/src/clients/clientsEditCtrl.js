@@ -8,8 +8,8 @@
     ClientsEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$filter', 'ClientsService', 'ClientsLocalStorage', '$stateParams'];
 
     function ClientsEditCtrl($scope, $state, $rootScope, $filter, ClientsService, ClientsLocalStorage, $stateParams) {
-        var vm = this;
 		$scope.convertPicToJSON = convertPicToJSON;
+        var vm = this;
 		
         angular.extend(vm, {
             init: init,
