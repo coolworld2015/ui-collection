@@ -40,6 +40,7 @@
         }
 
         function clientsEditBack() {
+			$rootScope.loading = true;			
             $state.go('clients');
         }
 		
