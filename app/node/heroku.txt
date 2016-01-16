@@ -13,6 +13,9 @@ db.dropDatabase()
 mongoimport --db test --collection clients --file clients.json
 -----------------------------------------------------------------------------------------------------
 
+mongoose.connect('mongodb://admin:admin@ds047355.mongolab.com:47355/collection');
+-----------------------------------------------------------------------------------------------------
+
 mongoose.connect('mongodb://localhost:27017');
 
 https://mongolab.com/databases/wintermute2009/collections/clients

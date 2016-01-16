@@ -43,8 +43,8 @@
 		//$rootScope.mode = 'ON-LINE (Heroku)'; //TODO remove it !!!
 		
         $rootScope.myConfig = {
-            //webUrl: 'http://coolworld2015a1.herokuapp.com/' //TODO change URL
-            webUrl: 'http://localhost:3000/'
+            webUrl: 'http://ui-collection.herokuapp.com/' //TODO change URL
+            //webUrl: 'http://localhost:3000/file/'
         };
     }
 

@@ -2,7 +2,7 @@ var fs = require("fs");
 var fileName = "./test.json";
 var myJson = require(fileName);
  
-var Collection = {
+var Clients = {
 	getAll: getAll,
     findById: findById,
 	findByName: findByName,
@@ -11,7 +11,7 @@ var Collection = {
 	removeItem: removeItem
 };
 
-module.exports.Collection = Collection;
+module.exports.Clients = Clients;
 
 function getAll(req, res) {
 	console.log(myJson.length);

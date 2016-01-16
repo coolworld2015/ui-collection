@@ -22,6 +22,7 @@
 		init();
 		
 		function init() {
+			$rootScope.myError = false;
 			$rootScope.loading = false;
 		}
 		

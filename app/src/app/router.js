@@ -57,10 +57,14 @@
                 url: '/main',
 				templateUrl: 'app/main.html',
 				controller: 'MainCtrl',
-				controllerAs: 'mainCtrl',
-                data: {
-                    requireLogin: false
-                }
+				controllerAs: 'mainCtrl'
+            })
+			
+            .state('config', {
+                url: '/config',
+				templateUrl: 'config/config.html',
+				controller: 'ConfigCtrl',
+				controllerAs: 'configCtrl'
             })
 			
             .state('clients', {

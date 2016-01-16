@@ -23,103 +23,30 @@ app.use(function (req, res, next) {
 });
 
 //------------------------------------------------------------------------
-var Collection = require('./collection').Collection;
-app.get('/api/clients/get', Collection.getAll); 
-app.get('/api/clients/findId/:id', Collection.findById);
-app.get('/api/clients/findName/:name', Collection.findByName);
-app.post('/api/clients/add', Collection.addItem);
-app.post('/api/clients/delete', Collection.removeItem);
-app.post('/api/clients/update', Collection.updateItem);
+var fileClients = require('./file-clients').Clients;
+
+app.get('/file/api/clients/get', fileClients.getAll); 
+app.get('/file/api/clients/findId/:id', fileClients.findById);
+app.get('/file/api/clients/findName/:name', fileClients.findByName);
+app.post('/file/api/clients/add', fileClients.addItem);
+app.post('/file/api/clients/delete', fileClients.removeItem);
+app.post('/file/api/clients/update', fileClients.updateItem);
 
 //------------------------------------------------------------------------
-/*
-var Clients = require('./clients').Clients;
+var mongoClients = require('./mongo-clients').Clients;
 
-app.get('/api/clients/get', Clients.getClients);
+app.get('/api/clients/get', mongoClients.getClients);
 
-app.get('/api/clients/find/:id', Clients.findClient);
-app.post('/api/clients/find', Clients.findPostClient);
+app.get('/api/clients/find/:id', mongoClients.findClient);
+app.post('/api/clients/find', mongoClients.findPostClient);
 
-app.get('/api/clients/edit/:id/:name', Clients.editClient);
-app.post('/api/clients/edit/', Clients.editPostClient);
-app.post('/api/clients/update', Clients.updateClient);
+app.get('/api/clients/edit/:id/:name', mongoClients.editClient);
+app.post('/api/clients/edit/', mongoClients.editPostClient);
+app.post('/api/clients/update', mongoClients.updateClient);
 
-app.post('/api/clients/add', Clients.addClient);
-app.post('/api/clients/save', Clients.saveClient);
+app.post('/api/clients/add', mongoClients.addClient);
+app.post('/api/clients/save', mongoClients.saveClient);
 
-app.get('/api/clients/drop', Clients.removeAllClients);
-app.post('/api/clients/drop', Clients.removeAllClients);
-app.post('/api/clients/delete', Clients.removeClient);
-
-//------------------------------------------------------------------------
-var Goods = require('./goods').Goods;
-
-app.get('/api/goods/get', Goods.getGoods);
-app.post('/api/goods/find', Goods.findPostItem);
-
-app.post('/api/goods/add', Goods.addItem);
-app.post('/api/goods/update', Goods.updateItem);
-app.post('/api/goods/delete', Goods.removesItem);
-
-app.get('/api/goods/drop', Goods.removeAllGoods);
-
-//------------------------------------------------------------------------
-var Users = require('./users').Users;
-
-app.get('/api/users/get', Users.getUsers);
-app.post('/api/users/find', Users.findPostUser);
-
-app.post('/api/users/add', Users.addUser);
-app.post('/api/users/update', Users.updateUser);
-app.post('/api/users/delete', Users.removeUser);
-
-app.get('/api/users/drop', Users.removeAllUsers);
-
-//------------------------------------------------------------------------
-var Inputs = require('./inputs').Inputs;
-
-app.get('/api/inputs/get', Inputs.getInputs);
-app.post('/api/inputs/find', Inputs.findPostInput);
-
-app.post('/api/inputs/add', Inputs.addInput);
-app.post('/api/inputs/update', Inputs.updateInput);
-app.post('/api/inputs/delete', Inputs.removeInput);
-
-app.get('/api/inputs/drop', Inputs.removeAllInputs);
-
-//------------------------------------------------------------------------
-var Outputs = require('./outputs').Outputs;
-
-app.get('/api/outputs/get', Outputs.getOutputs);
-app.post('/api/outputs/find', Outputs.findPostOutput);
-
-app.post('/api/outputs/add', Outputs.addOutput);
-app.post('/api/outputs/update', Outputs.updateOutput);
-app.post('/api/outputs/delete', Outputs.removeOutput);
-
-app.get('/api/outputs/drop', Outputs.removeAllOutputs);
-
-//------------------------------------------------------------------------
-var InvoiceIn = require('./invoicein').InvoiceIn;
-
-app.get('/api/invoicein/get', InvoiceIn.getInvoices);
-app.post('/api/invoicein/find', InvoiceIn.findPostInvoice);
-
-app.post('/api/invoicein/add', InvoiceIn.addInvoice);
-app.post('/api/invoicein/update', InvoiceIn.updateInvoice);
-app.post('/api/invoicein/delete', InvoiceIn.removeInvoice);
-
-app.get('/api/invoicein/drop', InvoiceIn.removeAllInvoices);
-
-//------------------------------------------------------------------------
-var InvoiceOut = require('./invoiceout').InvoiceOut;
-
-app.get('/api/invoiceout/get', InvoiceOut.getInvoices);
-app.post('/api/invoiceout/find', InvoiceOut.findPostInvoice);
-
-app.post('/api/invoiceout/add', InvoiceOut.addInvoice);
-app.post('/api/invoiceout/update', InvoiceOut.updateInvoice);
-app.post('/api/invoiceout/delete', InvoiceOut.removeInvoice);
-
-app.get('/api/invoiceout/drop', InvoiceOut.removeAllInvoices);
-*/
+app.get('/api/clients/drop', mongoClients.removeAllClients);
+app.post('/api/clients/drop', mongoClients.removeAllClients);
+app.post('/api/clients/delete', mongoClients.removeClient);
