@@ -19,6 +19,12 @@
 						return data;
 					}
 				}
+				if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
+					if (state == 'categories') {
+						data = ClientsLocalStorage.getClients();
+						return data;
+					}
+				}				
 				var webUrl = $rootScope.myConfig.webUrl + url;
 				return $http.get(webUrl)
                     .then(function (result) {
@@ -100,5 +106,39 @@
 				controller: 'ClientsDialogCtrl',
 				controllerAs: 'clientsDialogCtrl'
             })
+
+            .state('categories', {
+                url: '/categories',
+				templateUrl: 'categories/categories.html',
+				controller: 'CategoriesCtrl',
+				controllerAs: 'categoriesCtrl',
+                resolve: {
+                    categories: resolveResource('api/categories/get', 'categories', sort)
+                }
+            })
+				
+            .state('categories-add', {
+                url: '/categories-add',
+                params: {item:{}},
+				templateUrl: 'categories/categories-add.html',
+				controller: 'CategoriesAddCtrl',
+				controllerAs: 'categoriesAddCtrl'
+            })
+			
+			.state('categories-edit', {
+                url: '/categories-edit',
+                params: {item:{}},
+				templateUrl: 'categories/categories-edit.html',
+				controller: 'CategoriesEditCtrl',
+				controllerAs: 'categoriesEditCtrl'
+            })
+
+            .state('categories-dialog', {
+                url: '/categories-dialog',
+                params: {item:{}},
+				templateUrl: 'categories/categories-dialog.html',
+				controller: 'CategoriesDialogCtrl',
+				controllerAs: 'categoriesDialogCtrl'
+            })			
     }
 })();
