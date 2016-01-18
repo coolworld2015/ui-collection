@@ -24,16 +24,6 @@ app.use(function (req, res, next) {
 });
 
 //------------------------------------------------------------------------
-var fileCategories = require('./file-categories').Categories;
-
-app.get('/file/api/categories/get', fileCategories.getAll);
-app.get('/file/api/categories/findId/:id', fileCategories.findById);
-app.get('/file/api/categories/findName/:name', fileCategories.findByName);
-app.post('/file/api/categories/add', fileCategories.addItem);
-app.post('/file/api/categories/delete', fileCategories.removeItem);
-app.post('/file/api/categories/update', fileCategories.updateItem);
-
-//------------------------------------------------------------------------
 //------------------------------------------------------------------------
 var fileClients = require('./file-clients').Clients;
 
@@ -62,3 +52,29 @@ app.post('/api/clients/save', mongoClients.saveClient);
 app.get('/api/clients/drop', mongoClients.removeAllClients);
 app.post('/api/clients/drop', mongoClients.removeAllClients);
 app.post('/api/clients/delete', mongoClients.removeClient);
+
+//------------------------------------------------------------------------
+//------------------------------------------------------------------------
+var fileCategories = require('./file-categories').Categories;
+
+app.get('/file/api/categories/get', fileCategories.getAll);
+app.get('/file/api/categories/findId/:id', fileCategories.findById);
+app.get('/file/api/categories/findName/:name', fileCategories.findByName);
+app.post('/file/api/categories/add', fileCategories.addItem);
+app.post('/file/api/categories/delete', fileCategories.removeItem);
+app.post('/file/api/categories/update', fileCategories.updateItem);
+
+//------------------------------------------------------------------------
+var mongoCategories = require('./mongo-categories').Categories;
+
+app.get('/api/categories/get', mongoCategories.getCategories);
+app.get('/api/categories/find/:id', mongoCategories.findCategory);
+app.post('/api/categories/find', mongoCategories.findPostCategory);
+app.get('/api/categories/edit/:id/:name', mongoCategories.editCategory);
+app.post('/api/categories/edit/', mongoCategories.editPostCategory);
+app.post('/api/categories/update', mongoCategories.updateCategory);
+app.post('/api/categories/add', mongoCategories.addCategory);
+app.post('/api/categories/save', mongoCategories.saveCategory);
+app.get('/api/categories/drop', mongoCategories.removeAllCategories);
+app.post('/api/categories/drop', mongoCategories.removeAllCategories);
+app.post('/api/categories/delete', mongoCategories.removeCategory);

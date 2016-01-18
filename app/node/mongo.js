@@ -15,8 +15,9 @@ db.once('open', function callback() {
     console.log('Connected to mongoDB');
 });
 
-//---------------------------------------------------------------------------------------------
 var Schema = mongoose.Schema;
+
+//---------------------------------------------------------------------------------------------
 var Clients = new Schema({
     id: {type: String, required: true},
     name: {type: String, required: true},
@@ -26,3 +27,14 @@ var Clients = new Schema({
 
 var ClientsModel = mongoose.model('Clients', Clients);
 module.exports.ClientsModel = ClientsModel;
+
+//---------------------------------------------------------------------------------------------
+var Categories = new Schema({
+    id: {type: String, required: true},
+    name: {type: String, required: true},
+    groups: [],
+    description: {type: String, required: true}
+});
+
+var CategoriesModel = mongoose.model('Categories', Categories);
+module.exports.CategoriesModel = CategoriesModel;
