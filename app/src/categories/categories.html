@@ -17,7 +17,7 @@
 		ng-model="categoriesCtrl.query.name">
 	</div>	
 	<table class="table table-striped input" style="font-size:20px; color:white; background-color:black;">
-		<tr ng-repeat="item in filteredClients 
+		<tr ng-repeat="item in filteredCategories
 			| orderBy:categoriesCtrl.sort:categoriesCtrl.rev |
 			filter:categoriesCtrl.query as categoriesFilter
 			track by $index">

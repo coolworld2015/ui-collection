@@ -1,5 +1,5 @@
 <center>
-	<form ng-submit="clientsAddCtrl.clientsAddSubmit()" novalidate name="clientsAddCtrl.form">
+	<form ng-submit="categoriesAddCtrl.categoriesAddSubmit()" novalidate name="categoriesAddCtrl.form">
 		<div class="header">New record</div>
 		<br><br>
 		<div 
@@ -7,7 +7,7 @@
 				border-style: solid;
 				border-width: thick;
 				width: 210px;">
-			<img ng-src="{{clientsAddCtrl.pic}}" style="width:200px; height:210px;">
+			<img ng-src="{{categoriesAddCtrl.pic}}" style="width:200px; height:210px;">
 		</div>
 		<br>
 		<table class="table table-bordered">
@@ -19,10 +19,10 @@
 						   background-color: black;
 						   border-style: none;"
 						   placeholder="Name" name="name"
-						   ng-model="clientsAddCtrl.name">
+						   ng-model="categoriesAddCtrl.name">
 
-					<div ng-if="clientsAddCtrl.form.$submitted">
-						<div ng-show="clientsAddCtrl.form.name.$error.required" class="valid">Value required</div>
+					<div ng-if="categoriesAddCtrl.form.$submitted">
+						<div ng-show="categoriesAddCtrl.form.name.$error.required" class="valid">Value required</div>
 					</div>
 				</td>
 			</tr>
@@ -41,17 +41,17 @@
 						   background-color: black;
 						   border-style: none;"					
 						   placeholder="Description" name="description"
-						   ng-model="clientsAddCtrl.description">
+						   ng-model="categoriesAddCtrl.description">
 					</textarea>
-					<div ng-if="clientsAddCtrl.form.$submitted">
-						<div ng-show="clientsAddCtrl.form.description.$error.required" class="valid">Value required</div>
+					<div ng-if="categoriesAddCtrl.form.$submitted">
+						<div ng-show="categoriesAddCtrl.form.description.$error.required" class="valid">Value required</div>
 					</div>
 				</td>
 			</tr>
 		</table>
 
 		<button type="submit" class="btn btn-primary button">Submit</button>&nbsp
-		<button type="button" class="btn btn-primary button" ng-click="clientsAddCtrl.clientsAddBack()">Back</button>
+		<button type="button" class="btn btn-primary button" ng-click="categoriesAddCtrl.categoriesAddBack()">Back</button>
 	</form>
 	<br><br>
 </center>
