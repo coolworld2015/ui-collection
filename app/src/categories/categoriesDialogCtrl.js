@@ -3,48 +3,48 @@
 
     angular
         .module('app')
-        .controller('ClientsDialogCtrl', ClientsDialogCtrl);
+        .controller('CategoriesDialogCtrl', CategoriesDialogCtrl);
 
-    ClientsDialogCtrl.$inject = ['$state', '$rootScope', '$timeout', 'ClientsService', 'ClientsLocalStorage', '$stateParams'];
+    CategoriesDialogCtrl.$inject = ['$state', '$rootScope', '$timeout', 'CategoriesService', 'CategoriesLocalStorage', '$stateParams'];
 
-    function ClientsDialogCtrl($state, $rootScope, $timeout, ClientsService, ClientsLocalStorage, $stateParams) {
+    function CategoriesDialogCtrl($state, $rootScope, $timeout, CategoriesService, CategoriesLocalStorage, $stateParams) {
         var vm = this;
 
         angular.extend(vm, {
-            clientsDelete: clientsDelete,
-            clientsEditBack: clientsEditBack,
-			_errorHandler: errorHandler
+            categoriesDelete: categoriesDelete,
+            categoriesEditBack: categoriesEditBack,
+            _errorHandler: errorHandler
         });
 
         angular.extend(vm, $stateParams.item);
-		
+
         $timeout(function () {
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         });
-		
-        function clientsDelete() {
-			$rootScope.loading = true;
+
+        function categoriesDelete() {
+            $rootScope.loading = true;
             $rootScope.myError = false;
-			
-			if ($rootScope.mode == 'ON-LINE (Heroku)') {
-				ClientsService.deleteItem(vm.id)
-					.then(function () {
-						$rootScope.myError = false;
-						$state.go('clients');
-					})
-					.catch(errorHandler);
-			} else {
-                ClientsLocalStorage.deleteItem(vm.id);
-                $state.go('clients');
+
+            if ($rootScope.mode == 'ON-LINE (Heroku)') {
+                CategoriesService.deleteItem(vm.id)
+                    .then(function () {
+                        $rootScope.myError = false;
+                        $state.go('categories');
+                    })
+                    .catch(errorHandler);
+            } else {
+                CategoriesLocalStorage.deleteItem(vm.id);
+                $state.go('categories');
             }
         }
 
-        function clientsEditBack() {
-			$rootScope.loading = true;			
-            $state.go('clients');
+        function categoriesEditBack() {
+            $rootScope.loading = true;
+            $state.go('categories');
         }
-		
-		function errorHandler() {
+
+        function errorHandler() {
             $rootScope.loading = false;
             $rootScope.myError = true;
         }

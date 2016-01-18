@@ -1,13 +1,13 @@
 <center>
-	<form ng-submit="clientsEditCtrl.clientsSubmit()" novalidate name="clientsEditCtrl.form">
-		<div class="header">&nbsp;{{clientsEditCtrl.name}}</div>
+	<form ng-submit="categoriesEditCtrl.categoriesSubmit()" novalidate name="categoriesEditCtrl.form">
+		<div class="header">&nbsp;{{categoriesEditCtrl.name}}</div>
 		<br><br>
 		<div 
 			style="border-color: white;
 				border-style: solid;
 				border-width: thick;
 				width: 210px;">
-			<img ng-src="{{clientsEditCtrl.pic}}" style="width:200px; height:210px;" ng-click="clientsEditCtrl.openPic()">
+			<img ng-src="{{categoriesEditCtrl.pic}}" style="width:200px; height:210px;" ng-click="categoriesEditCtrl.openPic()">
 		</div>
 		<br>
 		<table class="table table-bordered">
@@ -19,10 +19,10 @@
 						   background-color: black;
 						   border-style: none;"
 						   placeholder="Name" name="name"
-						   ng-model="clientsEditCtrl.name">
+						   ng-model="categoriesEditCtrl.name">
 
-					<div ng-if="clientsEditCtrl.form.$submitted">
-						<div ng-show="clientsEditCtrl.form.name.$error.required" class="valid">Value required</div>
+					<div ng-if="categoriesEditCtrl.form.$submitted">
+						<div ng-show="categoriesEditCtrl.form.name.$error.required" class="valid">Value required</div>
 					</div>
 				</td>
 			</tr>
@@ -41,18 +41,18 @@
 						   background-color: black;
 						   border-style: none;"					
 						   placeholder="Description" name="description"
-						   ng-model="clientsEditCtrl.description">
+						   ng-model="categoriesEditCtrl.description">
 					</textarea>
-					<div ng-if="clientsEditCtrl.form.$submitted">
-						<div ng-show="clientsEditCtrl.form.description.$error.required" class="valid">Value required</div>
+					<div ng-if="categoriesEditCtrl.form.$submitted">
+						<div ng-show="categoriesEditCtrl.form.description.$error.required" class="valid">Value required</div>
 					</div>
 				</td>
 			</tr>
 		</table>
 
 		<button type="submit" class="btn btn-primary button">Submit</button>&nbsp
-		<button type="button" class="btn btn-primary button" ng-click="clientsEditCtrl.clientsDialog()">Delete</button><br><br>
-		<button type="button" class="btn btn-primary button" ng-click="clientsEditCtrl.clientsEditBack()">Back</button>
+		<button type="button" class="btn btn-primary button" ng-click="categoriesEditCtrl.categoriesDialog()">Delete</button><br><br>
+		<button type="button" class="btn btn-primary button" ng-click="categoriesEditCtrl.categoriesEditBack()">Back</button>
 	</form>
 	<br><br>
 </center>
