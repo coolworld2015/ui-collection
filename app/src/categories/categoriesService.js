@@ -15,7 +15,7 @@
             addItem: addItem,
             editItem: editItem,
             deleteItem: deleteItem,
-            findCategoria: findCategoria,
+            findCategory: findCategory,
             _sort: sort
         };
 
@@ -55,7 +55,7 @@
                 });
         }
 
-        function findCategoria(id) {
+        function findCategory(id) {
             var url = webUrl + 'api/categories/find';
             var item = {
                 "id": id
