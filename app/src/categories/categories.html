@@ -4,7 +4,7 @@
 	<img ng-src="logo.jpg" width=150 height=150 ng-click="categoriesCtrl.goToBack()">
 	<hr>
 	<div class="header" ng-click="categoriesCtrl.goToBack()">
-		{{categoriesCtrl.title}} ({{clientsFilter.length}} / {{categoriesCtrl.clients.length}})
+		{{categoriesCtrl.title}} ({{categoriesFilter.length}} / {{categoriesCtrl.categories.length}})
 	</div>
 	<div>
 		<input type="text" class="form-control" 
@@ -19,9 +19,9 @@
 	<table class="table table-striped input" style="font-size:20px; color:white; background-color:black;">
 		<tr ng-repeat="item in filteredClients 
 			| orderBy:categoriesCtrl.sort:categoriesCtrl.rev |
-			filter:categoriesCtrl.query as clientsFilter 
+			filter:categoriesCtrl.query as categoriesFilter
 			track by $index">
-			<td ng-click="categoriesCtrl.clientsEditForm(item)" style="font-size:20px; color:white; background-color:black;">
+			<td ng-click="categoriesCtrl.categoriesEditForm(item)" style="font-size:20px; color:white; background-color:black;">
 				<div style="border-style: solid;
 						border-width: thick;
 						float: left;">
@@ -43,7 +43,7 @@
 			type="text" ng-model="numPerPage" value={{numPerPage}}>
 		</span>	
 	<div><pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></pagination></div>
-	<button class="btn btn-primary button" ng-click="categoriesCtrl.clientsAdd()">Add</button>&nbsp
-	<button class="btn btn-primary button" ng-click="categoriesCtrl.clientsBack()" scroll-here>Back</button>
+	<button class="btn btn-primary button" ng-click="categoriesCtrl.categoriesAdd()">Add</button>&nbsp
+	<button class="btn btn-primary button" ng-click="categoriesCtrl.categoriesBack()" scroll-here>Back</button>
 	<br><br>
 </center>
