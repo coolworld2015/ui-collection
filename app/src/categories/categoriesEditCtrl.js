@@ -57,7 +57,7 @@
             var item = {
                 id: vm.id,
                 name: vm.name,
-                pic: vm.pic,
+                groups: vm.groups,
                 description: vm.description
             };
             if ($rootScope.mode == 'ON-LINE (Heroku)') {

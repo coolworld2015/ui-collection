@@ -56,7 +56,7 @@
             var item = {
                 id: id,
                 name: vm.name,
-                pic: vm.pic,
+                groups: [],
                 description: vm.description
             };
 
