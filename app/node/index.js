@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+
 app.use(bodyParser({limit: '50mb'}));
 
 app.listen(process.env.PORT || 3000, function () {
@@ -22,6 +23,17 @@ app.use(function (req, res, next) {
     next();
 });
 
+//------------------------------------------------------------------------
+var fileCategories = require('./file-categories').Categories;
+
+app.get('/file/api/categories/get', fileCategories.getAll);
+app.get('/file/api/categories/findId/:id', fileCategories.findById);
+app.get('/file/api/categories/findName/:name', fileCategories.findByName);
+app.post('/file/api/categories/add', fileCategories.addItem);
+app.post('/file/api/categories/delete', fileCategories.removeItem);
+app.post('/file/api/categories/update', fileCategories.updateItem);
+
+//------------------------------------------------------------------------
 //------------------------------------------------------------------------
 var fileClients = require('./file-clients').Clients;
 

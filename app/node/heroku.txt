@@ -1,3 +1,6 @@
+-----------------------------------------------------------------------------------------------------
+mongoose.connect('mongodb://admin:admin@ds047355.mongolab.com:47355/collection');
+-----------------------------------------------------------------------------------------------------
 node index.js
 
 mongod.exe --dbpath d:/MongoDB/db
@@ -11,9 +14,6 @@ show collections
 db.dropDatabase()
 
 mongoimport --db test --collection clients --file clients.json
------------------------------------------------------------------------------------------------------
-
-mongoose.connect('mongodb://admin:admin@ds047355.mongolab.com:47355/collection');
 -----------------------------------------------------------------------------------------------------
 
 mongoose.connect('mongodb://localhost:27017');
