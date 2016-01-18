@@ -3,75 +3,75 @@
 
     angular
         .module('app')
-        .factory('ClientsLocalStorage', ClientsLocalStorage);
+        .factory('CategoriesLocalStorage', CategoriesLocalStorage);
 
-    ClientsLocalStorage.$inject = ['$rootScope'];
+    CategoriesLocalStorage.$inject = ['$rootScope'];
 
-    function ClientsLocalStorage($rootScope) {
+    function CategoriesLocalStorage($rootScope) {
         var webUrl = $rootScope.myConfig.webUrl;
 
         return {
             clients: [],
             numPerPage: 10,
 
-            getClients: getClients,
+            getCategories: getCategories,
             addItem: addItem,
             editItem: editItem,
             deleteItem: deleteItem,
-            setClients: setClients,
+            setCategories: setCategories,
 
-            uploadClients: uploadClients,
+            uploadCategories: uploadCategories,
             _sort: sort
         };
 
-        function getClients() {
-            if (ClientsLocalStorage.clients === undefined) {
+        function getCategories() {
+            if (CategoriesLocalStorage.clients === undefined) {
                 var clients = localStorage.getItem('ui-collection.clients');
                 clients = JSON.parse(clients);
-                ClientsLocalStorage.clients = clients;
+                CategoriesLocalStorage.clients = clients;
             }
 
-            if (ClientsLocalStorage.clients === null) {
-                ClientsLocalStorage.clients = [];
+            if (CategoriesLocalStorage.clients === null) {
+                CategoriesLocalStorage.clients = [];
             }
 
-            return ClientsLocalStorage.clients.sort(sort);
+            return CategoriesLocalStorage.clients.sort(sort);
         }
 
         function addItem(item) {
-            ClientsLocalStorage.clients.push(item);
-            setClients();
+            CategoriesLocalStorage.clients.push(item);
+            setCategories();
         }
 
         function editItem(item) {
-            var clients = ClientsLocalStorage.clients;
+            var clients = CategoriesLocalStorage.clients;
             for (var i = 0; i < clients.length; i++) {
                 if (clients[i].id == item.id) {
                     clients.splice(i, 1, item);
-                    setClients();
+                    setCategories();
                     break;
                 }
             }
         }
 
         function deleteItem(id) {
-            var clients = ClientsLocalStorage.clients;
+            var clients = CategoriesLocalStorage.clients;
             for (var i = 0; i < clients.length; i++) {
                 if (clients[i].id == id) {
                     clients.splice(i, 1);
-                    setClients();
+                    setCategories();
                     break;
                 }
             }
         }
 
-        function setClients() {
-            localStorage.setItem('ui-collection.clients', JSON.stringify(ClientsLocalStorage.clients));
+        function setCategories() {
+            localStorage.setItem('ui-collection.clients', JSON.stringify(CategoriesLocalStorage.clients));
         }
 
-        function uploadClients(clients) {
+        function uploadCategories(clients) {
             localStorage.setItem('ui-collection.clients', JSON.stringify(clients));
-            ClientsLocalStorage.clients = undefined;
+            CategoriesLocalStorage.clients = undefined;
         }
 
         function sort(a, b) {

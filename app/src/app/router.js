@@ -5,28 +5,28 @@
         .module('app')
         .config(routeConfig);
 
-	routeConfig.$inject = ['$stateProvider','$urlRouterProvider'];
+    routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function routeConfig($stateProvider, $urlRouterProvider) {
-	
-		function resolveResource(url, state ,sort) {
-			resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage'];
-			function resolver($http, $q, $rootScope, ClientsLocalStorage) {
-				var data;
-				if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
-					if (state == 'clients') {
-						data = ClientsLocalStorage.getClients();
-						return data;
-					}
-				}
-				if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
-					if (state == 'categories') {
-						data = ClientsLocalStorage.getClients();
-						return data;
-					}
-				}				
-				var webUrl = $rootScope.myConfig.webUrl + url;
-				return $http.get(webUrl)
+
+        function resolveResource(url, state, sort) {
+            resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage', 'CategoriesLocalStorage'];
+            function resolver($http, $q, $rootScope, ClientsLocalStorage, CategoriesLocalStorage) {
+                var data;
+                if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
+                    if (state == 'clients') {
+                        data = ClientsLocalStorage.getClients();
+                        return data;
+                    }
+                }
+                if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
+                    if (state == 'categories') {
+                        data = CategoriesLocalStorage.getCategories();
+                        return data;
+                    }
+                }
+                var webUrl = $rootScope.myConfig.webUrl + url;
+                return $http.get(webUrl)
                     .then(function (result) {
                         $rootScope.loading = false;
                         return result.data.sort(sort);
@@ -36,12 +36,12 @@
                         $rootScope.myError = true;
                         return $q.reject(reject);
                     });
-			}
+            }
 
-			return resolver;
-		}
-		
-		function sort(a, b) {
+            return resolver;
+        }
+
+        function sort(a, b) {
             var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
             if (nameA < nameB) {
                 return -1
@@ -55,90 +55,90 @@
         function sort1(a, b) {
             return parseInt(a.number) - parseInt(b.number);
         }
-								
+
         $urlRouterProvider.otherwise('/main');
-		
+
         $stateProvider
-		    .state('main', {
+            .state('main', {
                 url: '/main',
-				templateUrl: 'app/main.html',
-				controller: 'MainCtrl',
-				controllerAs: 'mainCtrl'
+                templateUrl: 'app/main.html',
+                controller: 'MainCtrl',
+                controllerAs: 'mainCtrl'
             })
-			
+
             .state('config', {
                 url: '/config',
-				templateUrl: 'config/config.html',
-				controller: 'ConfigCtrl',
-				controllerAs: 'configCtrl'
+                templateUrl: 'config/config.html',
+                controller: 'ConfigCtrl',
+                controllerAs: 'configCtrl'
             })
-			
+
             .state('clients', {
                 url: '/clients',
-				templateUrl: 'clients/clients.html',
-				controller: 'ClientsCtrl',
-				controllerAs: 'clientsCtrl',
+                templateUrl: 'clients/clients.html',
+                controller: 'ClientsCtrl',
+                controllerAs: 'clientsCtrl',
                 resolve: {
                     clients: resolveResource('api/clients/get', 'clients', sort)
                 }
             })
-				
+
             .state('clients-add', {
                 url: '/clients-add',
-                params: {item:{}},
-				templateUrl: 'clients/clients-add.html',
-				controller: 'ClientsAddCtrl',
-				controllerAs: 'clientsAddCtrl'
+                params: {item: {}},
+                templateUrl: 'clients/clients-add.html',
+                controller: 'ClientsAddCtrl',
+                controllerAs: 'clientsAddCtrl'
             })
-			
-			.state('clients-edit', {
+
+            .state('clients-edit', {
                 url: '/clients-edit',
-                params: {item:{}},
-				templateUrl: 'clients/clients-edit.html',
-				controller: 'ClientsEditCtrl',
-				controllerAs: 'clientsEditCtrl'
+                params: {item: {}},
+                templateUrl: 'clients/clients-edit.html',
+                controller: 'ClientsEditCtrl',
+                controllerAs: 'clientsEditCtrl'
             })
 
             .state('clients-dialog', {
                 url: '/clients-dialog',
-                params: {item:{}},
-				templateUrl: 'clients/clients-dialog.html',
-				controller: 'ClientsDialogCtrl',
-				controllerAs: 'clientsDialogCtrl'
+                params: {item: {}},
+                templateUrl: 'clients/clients-dialog.html',
+                controller: 'ClientsDialogCtrl',
+                controllerAs: 'clientsDialogCtrl'
             })
 
             .state('categories', {
                 url: '/categories',
-				templateUrl: 'categories/categories.html',
-				controller: 'CategoriesCtrl',
-				controllerAs: 'categoriesCtrl',
+                templateUrl: 'categories/categories.html',
+                controller: 'CategoriesCtrl',
+                controllerAs: 'categoriesCtrl',
                 resolve: {
                     categories: resolveResource('api/categories/get', 'categories', sort)
                 }
             })
-				
+
             .state('categories-add', {
                 url: '/categories-add',
-                params: {item:{}},
-				templateUrl: 'categories/categories-add.html',
-				controller: 'CategoriesAddCtrl',
-				controllerAs: 'categoriesAddCtrl'
+                params: {item: {}},
+                templateUrl: 'categories/categories-add.html',
+                controller: 'CategoriesAddCtrl',
+                controllerAs: 'categoriesAddCtrl'
             })
-			
-			.state('categories-edit', {
+
+            .state('categories-edit', {
                 url: '/categories-edit',
-                params: {item:{}},
-				templateUrl: 'categories/categories-edit.html',
-				controller: 'CategoriesEditCtrl',
-				controllerAs: 'categoriesEditCtrl'
+                params: {item: {}},
+                templateUrl: 'categories/categories-edit.html',
+                controller: 'CategoriesEditCtrl',
+                controllerAs: 'categoriesEditCtrl'
             })
 
             .state('categories-dialog', {
                 url: '/categories-dialog',
-                params: {item:{}},
-				templateUrl: 'categories/categories-dialog.html',
-				controller: 'CategoriesDialogCtrl',
-				controllerAs: 'categoriesDialogCtrl'
-            })			
+                params: {item: {}},
+                templateUrl: 'categories/categories-dialog.html',
+                controller: 'CategoriesDialogCtrl',
+                controllerAs: 'categoriesDialogCtrl'
+            })
     }
 })();
