@@ -38,3 +38,14 @@ var Categories = new Schema({
 
 var CategoriesModel = mongoose.model('Categories', Categories);
 module.exports.CategoriesModel = CategoriesModel;
+
+//---------------------------------------------------------------------------------------------
+var Groups = new Schema({
+    id: {type: String, required: true},
+    name: {type: String, required: true},
+    category: {type: String, required: true},
+    description: {type: String, required: true}
+});
+
+var GroupsModel = mongoose.model('Groups', Groups);
+module.exports.GroupsModel = GroupsModel;

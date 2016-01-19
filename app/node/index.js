@@ -78,3 +78,29 @@ app.post('/api/categories/save', mongoCategories.saveCategory);
 app.get('/api/categories/drop', mongoCategories.removeAllCategories);
 app.post('/api/categories/drop', mongoCategories.removeAllCategories);
 app.post('/api/categories/delete', mongoCategories.removeCategory);
+
+//------------------------------------------------------------------------
+//------------------------------------------------------------------------
+var fileGroups = require('./file-groups').Groups;
+
+app.get('/file/api/groups/get', fileGroups.getAll);
+app.get('/file/api/groups/findId/:id', fileGroups.findById);
+app.get('/file/api/groups/findName/:name', fileGroups.findByName);
+app.post('/file/api/groups/add', fileGroups.addItem);
+app.post('/file/api/groups/delete', fileGroups.removeItem);
+app.post('/file/api/groups/update', fileGroups.updateItem);
+
+//------------------------------------------------------------------------
+var mongoGroups = require('./mongo-groups').Groups;
+
+app.get('/api/groups/get', mongoGroups.getGroups);
+app.get('/api/groups/find/:id', mongoGroups.findGroup);
+app.post('/api/groups/find', mongoGroups.findPostGroup);
+app.get('/api/groups/edit/:id/:name', mongoGroups.editGroup);
+app.post('/api/groups/edit/', mongoGroups.editPostGroup);
+app.post('/api/groups/update', mongoGroups.updateGroup);
+app.post('/api/groups/add', mongoGroups.addGroup);
+app.post('/api/groups/save', mongoGroups.saveGroup);
+app.get('/api/groups/drop', mongoGroups.removeAllGroups);
+app.post('/api/groups/drop', mongoGroups.removeAllGroups);
+app.post('/api/groups/delete', mongoGroups.removeGroup);
