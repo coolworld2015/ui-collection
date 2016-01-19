@@ -3,19 +3,21 @@
 
     angular
         .module('app')
-        .controller('CategoriesAddCtrl', CategoriesAddCtrl);
+        .controller('GroupsAddCtrl', GroupsAddCtrl);
 
-    CategoriesAddCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'CategoriesService', 'CategoriesLocalStorage'];
+    GroupsAddCtrl.$inject = ['$state', '$rootScope', '$timeout', 'GroupsService', 'GroupsLocalStorage',
+        'CategoriesLocalStorage'];
 
-    function CategoriesAddCtrl($scope, $state, $rootScope, $timeout, CategoriesService, CategoriesLocalStorage) {
-        $scope.convertPicToJSON = convertPicToJSON;
+    function GroupsAddCtrl($state, $rootScope, $timeout, GroupsService, GroupsLocalStorage,
+                           CategoriesLocalStorage) {
+        var optionalClient = {name: 'Select customer'};
         var vm = this;
 
         angular.extend(vm, {
             init: init,
-            convertPicToJSON: convertPicToJSON,
-            categoriesAddSubmit: categoriesAddSubmit,
-            categoriesAddBack: categoriesAddBack,
+            updateChange: updateChange,
+            groupsAddSubmit: groupsAddSubmit,
+            groupsAddBack: groupsAddBack,
             _errorHandler: errorHandler
         });
 
@@ -26,25 +28,23 @@
         init();
 
         function init() {
+            vm.clients = CategoriesLocalStorage.getCategories();
+            vm.clientsOptions = [].concat(vm.clients);
+            //vm.clientsOptions.unshift(optionalClient);
             $rootScope.loading = false;
-            vm.pic = $rootScope.picBlank;
         }
 
-        function convertPicToJSON() {
-            var fileInput = document.getElementById("picFileInput");
-            var files = fileInput.files;
-            var file = files[0];
-            var reader = new FileReader();
-            reader.onload = function () {
-                $scope.$apply(function () {
-                    vm.pic = reader.result;
-                });
-            };
-            console.log(file);
-            reader.readAsDataURL(file);
+        function updateChange(item) {
+            vm.error = false;
+            vm.categoryName = item.name;
         }
 
-        function categoriesAddSubmit() {
+        function groupsAddSubmit() {
+            if (vm.selectedItem.name == 'Select customer') {
+                vm.error = true;
+                return;
+            }
+
             if (vm.form.$invalid) {
                 return;
             }
@@ -56,25 +56,25 @@
             var item = {
                 id: id,
                 name: vm.name,
-                groups: [],
+                category: vm.categoryName,
                 description: vm.description
             };
 
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
-                CategoriesService.addItem(item)
+                GroupsService.addItem(item)
                     .then(function () {
                         $rootScope.myError = false;
-                        $state.go('categories');
+                        $state.go('groups');
                     })
                     .catch(errorHandler);
             } else {
-                CategoriesLocalStorage.addItem(item);
-                $state.go('categories');
+                GroupsLocalStorage.addItem(item);
+                $state.go('groups');
             }
         }
 
-        function categoriesAddBack() {
-            $state.go('categories');
+        function groupsAddBack() {
+            $state.go('groups');
         }
 
         function errorHandler() {

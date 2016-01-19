@@ -5,11 +5,7 @@
         .module('app')
         .factory('CategoriesLocalStorage', CategoriesLocalStorage);
 
-    CategoriesLocalStorage.$inject = ['$rootScope'];
-
-    function CategoriesLocalStorage($rootScope) {
-        var webUrl = $rootScope.myConfig.webUrl;
-
+    function CategoriesLocalStorage() {
         return {
             categories: [],
             numPerPage: 10,

@@ -5,9 +5,11 @@
         .module('app')
         .controller('CategoriesEditCtrl', CategoriesEditCtrl);
 
-    CategoriesEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'CategoriesService', 'CategoriesLocalStorage', '$stateParams'];
+    CategoriesEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'CategoriesService',
+        'CategoriesLocalStorage', '$stateParams'];
 
-    function CategoriesEditCtrl($scope, $state, $rootScope, $timeout, CategoriesService, CategoriesLocalStorage, $stateParams) {
+    function CategoriesEditCtrl($scope, $state, $rootScope, $timeout, CategoriesService,
+                                CategoriesLocalStorage, $stateParams) {
         $scope.convertPicToJSON = convertPicToJSON;
         var vm = this;
 
@@ -57,7 +59,7 @@
             var item = {
                 id: vm.id,
                 name: vm.name,
-                groups: vm.groups,
+                category: vm.category,
                 description: vm.description
             };
             if ($rootScope.mode == 'ON-LINE (Heroku)') {

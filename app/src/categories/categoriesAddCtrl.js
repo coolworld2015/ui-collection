@@ -8,12 +8,10 @@
     CategoriesAddCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'CategoriesService', 'CategoriesLocalStorage'];
 
     function CategoriesAddCtrl($scope, $state, $rootScope, $timeout, CategoriesService, CategoriesLocalStorage) {
-        $scope.convertPicToJSON = convertPicToJSON;
         var vm = this;
 
         angular.extend(vm, {
             init: init,
-            convertPicToJSON: convertPicToJSON,
             categoriesAddSubmit: categoriesAddSubmit,
             categoriesAddBack: categoriesAddBack,
             _errorHandler: errorHandler
@@ -27,21 +25,6 @@
 
         function init() {
             $rootScope.loading = false;
-            vm.pic = $rootScope.picBlank;
-        }
-
-        function convertPicToJSON() {
-            var fileInput = document.getElementById("picFileInput");
-            var files = fileInput.files;
-            var file = files[0];
-            var reader = new FileReader();
-            reader.onload = function () {
-                $scope.$apply(function () {
-                    vm.pic = reader.result;
-                });
-            };
-            console.log(file);
-            reader.readAsDataURL(file);
         }
 
         function categoriesAddSubmit() {

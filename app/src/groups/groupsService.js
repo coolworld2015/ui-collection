@@ -3,24 +3,24 @@
 
     angular
         .module('app')
-        .factory('CategoriesService', CategoriesService);
+        .factory('GroupsService', GroupsService);
 
-    CategoriesService.$inject = ['$rootScope', '$http'];
+    GroupsService.$inject = ['$rootScope', '$http'];
 
-    function CategoriesService($rootScope, $http) {
+    function GroupsService($rootScope, $http) {
         var webUrl = $rootScope.myConfig.webUrl;
 
         return {
-            getCategories: getCategories,
+            getGroups: getGroups,
             addItem: addItem,
             editItem: editItem,
             deleteItem: deleteItem,
-            findCategory: findCategory,
+            findGroup: findGroup,
             _sort: sort
         };
 
-        function getCategories() {
-            var url = webUrl + 'api/categories/get';
+        function getGroups() {
+            var url = webUrl + 'api/groups/get';
             return $http.get(url)
                 .then(function (result) {
                     result.data.sort(sort);
@@ -29,7 +29,7 @@
         }
 
         function addItem(item) {
-            var url = webUrl + 'api/categories/add';
+            var url = webUrl + 'api/groups/add';
             return $http.post(url, item)
                 .then(function (result) {
                     return result;
@@ -37,7 +37,7 @@
         }
 
         function editItem(item) {
-            var url = webUrl + 'api/categories/update';
+            var url = webUrl + 'api/groups/update';
             return $http.post(url, item)
                 .then(function (result) {
                     return result;
@@ -45,7 +45,7 @@
         }
 
         function deleteItem(id) {
-            var url = webUrl + 'api/categories/delete';
+            var url = webUrl + 'api/groups/delete';
             var item = {
                 "id": id
             };
@@ -55,8 +55,8 @@
                 });
         }
 
-        function findCategory(id) {
-            var url = webUrl + 'api/categories/find';
+        function findGroup(id) {
+            var url = webUrl + 'api/groups/find';
             var item = {
                 "id": id
             };

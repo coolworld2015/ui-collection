@@ -5,11 +5,7 @@
         .module('app')
         .factory('ClientsLocalStorage', ClientsLocalStorage);
 
-    ClientsLocalStorage.$inject = ['$rootScope'];
-
-    function ClientsLocalStorage($rootScope) {
-        var webUrl = $rootScope.myConfig.webUrl;
-
+    function ClientsLocalStorage() {
         return {
             clients: [],
             numPerPage: 10,

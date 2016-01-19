@@ -5,11 +5,7 @@
         .module('app')
         .factory('GroupsLocalStorage', GroupsLocalStorage);
 
-    GroupsLocalStorage.$inject = ['$rootScope'];
-
-    function GroupsLocalStorage($rootScope) {
-        var webUrl = $rootScope.myConfig.webUrl;
-
+    function GroupsLocalStorage() {
         return {
             groups: [],
             numPerPage: 10,
