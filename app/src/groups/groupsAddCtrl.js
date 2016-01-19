@@ -10,8 +10,8 @@
 
     function GroupsAddCtrl($state, $rootScope, $timeout, GroupsService, GroupsLocalStorage,
                            CategoriesLocalStorage) {
-        var optionalClient = {name: 'Select customer'};
         var vm = this;
+        var optionalClient = {name: 'Select category'};
 
         angular.extend(vm, {
             init: init,
@@ -29,8 +29,9 @@
 
         function init() {
             vm.clients = CategoriesLocalStorage.getCategories();
-            vm.clientsOptions = [].concat(vm.clients);
-            //vm.clientsOptions.unshift(optionalClient);
+            vm.options = [].concat(vm.clients);
+            vm.options.unshift(optionalClient);
+            vm.selectedItem = vm.options[0];
             $rootScope.loading = false;
         }
 
@@ -40,7 +41,7 @@
         }
 
         function groupsAddSubmit() {
-            if (vm.selectedItem.name == 'Select customer') {
+            if (vm.selectedItem.name == 'Select category') {
                 vm.error = true;
                 return;
             }

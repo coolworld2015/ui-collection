@@ -11,8 +11,8 @@
                 <td>
                     <select class="form-control input" required
                             ng-model="groupsAddCtrl.selectedItem"
-                            ng-options="clientsOption.name for clientsOption in groupsAddCtrl.clientsOptions
-							track by clientsOption.name"
+                            ng-options="option.name for option in groupsAddCtrl.options
+							track by option.name"
                             ng-change="groupsAddCtrl.updateChange(groupsAddCtrl.selectedItem)">
                     </select>
 
