@@ -3,16 +3,16 @@
 
     angular
         .module('app')
-        .controller('CategoriesDialogCtrl', CategoriesDialogCtrl);
+        .controller('GroupsDialogCtrl', GroupsDialogCtrl);
 
-    CategoriesDialogCtrl.$inject = ['$state', '$rootScope', '$timeout', 'CategoriesService', 'CategoriesLocalStorage', '$stateParams'];
+    GroupsDialogCtrl.$inject = ['$state', '$rootScope', '$timeout', 'GroupsService', 'GroupsLocalStorage', '$stateParams'];
 
-    function CategoriesDialogCtrl($state, $rootScope, $timeout, CategoriesService, CategoriesLocalStorage, $stateParams) {
+    function GroupsDialogCtrl($state, $rootScope, $timeout, GroupsService, GroupsLocalStorage, $stateParams) {
         var vm = this;
 
         angular.extend(vm, {
-            categoriesDelete: categoriesDelete,
-            categoriesEditBack: categoriesEditBack,
+            groupsDelete: groupsDelete,
+            groupsEditBack: groupsEditBack,
             _errorHandler: errorHandler
         });
 
@@ -22,26 +22,26 @@
             window.scrollTo(0, 0);
         });
 
-        function categoriesDelete() {
+        function groupsDelete() {
             $rootScope.loading = true;
             $rootScope.myError = false;
 
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
-                CategoriesService.deleteItem(vm.id)
+                GroupsService.deleteItem(vm.id)
                     .then(function () {
                         $rootScope.myError = false;
-                        $state.go('categories');
+                        $state.go('groups');
                     })
                     .catch(errorHandler);
             } else {
-                CategoriesLocalStorage.deleteItem(vm.id);
-                $state.go('categories');
+                GroupsLocalStorage.deleteItem(vm.id);
+                $state.go('groups');
             }
         }
 
-        function categoriesEditBack() {
+        function groupsEditBack() {
             $rootScope.loading = true;
-            $state.go('categories');
+            $state.go('groups');
         }
 
         function errorHandler() {

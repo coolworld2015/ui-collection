@@ -9,21 +9,9 @@
         <table class="table table-bordered">
             <tr>
                 <td>
-                    <input readonly type="text" class="form-control input"
-                           style="font-size:20px;
-						   color: white;
-						   background-color: black;
-						   border-style: none;"
-                           placeholder="Category"
-                           ng-model="groupsEditCtrl.category">
-                </td>
-            </tr>
-
-            <tr>
-                <td>
                     <input type="text" class="form-control input" required
                            style="font-size:20px;
-						   color: white; 
+						   color: white;
 						   background-color: black;
 						   border-style: none;"
                            placeholder="Name" name="name"
@@ -32,6 +20,18 @@
                     <div ng-if="groupsEditCtrl.form.$submitted">
                         <div ng-show="groupsEditCtrl.form.name.$error.required" class="valid">Value required</div>
                     </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input readonly type="text" class="form-control input"
+                           style="font-size:20px;
+						   color: white;
+						   background-color: black;
+						   border-style: none;"
+                           placeholder="Category"
+                           ng-model="groupsEditCtrl.category">
                 </td>
             </tr>
 
