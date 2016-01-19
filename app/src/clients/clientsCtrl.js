@@ -31,7 +31,6 @@
 
         function init() {
             vm.title = 'Contacts';
-            vm.sort = 'name';
             vm.clients = clients;
             vm.clientsFilter = [];
 

@@ -1,10 +1,10 @@
 <center>
 	<div class="header">Collection</div>
 	<br><br>
-	<img ng-src="logo.jpg" width=150 height=150 ng-click="categoriesCtrl.goToBack()">
+	<img ng-src="logo.jpg" width=150 height=150 ng-click="groupsCtrl.goToBack()">
 	<hr>
-	<div class="header" ng-click="categoriesCtrl.goToBack()">
-		{{categoriesCtrl.title}} ({{categoriesFilter.length}} / {{categoriesCtrl.categories.length}})
+	<div class="header" ng-click="groupsCtrl.goToBack()">
+		{{groupsCtrl.title}} ({{groupsFilter.length}} / {{groupsCtrl.groups.length}})
 	</div>
 	<div>
 		<input type="text" class="form-control" 
@@ -14,14 +14,14 @@
 								   border-style: none;
 								   float: left;"	
 								   placeholder="Search here"
-		ng-model="categoriesCtrl.query.name">
+		ng-model="groupsCtrl.query.name">
 	</div>	
 	<table class="table table-striped input" style="font-size:20px; color:white; background-color:black;">
-		<tr ng-repeat="item in filteredCategories
-			| orderBy:categoriesCtrl.sort:categoriesCtrl.rev |
-			filter:categoriesCtrl.query as categoriesFilter
+		<tr ng-repeat="item in filteredGroups
+			| orderBy:groupsCtrl.sort:groupsCtrl.rev |
+			filter:groupsCtrl.query as groupsFilter
 			track by $index">
-			<td ng-click="categoriesCtrl.categoriesEditForm(item)" style="font-size:20px; color:white; background-color:black;">
+			<td ng-click="groupsCtrl.groupsEditForm(item)" style="font-size:20px; color:white; background-color:black;">
 				<div style="width:50%;
 							float: left;
 							color: white;
@@ -38,7 +38,7 @@
 			type="text" ng-model="numPerPage" value={{numPerPage}}>
 		</span>	
 	<div><pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></pagination></div>
-	<button class="btn btn-primary button" ng-click="categoriesCtrl.categoriesAdd()">Add</button>&nbsp
-	<button class="btn btn-primary button" ng-click="categoriesCtrl.categoriesBack()" scroll-here>Back</button>
+	<button class="btn btn-primary button" ng-click="groupsCtrl.groupsAdd()">Add</button>&nbsp
+	<button class="btn btn-primary button" ng-click="groupsCtrl.groupsBack()" scroll-here>Back</button>
 	<br><br>
 </center>

@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .controller('CategoriesCtrl', CategoriesCtrl);
+        .controller('GroupsCtrl', GroupsCtrl);
 
-    CategoriesCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'categories'];
+    GroupsCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'groups'];
 
-    function CategoriesCtrl($scope, $rootScope, $state, $timeout, categories) {
+    function GroupsCtrl($scope, $rootScope, $state, $timeout, groups) {
         $scope.$watch('numPerPage', currentPage);
         $scope.$watch('currentPage', currentPage);
         var vm = this;
@@ -15,11 +15,11 @@
         angular.extend(vm, {
             init: init,
             currentPage: currentPage,
-            categoriesEditForm: categoriesEditForm,
-            categoriesAdd: categoriesAdd,
+            groupsEditForm: groupsEditForm,
+            groupsAdd: groupsAdd,
             goToBack: goToBack,
             goToHead: goToHead,
-            categoriesBack: categoriesBack,
+            groupsBack: groupsBack,
             _errorHandler: errorHandler
         });
 
@@ -30,10 +30,9 @@
         init();
 
         function init() {
-            vm.title = 'Categories';
-            vm.sort = 'name';
-            vm.categories = categories;
-            vm.categoriesFilter = [];
+            vm.title = 'Groups';
+            vm.groups = groups;
+            vm.groupsFilter = [];
 
             $scope.currentPage = 1;
             $scope.numPerPage = 10;
@@ -44,20 +43,20 @@
         }
 
         function currentPage() {
-            if (Object.prototype.toString.call(vm.categories) == '[object Array]') {
+            if (Object.prototype.toString.call(vm.groups) == '[object Array]') {
                 var begin = (($scope.currentPage - 1) * $scope.numPerPage);
                 var end = parseInt(begin) + parseInt($scope.numPerPage);
-                $scope.filteredCategories = vm.categories.slice(begin, end);
-                $scope.totalItems = vm.categories.length;
+                $scope.filteredGroups = vm.groups.slice(begin, end);
+                $scope.totalItems = vm.groups.length;
             }
         }
 
-        function categoriesEditForm(item) {
-            $state.go('categories-edit', {item: item});
+        function groupsEditForm(item) {
+            $state.go('groups-edit', {item: item});
         }
 
-        function categoriesAdd() {
-            $state.go('categories-add');
+        function groupsAdd() {
+            $state.go('groups-add');
         }
 
         function goToBack() {
@@ -68,7 +67,7 @@
             $scope.$broadcast('scrollThere');
         }
 
-        function categoriesBack() {
+        function groupsBack() {
             $state.go('main');
         }
 

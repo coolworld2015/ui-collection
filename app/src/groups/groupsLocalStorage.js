@@ -3,75 +3,75 @@
 
     angular
         .module('app')
-        .factory('CategoriesLocalStorage', CategoriesLocalStorage);
+        .factory('GroupsLocalStorage', GroupsLocalStorage);
 
-    CategoriesLocalStorage.$inject = ['$rootScope'];
+    GroupsLocalStorage.$inject = ['$rootScope'];
 
-    function CategoriesLocalStorage($rootScope) {
+    function GroupsLocalStorage($rootScope) {
         var webUrl = $rootScope.myConfig.webUrl;
 
         return {
-            categories: [],
+            groups: [],
             numPerPage: 10,
 
-            getCategories: getCategories,
+            getGroups: getGroups,
             addItem: addItem,
             editItem: editItem,
             deleteItem: deleteItem,
-            setCategories: setCategories,
+            setGroups: setGroups,
 
-            uploadCategories: uploadCategories,
+            uploadGroups: uploadGroups,
             _sort: sort
         };
 
-        function getCategories() {
-            if (CategoriesLocalStorage.categories === undefined) {
-                var categories = localStorage.getItem('ui-collection.categories');
-                categories = JSON.parse(categories);
-                CategoriesLocalStorage.categories = categories;
+        function getGroups() {
+            if (GroupsLocalStorage.groups === undefined) {
+                var groups = localStorage.getItem('ui-collection.groups');
+                groups = JSON.parse(groups);
+                GroupsLocalStorage.groups = groups;
             }
 
-            if (CategoriesLocalStorage.categories === null) {
-                CategoriesLocalStorage.categories = [];
+            if (GroupsLocalStorage.groups === null) {
+                GroupsLocalStorage.groups = [];
             }
 
-            return CategoriesLocalStorage.categories.sort(sort);
+            return GroupsLocalStorage.groups.sort(sort);
         }
 
         function addItem(item) {
-            CategoriesLocalStorage.categories.push(item);
-            setCategories();
+            GroupsLocalStorage.groups.push(item);
+            setGroups();
         }
 
         function editItem(item) {
-            var categories = CategoriesLocalStorage.categories;
-            for (var i = 0; i < categories.length; i++) {
-                if (categories[i].id == item.id) {
-                    categories.splice(i, 1, item);
-                    setCategories();
+            var groups = GroupsLocalStorage.groups;
+            for (var i = 0; i < groups.length; i++) {
+                if (groups[i].id == item.id) {
+                    groups.splice(i, 1, item);
+                    setGroups();
                     break;
                 }
             }
         }
 
         function deleteItem(id) {
-            var categories = CategoriesLocalStorage.categories;
-            for (var i = 0; i < categories.length; i++) {
-                if (categories[i].id == id) {
-                    categories.splice(i, 1);
-                    setCategories();
+            var groups = GroupsLocalStorage.groups;
+            for (var i = 0; i < groups.length; i++) {
+                if (groups[i].id == id) {
+                    groups.splice(i, 1);
+                    setGroups();
                     break;
                 }
             }
         }
 
-        function setCategories() {
-            localStorage.setItem('ui-collection.categories', JSON.stringify(CategoriesLocalStorage.categories));
+        function setGroups() {
+            localStorage.setItem('ui-collection.groups', JSON.stringify(GroupsLocalStorage.groups));
         }
 
-        function uploadCategories(categories) {
-            localStorage.setItem('ui-collection.categories', JSON.stringify(categories));
-            CategoriesLocalStorage.categories = undefined;
+        function uploadGroups(groups) {
+            localStorage.setItem('ui-collection.groups', JSON.stringify(groups));
+            GroupsLocalStorage.groups = undefined;
         }
 
         function sort(a, b) {

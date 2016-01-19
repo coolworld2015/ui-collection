@@ -31,7 +31,6 @@
 
         function init() {
             vm.title = 'Categories';
-            vm.sort = 'name';
             vm.categories = categories;
             vm.categoriesFilter = [];
 

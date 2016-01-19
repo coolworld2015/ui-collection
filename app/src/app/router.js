@@ -10,8 +10,10 @@
     function routeConfig($stateProvider, $urlRouterProvider) {
 
         function resolveResource(url, state, sort) {
-            resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage', 'CategoriesLocalStorage'];
-            function resolver($http, $q, $rootScope, ClientsLocalStorage, CategoriesLocalStorage) {
+            resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage', 'CategoriesLocalStorage',
+                'GroupsLocalStorage'];
+            function resolver($http, $q, $rootScope, ClientsLocalStorage, CategoriesLocalStorage,
+                              GroupsLocalStorage) {
                 var data;
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
                     if (state == 'clients') {
@@ -22,6 +24,12 @@
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
                     if (state == 'categories') {
                         data = CategoriesLocalStorage.getCategories();
+                        return data;
+                    }
+                }
+                if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
+                    if (state == 'groups') {
+                        data = GroupsLocalStorage.getGroups();
                         return data;
                     }
                 }
@@ -52,9 +60,9 @@
             return 0;
         }
 
-        function sort1(a, b) {
-            return parseInt(a.number) - parseInt(b.number);
-        }
+        //function sort1(a, b) {
+        //    return parseInt(a.number) - parseInt(b.number);
+        //}
 
         $urlRouterProvider.otherwise('/main');
 
@@ -72,7 +80,7 @@
                 controller: 'ConfigCtrl',
                 controllerAs: 'configCtrl'
             })
-
+//-------------------------------------------------------------------------------------------------------
             .state('clients', {
                 url: '/clients',
                 templateUrl: 'clients/clients.html',
@@ -106,7 +114,7 @@
                 controller: 'ClientsDialogCtrl',
                 controllerAs: 'clientsDialogCtrl'
             })
-
+//-------------------------------------------------------------------------------------------------------
             .state('categories', {
                 url: '/categories',
                 templateUrl: 'categories/categories.html',
@@ -140,5 +148,40 @@
                 controller: 'CategoriesDialogCtrl',
                 controllerAs: 'categoriesDialogCtrl'
             })
+//-------------------------------------------------------------------------------------------------------
+            .state('groups', {
+                url: '/groups',
+                templateUrl: 'groups/groups.html',
+                controller: 'GroupsCtrl',
+                controllerAs: 'groupsCtrl',
+                resolve: {
+                    groups: resolveResource('api/groups/get', 'groups', sort)
+                }
+            })
+
+            .state('groups-add', {
+                url: '/groups-add',
+                params: {item: {}},
+                templateUrl: 'groups/groups-add.html',
+                controller: 'GroupsAddCtrl',
+                controllerAs: 'groupsAddCtrl'
+            })
+
+            .state('groups-edit', {
+                url: '/groups-edit',
+                params: {item: {}},
+                templateUrl: 'groups/groups-edit.html',
+                controller: 'GroupsEditCtrl',
+                controllerAs: 'groupsEditCtrl'
+            })
+
+            .state('groups-dialog', {
+                url: '/groups-dialog',
+                params: {item: {}},
+                templateUrl: 'groups/groups-dialog.html',
+                controller: 'GroupsDialogCtrl',
+                controllerAs: 'groupsDialogCtrl'
+            });
+//-------------------------------------------------------------------------------------------------------
     }
 })();
