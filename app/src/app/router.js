@@ -33,6 +33,12 @@
                         return data;
                     }
                 }
+                if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
+                    if (state == 'items') {
+                        data = ClientsLocalStorage.getClients();
+                        return data;
+                    }
+                }
                 var webUrl = $rootScope.myConfig.webUrl + url;
                 return $http.get(webUrl)
                     .then(function (result) {
@@ -181,6 +187,40 @@
                 templateUrl: 'groups/groups-dialog.html',
                 controller: 'GroupsDialogCtrl',
                 controllerAs: 'groupsDialogCtrl'
+            })
+//-------------------------------------------------------------------------------------------------------
+            .state('items', {
+                url: '/items',
+                templateUrl: 'items/items.html',
+                controller: 'ItemsCtrl',
+                controllerAs: 'itemsCtrl',
+                resolve: {
+                    items: resolveResource('api/items/get', 'items', sort)
+                }
+            })
+
+            .state('items-add', {
+                url: '/items-add',
+                params: {item: {}},
+                templateUrl: 'items/items-add.html',
+                controller: 'ItemsAddCtrl',
+                controllerAs: 'itemsAddCtrl'
+            })
+
+            .state('items-edit', {
+                url: '/items-edit',
+                params: {item: {}},
+                templateUrl: 'items/items-edit.html',
+                controller: 'ItemsEditCtrl',
+                controllerAs: 'itemsEditCtrl'
+            })
+
+            .state('items-dialog', {
+                url: '/items-dialog',
+                params: {item: {}},
+                templateUrl: 'items/items-dialog.html',
+                controller: 'ItemsDialogCtrl',
+                controllerAs: 'itemsDialogCtrl'
             });
 //-------------------------------------------------------------------------------------------------------
     }
