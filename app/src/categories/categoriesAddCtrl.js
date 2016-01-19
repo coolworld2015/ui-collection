@@ -5,9 +5,9 @@
         .module('app')
         .controller('CategoriesAddCtrl', CategoriesAddCtrl);
 
-    CategoriesAddCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'CategoriesService', 'CategoriesLocalStorage'];
+    CategoriesAddCtrl.$inject = ['$state', '$rootScope', '$timeout', 'CategoriesService', 'CategoriesLocalStorage'];
 
-    function CategoriesAddCtrl($scope, $state, $rootScope, $timeout, CategoriesService, CategoriesLocalStorage) {
+    function CategoriesAddCtrl($state, $rootScope, $timeout, CategoriesService, CategoriesLocalStorage) {
         var vm = this;
 
         angular.extend(vm, {

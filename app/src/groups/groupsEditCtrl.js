@@ -3,22 +3,19 @@
 
     angular
         .module('app')
-        .controller('CategoriesEditCtrl', CategoriesEditCtrl);
+        .controller('GroupsEditCtrl', GroupsEditCtrl);
 
-    CategoriesEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'CategoriesService',
-        'CategoriesLocalStorage', '$stateParams'];
+    GroupsEditCtrl.$inject = ['$state', '$rootScope', '$timeout', 'GroupsService',
+        'GroupsLocalStorage', '$stateParams'];
 
-    function CategoriesEditCtrl($scope, $state, $rootScope, $timeout, CategoriesService,
-                                CategoriesLocalStorage, $stateParams) {
-        $scope.convertPicToJSON = convertPicToJSON;
+    function GroupsEditCtrl($state, $rootScope, $timeout, GroupsService,
+                            GroupsLocalStorage, $stateParams) {
         var vm = this;
 
         angular.extend(vm, {
-            convertPicToJSON: convertPicToJSON,
-            openPic: openPic,
-            categoriesSubmit: categoriesSubmit,
-            categoriesDialog: categoriesDialog,
-            categoriesEditBack: categoriesEditBack,
+            groupsSubmit: groupsSubmit,
+            groupsDialog: groupsDialog,
+            groupsEditBack: groupsEditBack,
             _errorHandler: errorHandler
         });
 
@@ -28,27 +25,7 @@
             window.scrollTo(0, 0);
         });
 
-
-        function convertPicToJSON() {
-            var fileInput = document.getElementById("picFileInput");
-            var files = fileInput.files;
-            var file = files[0];
-            var reader = new FileReader();
-            reader.onload = function () {
-                $scope.$apply(function () {
-                    vm.pic = reader.result;
-                });
-            };
-            console.log(file);
-            reader.readAsDataURL(file);
-        }
-
-        function openPic() {
-            window.open(vm.pic);
-            return false;
-        }
-
-        function categoriesSubmit() {
+        function groupsSubmit() {
             if (vm.form.$invalid) {
                 return;
             }
@@ -63,29 +40,29 @@
                 description: vm.description
             };
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
-                CategoriesService.editItem(item)
+                GroupsService.editItem(item)
                     .then(function () {
                         $rootScope.myError = false;
-                        $state.go('categories');
+                        $state.go('groups');
                     })
                     .catch(errorHandler);
             } else {
-                CategoriesLocalStorage.editItem(item);
-                $state.go('categories');
+                GroupsLocalStorage.editItem(item);
+                $state.go('groups');
             }
         }
 
-        function categoriesDialog() {
+        function groupsDialog() {
             var obj = {
                 id: vm.id,
                 name: vm.name
             };
-            $state.go('categories-dialog', {item: obj});
+            $state.go('groups-dialog', {item: obj});
         }
 
-        function categoriesEditBack() {
+        function groupsEditBack() {
             $rootScope.loading = true;
-            $state.go('categories');
+            $state.go('groups');
         }
 
         function errorHandler() {

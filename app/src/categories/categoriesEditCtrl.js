@@ -5,15 +5,12 @@
         .module('app')
         .controller('CategoriesEditCtrl', CategoriesEditCtrl);
 
-    CategoriesEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'CategoriesService', 'CategoriesLocalStorage', '$stateParams'];
+    CategoriesEditCtrl.$inject = ['$state', '$rootScope', '$timeout', 'CategoriesService', 'CategoriesLocalStorage', '$stateParams'];
 
-    function CategoriesEditCtrl($scope, $state, $rootScope, $timeout, CategoriesService, CategoriesLocalStorage, $stateParams) {
-        $scope.convertPicToJSON = convertPicToJSON;
+    function CategoriesEditCtrl($state, $rootScope, $timeout, CategoriesService, CategoriesLocalStorage, $stateParams) {
         var vm = this;
 
         angular.extend(vm, {
-            convertPicToJSON: convertPicToJSON,
-            openPic: openPic,
             categoriesSubmit: categoriesSubmit,
             categoriesDialog: categoriesDialog,
             categoriesEditBack: categoriesEditBack,
@@ -25,26 +22,6 @@
         $timeout(function () {
             window.scrollTo(0, 0);
         });
-
-
-        function convertPicToJSON() {
-            var fileInput = document.getElementById("picFileInput");
-            var files = fileInput.files;
-            var file = files[0];
-            var reader = new FileReader();
-            reader.onload = function () {
-                $scope.$apply(function () {
-                    vm.pic = reader.result;
-                });
-            };
-            console.log(file);
-            reader.readAsDataURL(file);
-        }
-
-        function openPic() {
-            window.open(vm.pic);
-            return false;
-        }
 
         function categoriesSubmit() {
             if (vm.form.$invalid) {
