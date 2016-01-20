@@ -11,9 +11,9 @@
 
         function resolveResource(url, state, sort) {
             resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage', 'CategoriesLocalStorage',
-                'GroupsLocalStorage'];
+                'GroupsLocalStorage', 'ItemsLocalStorage'];
             function resolver($http, $q, $rootScope, ClientsLocalStorage, CategoriesLocalStorage,
-                              GroupsLocalStorage) {
+                              GroupsLocalStorage, ItemsLocalStorage) {
                 var data;
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
                     if (state == 'clients') {
@@ -35,7 +35,7 @@
                 }
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
                     if (state == 'items') {
-                        data = ClientsLocalStorage.getClients();
+                        data = ItemsLocalStorage.getItems();
                         return data;
                     }
                 }

@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .controller('ClientsCtrl', ClientsCtrl);
+        .controller('ItemsCtrl', ItemsCtrl);
 
-    ClientsCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'clients'];
+    ItemsCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'items'];
 
-    function ClientsCtrl($scope, $rootScope, $state, $timeout, clients) {
+    function ItemsCtrl($scope, $rootScope, $state, $timeout, items) {
         $scope.$watch('numPerPage', currentPage);
         $scope.$watch('currentPage', currentPage);
         var vm = this;
@@ -15,11 +15,11 @@
         angular.extend(vm, {
             init: init,
             currentPage: currentPage,
-            clientsEditForm: clientsEditForm,
-            clientsAdd: clientsAdd,
+            itemsEditForm: itemsEditForm,
+            itemsAdd: itemsAdd,
             goToBack: goToBack,
             goToHead: goToHead,
-            clientsBack: clientsBack,
+            itemsBack: itemsBack,
             _errorHandler: errorHandler
         });
 
@@ -30,9 +30,9 @@
         init();
 
         function init() {
-            vm.title = 'Contacts';
-            vm.clients = clients;
-            vm.clientsFilter = [];
+            vm.title = 'Items';
+            vm.items = items;
+            vm.itemsFilter = [];
 
             $scope.currentPage = 1;
             $scope.numPerPage = 10;
@@ -43,20 +43,20 @@
         }
 
         function currentPage() {
-            if (Object.prototype.toString.call(vm.clients) == '[object Array]') {
+            if (Object.prototype.toString.call(vm.items) == '[object Array]') {
                 var begin = (($scope.currentPage - 1) * $scope.numPerPage);
                 var end = parseInt(begin) + parseInt($scope.numPerPage);
-                $scope.filteredClients = vm.clients.slice(begin, end);
-                $scope.totalItems = vm.clients.length;
+                $scope.filteredItems = vm.items.slice(begin, end);
+                $scope.totalItems = vm.items.length;
             }
         }
 
-        function clientsEditForm(item) {
-            $state.go('clients-edit', {item: item});
+        function itemsEditForm(item) {
+            $state.go('items-edit', {item: item});
         }
 
-        function clientsAdd() {
-            $state.go('clients-add');
+        function itemsAdd() {
+            $state.go('items-add');
         }
 
         function goToBack() {
@@ -67,7 +67,7 @@
             $scope.$broadcast('scrollThere');
         }
 
-        function clientsBack() {
+        function itemsBack() {
             $state.go('main');
         }
 
