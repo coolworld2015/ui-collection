@@ -3,20 +3,20 @@
 
     angular
         .module('app')
-        .controller('ClientsEditCtrl', ClientsEditCtrl);
+        .controller('ItemsEditCtrl', ItemsEditCtrl);
 
-    ClientsEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'ClientsService', 'ClientsLocalStorage', '$stateParams'];
+    ItemsEditCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'ItemsService', 'ItemsLocalStorage', '$stateParams'];
 
-    function ClientsEditCtrl($scope, $state, $rootScope, $timeout, ClientsService, ClientsLocalStorage, $stateParams) {
+    function ItemsEditCtrl($scope, $state, $rootScope, $timeout, ItemsService, ItemsLocalStorage, $stateParams) {
         $scope.convertPicToJSON = convertPicToJSON;
         var vm = this;
 
         angular.extend(vm, {
             convertPicToJSON: convertPicToJSON,
             openPic: openPic,
-            clientsSubmit: clientsSubmit,
-            clientsDialog: clientsDialog,
-            clientsEditBack: clientsEditBack,
+            itemsSubmit: itemsSubmit,
+            itemsDialog: itemsDialog,
+            itemsEditBack: itemsEditBack,
             _errorHandler: errorHandler
         });
 
@@ -46,7 +46,7 @@
             return false;
         }
 
-        function clientsSubmit() {
+        function itemsSubmit() {
             if (vm.form.$invalid) {
                 return;
             }
@@ -61,29 +61,29 @@
                 description: vm.description
             };
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
-                ClientsService.editItem(item)
+                ItemsService.editItem(item)
                     .then(function () {
                         $rootScope.myError = false;
-                        $state.go('clients');
+                        $state.go('items');
                     })
                     .catch(errorHandler);
             } else {
-                ClientsLocalStorage.editItem(item);
-                $state.go('clients');
+                ItemsLocalStorage.editItem(item);
+                $state.go('items');
             }
         }
 
-        function clientsDialog() {
+        function itemsDialog() {
             var obj = {
                 id: vm.id,
                 name: vm.name
             };
-            $state.go('clients-dialog', {item: obj});
+            $state.go('items-dialog', {item: obj});
         }
 
-        function clientsEditBack() {
+        function itemsEditBack() {
             $rootScope.loading = true;
-            $state.go('clients');
+            $state.go('items');
         }
 
         function errorHandler() {

@@ -3,24 +3,24 @@
 
     angular
         .module('app')
-        .factory('ClientsService', ClientsService);
+        .factory('ItemsService', ItemsService);
 
-    ClientsService.$inject = ['$rootScope', '$http'];
+    ItemsService.$inject = ['$rootScope', '$http'];
 
-    function ClientsService($rootScope, $http) {
+    function ItemsService($rootScope, $http) {
         var webUrl = $rootScope.myConfig.webUrl;
 
         return {
-            getClients: getClients,
+            getItems: getItems,
             addItem: addItem,
             editItem: editItem,
             deleteItem: deleteItem,
-            findClient: findClient,
+            findItem: findItem,
             _sort: sort
         };
 
-        function getClients() {
-            var url = webUrl + 'api/clients/get';
+        function getItems() {
+            var url = webUrl + 'api/items/get';
             return $http.get(url)
                 .then(function (result) {
                     result.data.sort(sort);
@@ -29,7 +29,7 @@
         }
 
         function addItem(item) {
-            var url = webUrl + 'api/clients/add';
+            var url = webUrl + 'api/items/add';
             return $http.post(url, item)
                 .then(function (result) {
                     return result;
@@ -37,7 +37,7 @@
         }
 
         function editItem(item) {
-            var url = webUrl + 'api/clients/update';
+            var url = webUrl + 'api/items/update';
             return $http.post(url, item)
                 .then(function (result) {
                     return result;
@@ -45,7 +45,7 @@
         }
 
         function deleteItem(id) {
-            var url = webUrl + 'api/clients/delete';
+            var url = webUrl + 'api/items/delete';
             var item = {
                 "id": id
             };
@@ -55,8 +55,8 @@
                 });
         }
 
-        function findClient(id) {
-            var url = webUrl + 'api/clients/find';
+        function findItem(id) {
+            var url = webUrl + 'api/items/find';
             var item = {
                 "id": id
             };

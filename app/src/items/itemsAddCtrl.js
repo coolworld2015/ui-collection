@@ -3,19 +3,19 @@
 
     angular
         .module('app')
-        .controller('ClientsAddCtrl', ClientsAddCtrl);
+        .controller('ItemsAddCtrl', ItemsAddCtrl);
 
-    ClientsAddCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'ClientsService', 'ClientsLocalStorage'];
+    ItemsAddCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'ItemsService', 'ItemsLocalStorage'];
 
-    function ClientsAddCtrl($scope, $state, $rootScope, $timeout, ClientsService, ClientsLocalStorage) {
+    function ItemsAddCtrl($scope, $state, $rootScope, $timeout, ItemsService, ItemsLocalStorage) {
         $scope.convertPicToJSON = convertPicToJSON;
         var vm = this;
 
         angular.extend(vm, {
             init: init,
             convertPicToJSON: convertPicToJSON,
-            clientsAddSubmit: clientsAddSubmit,
-            clientsAddBack: clientsAddBack,
+            itemsAddSubmit: itemsAddSubmit,
+            itemsAddBack: itemsAddBack,
             _errorHandler: errorHandler
         });
 
@@ -44,7 +44,7 @@
             reader.readAsDataURL(file);
         }
 
-        function clientsAddSubmit() {
+        function itemsAddSubmit() {
             if (vm.form.$invalid) {
                 return;
             }
@@ -61,20 +61,20 @@
             };
 
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
-                ClientsService.addItem(item)
+                ItemsService.addItem(item)
                     .then(function () {
                         $rootScope.myError = false;
-                        $state.go('clients');
+                        $state.go('items');
                     })
                     .catch(errorHandler);
             } else {
-                ClientsLocalStorage.addItem(item);
-                $state.go('clients');
+                ItemsLocalStorage.addItem(item);
+                $state.go('items');
             }
         }
 
-        function clientsAddBack() {
-            $state.go('clients');
+        function itemsAddBack() {
+            $state.go('items');
         }
 
         function errorHandler() {

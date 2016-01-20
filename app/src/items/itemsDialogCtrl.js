@@ -3,16 +3,16 @@
 
     angular
         .module('app')
-        .controller('ClientsDialogCtrl', ClientsDialogCtrl);
+        .controller('ItemsDialogCtrl', ItemsDialogCtrl);
 
-    ClientsDialogCtrl.$inject = ['$state', '$rootScope', '$timeout', 'ClientsService', 'ClientsLocalStorage', '$stateParams'];
+    ItemsDialogCtrl.$inject = ['$state', '$rootScope', '$timeout', 'ItemsService', 'ItemsLocalStorage', '$stateParams'];
 
-    function ClientsDialogCtrl($state, $rootScope, $timeout, ClientsService, ClientsLocalStorage, $stateParams) {
+    function ItemsDialogCtrl($state, $rootScope, $timeout, ItemsService, ItemsLocalStorage, $stateParams) {
         var vm = this;
 
         angular.extend(vm, {
-            clientsDelete: clientsDelete,
-            clientsEditBack: clientsEditBack,
+            itemsDelete: itemsDelete,
+            itemsEditBack: itemsEditBack,
             _errorHandler: errorHandler
         });
 
@@ -22,26 +22,26 @@
             window.scrollTo(0, 0);
         });
 
-        function clientsDelete() {
+        function itemsDelete() {
             $rootScope.loading = true;
             $rootScope.myError = false;
 
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
-                ClientsService.deleteItem(vm.id)
+                ItemsService.deleteItem(vm.id)
                     .then(function () {
                         $rootScope.myError = false;
-                        $state.go('clients');
+                        $state.go('items');
                     })
                     .catch(errorHandler);
             } else {
-                ClientsLocalStorage.deleteItem(vm.id);
-                $state.go('clients');
+                ItemsLocalStorage.deleteItem(vm.id);
+                $state.go('items');
             }
         }
 
-        function clientsEditBack() {
+        function itemsEditBack() {
             $rootScope.loading = true;
-            $state.go('clients');
+            $state.go('items');
         }
 
         function errorHandler() {
