@@ -20,6 +20,7 @@
 
         $timeout(function () {
             window.scrollTo(0, 0);
+			$rootScope.loading = false;
         });
 
         function clientsDelete() {
@@ -35,13 +36,18 @@
                     .catch(errorHandler);
             } else {
                 ClientsLocalStorage.deleteItem(vm.id);
-                $state.go('clients');
+				$rootScope.loading = true;
+				$timeout(function () {
+					$state.go('clients');
+				}, 100);
             }
         }
 
         function clientsEditBack() {
-            $rootScope.loading = true;
-            $state.go('clients');
+			$rootScope.loading = true;
+			$timeout(function () {
+				$state.go('clients');
+			}, 100);
         }
 
         function errorHandler() {

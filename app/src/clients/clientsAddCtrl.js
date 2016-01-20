@@ -69,12 +69,18 @@
                     .catch(errorHandler);
             } else {
                 ClientsLocalStorage.addItem(item);
-                $state.go('clients');
+				$rootScope.loading = true;
+				$timeout(function () {
+					$state.go('clients');
+				}, 100);
             }
         }
 
         function clientsAddBack() {
-            $state.go('clients');
+			$rootScope.loading = true;
+			$timeout(function () {
+				$state.go('clients');
+			}, 100);
         }
 
         function errorHandler() {

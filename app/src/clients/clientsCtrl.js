@@ -52,11 +52,17 @@
         }
 
         function clientsEditForm(item) {
-            $state.go('clients-edit', {item: item});
+			$rootScope.loading = true;			
+			$timeout(function () {
+				$state.go('clients-edit', {item: item});
+			}, 100);
         }
 
         function clientsAdd() {
-            $state.go('clients-add');
+			$rootScope.loading = true;		
+			$timeout(function () {
+				$state.go('clients-add');
+			}, 100);			
         }
 
         function goToBack() {
@@ -68,7 +74,10 @@
         }
 
         function clientsBack() {
-            $state.go('main');
+			$rootScope.loading = true;
+			$timeout(function () {
+				$state.go('main');
+			}, 100);				
         }
 
         function errorHandler() {

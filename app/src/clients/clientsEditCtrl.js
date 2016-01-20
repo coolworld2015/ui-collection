@@ -12,6 +12,7 @@
         var vm = this;
 
         angular.extend(vm, {
+			init: init,
             convertPicToJSON: convertPicToJSON,
             openPic: openPic,
             clientsSubmit: clientsSubmit,
@@ -26,7 +27,13 @@
             window.scrollTo(0, 0);
         });
 
+        init();
 
+        function init() {
+            $rootScope.myError = false;
+            $rootScope.loading = false;
+        }
+		
         function convertPicToJSON() {
             var fileInput = document.getElementById("picFileInput");
             var files = fileInput.files;
@@ -69,7 +76,10 @@
                     .catch(errorHandler);
             } else {
                 ClientsLocalStorage.editItem(item);
-                $state.go('clients');
+				$rootScope.loading = true;
+				$timeout(function () {
+					$state.go('clients');
+				}, 100);	
             }
         }
 
@@ -78,12 +88,17 @@
                 id: vm.id,
                 name: vm.name
             };
-            $state.go('clients-dialog', {item: obj});
+			$rootScope.loading = true;
+			$timeout(function () {
+				$state.go('clients-dialog', {item: obj});
+			}, 100);				
         }
 
         function clientsEditBack() {
-            $rootScope.loading = true;
-            $state.go('clients');
+			$rootScope.loading = true;
+			$timeout(function () {
+				$state.go('clients');
+			}, 100);			
         }
 
         function errorHandler() {
