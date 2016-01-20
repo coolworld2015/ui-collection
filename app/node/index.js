@@ -113,16 +113,16 @@ app.post('/file/api/items/delete', fileItems.removeItem);
 app.post('/file/api/items/update', fileItems.updateItem);
 
 //------------------------------------------------------------------------
-//var mongoItems = require('./mongo-items').Items;
-//
-//app.get('/api/items/get', mongoItems.getItems);
-//app.get('/api/items/find/:id', mongoItems.findItem);
-//app.post('/api/items/find', mongoItems.findPostItem);
-//app.get('/api/items/edit/:id/:name', mongoItems.editItem);
-//app.post('/api/items/edit/', mongoItems.editPostItem);
-//app.post('/api/items/update', mongoItems.updateItem);
-//app.post('/api/items/add', mongoItems.addItem);
-//app.post('/api/items/save', mongoItems.saveItem);
-//app.get('/api/items/drop', mongoItems.removeAllItems);
-//app.post('/api/items/drop', mongoItems.removeAllItems);
-//app.post('/api/items/delete', mongoItems.removeItem);
+var mongoItems = require('./mongo-items').Items;
+
+app.get('/api/items/get', mongoItems.getItems);
+app.get('/api/items/find/:id', mongoItems.findItem);
+app.post('/api/items/find', mongoItems.findPostItem);
+app.get('/api/items/edit/:id/:name', mongoItems.editItem);
+app.post('/api/items/edit/', mongoItems.editPostItem);
+app.post('/api/items/update', mongoItems.updateItem);
+app.post('/api/items/add', mongoItems.addItem);
+app.post('/api/items/save', mongoItems.saveItem);
+app.get('/api/items/drop', mongoItems.removeAllItems);
+app.post('/api/items/drop', mongoItems.removeAllItems);
+app.post('/api/items/delete', mongoItems.removeItem);

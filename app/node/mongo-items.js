@@ -3,27 +3,27 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser());
 
-var ClientsModel = require('./mongo').ClientsModel;
+var ItemsModel = require('./mongo').ItemsModel;
 
-var Clients = {
-    getClients: getClients,
-    findClient: findClient,
-    findPostClient: findPostClient,
-    editClient: editClient,
-	editPostClient: editPostClient,
-    updateClient: updateClient,
-    addClient: addClient,
-    saveClient: saveClient,
-    removeAllClients: removeAllClients,
-    removeClient: removeClient
+var Items = {
+    getItems: getItems,
+    findItem: findItem,
+    findPostItem: findPostItem,
+    editItem: editItem,
+	editPostItem: editPostItem,
+    updateItem: updateItem,
+    addItem: addItem,
+    saveItem: saveItem,
+    removeAllItems: removeAllItems,
+    removeItem: removeItem
 };
 
-module.exports.Clients = Clients;
+module.exports.Items = Items;
 
-function getClients(req, res) {
-    return ClientsModel.find(function (err, clients) {
+function getItems(req, res) {
+    return ItemsModel.find(function (err, items) {
         if (!err) {
-            return res.send(clients);
+            return res.send(items);
         } else {
             res.statusCode = 500;
             return res.send({error: 'Server error'});
@@ -31,43 +31,43 @@ function getClients(req, res) {
     });
 }
 
-function findClient(req, res) {
-    ClientsModel.findOne({
+function findItem(req, res) {
+    ItemsModel.findOne({
         id: req.params.id
-    }, function (err, client) {
+    }, function (err, item) {
         if (err) {
             res.send({error: err.message});
         }
-        console.log(client);
-        res.send(client);
+        console.log(item);
+        res.send(item);
     });
 }
 
-function findPostClient(req, res) {
-    ClientsModel.findOne({
+function findPostItem(req, res) {
+    ItemsModel.findOne({
         id: req.body.id
-    }, function (err, client) {
+    }, function (err, item) {
         if (err) {
             res.send({error: err.message});
         }
-        console.log(client);
-        res.send(client);
+        console.log(item);
+        res.send(item);
     });
 }
 
-function editClient(req, res) {
-    ClientsModel.findOne({
+function editItem(req, res) {
+    ItemsModel.findOne({
         id: req.params.id
-    }, function (err, client) {
+    }, function (err, item) {
         if (err) {
             res.send({error: err.message});
         }
 
-        client.name = req.params.name;
+        item.name = req.params.name;
 
-        client.save(function (err) {
+        item.save(function (err) {
             if (!err) {
-                res.send(client);
+                res.send(item);
             } else {
                 return res.send(err);
             }
@@ -75,35 +75,35 @@ function editClient(req, res) {
     });
 }
 
-function editPostClient(req, res) {
-    ClientsModel.findOneAndUpdate({
+function editPostItem(req, res) {
+    ItemsModel.findOneAndUpdate({
             id: req.body.id
         },
         {$set: {name: req.body.name}},
-        function (err, client) {
+        function (err, item) {
             if (!err) {
-                res.send(client);
+                res.send(item);
             } else {
                 res.send({error: err.message});
             }
         });
 }
 
-function updateClient(req, res) {
-    ClientsModel.findOne({
+function updateItem(req, res) {
+    ItemsModel.findOne({
         id: req.body.id
-    }, function (err, client) {
+    }, function (err, item) {
         if (err) {
             res.send({error: err.message});
         }
 
-        client.name = req.body.name;
-        client.pic = req.body.pic;
-        client.description = req.body.description;
+        item.name = req.body.name;
+        item.pic = req.body.pic;
+        item.description = req.body.description;
 
-        client.save(function (err) {
+        item.save(function (err) {
             if (!err) {
-                res.send(client);
+                res.send(item);
             } else {
                 return res.send(err);
             }
@@ -111,49 +111,49 @@ function updateClient(req, res) {
     });
 }
 
-function addClient(req, res) {
-    ClientsModel.create({
+function addItem(req, res) {
+    ItemsModel.create({
             id: req.body.id,
             name: req.body.name,
             pic: req.body.pic,
             description: req.body.description
         },
-        function (err, client) {
+        function (err, item) {
             if (err) {
                 return res.send({error: 'Server error'});
             }
-            res.send(client);
+            res.send(item);
         });
 }
 
-function saveClient(req, res) {
+function saveItem(req, res) {
     console.log(req.body);
-    var client = new ClientsModel({
+    var item = new ItemsModel({
             id: req.body.id,
             name: req.body.name,
             pic: req.body.pic,
             description: req.body.description
     });
-    client.save(function (err) {
+    item.save(function (err) {
         if (!err) {
-            res.send(client);
+            res.send(item);
         } else {
             return res.send(err);
         }
     });
 }
 
-function removeAllClients(req, res, err) {
-    ClientsModel.remove({}, function (err) {
+function removeAllItems(req, res, err) {
+    ItemsModel.remove({}, function (err) {
     });
-    res.send('Collection Clients removed');
+    res.send('Collection Items removed');
 }
 
-function removeClient(req, res) {
-    ClientsModel.remove({
+function removeItem(req, res) {
+    ItemsModel.remove({
         "id": req.body.id
     }, function () {
-        console.log('Client with id: ', req.body.id, ' was removed');
+        console.log('Item with id: ', req.body.id, ' was removed');
     });
-    res.send('Client with id: ' + req.body.id + ' was removed');
+    res.send('Item with id: ' + req.body.id + ' was removed');
 }

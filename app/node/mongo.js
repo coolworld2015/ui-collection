@@ -49,3 +49,14 @@ var Groups = new Schema({
 
 var GroupsModel = mongoose.model('Groups', Groups);
 module.exports.GroupsModel = GroupsModel;
+
+//---------------------------------------------------------------------------------------------
+var Items = new Schema({
+    id: {type: String, required: true},
+    name: {type: String, required: true},
+    pic: {type: String, required: true},
+    description: {type: String, required: true}
+});
+
+var ItemsModel = mongoose.model('Items', Items);
+module.exports.ItemsModel = ItemsModel;
