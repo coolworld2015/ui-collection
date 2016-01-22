@@ -25,7 +25,7 @@
 							track by option.name"
 							ng-change="itemsAddCtrl.updateChangeCategory(itemsAddCtrl.categorySelectedItem)">
 					</select>
-					<div ng-show="itemsAddCtrl.error" class="valid">Value required</div>
+					<div ng-show="itemsAddCtrl.categoryError" class="valid">Value required</div>
 				</td>
 			</tr>
 
@@ -37,7 +37,7 @@
 							track by option.name"
 							ng-change="itemsAddCtrl.updateChangeGroup(itemsAddCtrl.groupSelectedItem)">
 					</select>
-					<div ng-show="itemsAddCtrl.error" class="valid">Value required</div>
+					<div ng-show="itemsAddCtrl.groupError" class="valid">Value required</div>
 				</td>
 			</tr>
 

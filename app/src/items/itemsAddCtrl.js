@@ -71,7 +71,12 @@
 
         function itemsAddSubmit() {
             if (vm.categorySelectedItem.name == 'Select category') {
-                vm.error = true;
+                vm.categoryError = true;
+                return;
+            }
+
+            if (vm.groupSelectedItem.name == 'Select group') {
+                vm.groupError = true;
                 return;
             }
 
