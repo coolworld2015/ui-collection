@@ -32,13 +32,13 @@
         init();
 
         function init() {
-            var category = CategoriesLocalStorage.getCategories();
-            vm.categoryOptions = [].concat(category);
+            vm.category = CategoriesLocalStorage.getCategories();
+            vm.categoryOptions = [].concat(vm.category);
             vm.categoryOptions.unshift(optionalCategory);
             vm.categorySelectedItem = vm.categoryOptions[0];
 
-            var group = GroupsLocalStorage.getGroups();
-            vm.groupOptions = [].concat(group);
+            vm.group = GroupsLocalStorage.getGroups();
+            vm.groupOptions = [].concat(vm.group);
             vm.groupOptions.unshift(optionalGroup);
             vm.groupSelectedItem = vm.groupOptions[0];
 
@@ -47,12 +47,36 @@
         }
 
         function updateChangeCategory(item) {
-            vm.error = false;
+            vm.categoryError = false;
+            vm.groupError = false;
             vm.categoryName = item.name;
+
+            if (vm.categorySelectedItem.name == 'Select category') {
+                vm.groupOptions = [].concat(vm.group);
+                vm.groupOptions.unshift(optionalGroup);
+                vm.groupSelectedItem = vm.groupOptions[0];
+                return;
+            }
+
+            vm.groupOptions = [].concat(vm.group);
+            vm.groupOptionsSorted = [];
+
+            for (var i = 0; i < vm.groupOptions.length; i++) {
+                if (vm.groupOptions[i].category == item.name) {
+                    vm.groupOptionsSorted.push(vm.groupOptions[i]);
+                }
+            }
+
+            vm.groupOptions = [].concat(vm.groupOptionsSorted);
+            vm.groupSelectedItem = vm.groupOptions[0];
+
+            if (vm.groupSelectedItem) {
+                vm.groupName = vm.groupSelectedItem.name;
+            }
         }
 
         function updateChangeGroup(item) {
-            vm.error = false;
+            vm.groupError = false;
             vm.groupName = item.name;
         }
 
@@ -75,7 +99,7 @@
                 return;
             }
 
-            if (vm.groupSelectedItem.name == 'Select group') {
+            if (vm.groupSelectedItem == undefined || vm.groupSelectedItem.name == 'Select group') {
                 vm.groupError = true;
                 return;
             }

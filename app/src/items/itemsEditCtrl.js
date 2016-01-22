@@ -68,6 +68,7 @@
                 name: vm.name,
                 pic: vm.pic,
                 category: vm.category,
+                group: vm.group,
                 description: vm.description
             };
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
