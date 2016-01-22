@@ -45,6 +45,8 @@ function addItem(req, res) {
         id: req.body.id,
         pic: req.body.pic,
         name: req.body.name,
+        category: req.body.category,
+        group: req.body.group,
         description: req.body.description
     };
     jsonItems.push(obj);
@@ -59,6 +61,8 @@ function updateItem(req, res) {
         id: req.body.id,
         pic: req.body.pic,
         name: req.body.name,
+        category: req.body.category,
+        group: req.body.group,
         description: req.body.description
     };
     for (var i = 0; i < jsonItems.length; i++) {

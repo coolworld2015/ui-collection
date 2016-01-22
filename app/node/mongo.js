@@ -53,8 +53,10 @@ module.exports.GroupsModel = GroupsModel;
 //---------------------------------------------------------------------------------------------
 var Items = new Schema({
     id: {type: String, required: true},
-    name: {type: String, required: true},
     pic: {type: String, required: true},
+    name: {type: String, required: true},
+    category: {type: String, required: true},
+    group: {type: String, required: true},
     description: {type: String, required: true}
 });
 

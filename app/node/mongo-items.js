@@ -10,7 +10,7 @@ var Items = {
     findItem: findItem,
     findPostItem: findPostItem,
     editItem: editItem,
-	editPostItem: editPostItem,
+    editPostItem: editPostItem,
     updateItem: updateItem,
     addItem: addItem,
     saveItem: saveItem,
@@ -97,8 +97,10 @@ function updateItem(req, res) {
             res.send({error: err.message});
         }
 
-        item.name = req.body.name;
         item.pic = req.body.pic;
+        item.name = req.body.name;
+        item.category = req.body.category;
+        item.group = req.body.group;
         item.description = req.body.description;
 
         item.save(function (err) {
@@ -114,8 +116,10 @@ function updateItem(req, res) {
 function addItem(req, res) {
     ItemsModel.create({
             id: req.body.id,
-            name: req.body.name,
             pic: req.body.pic,
+            name: req.body.name,
+            category: req.body.category,
+            group: req.body.group,
             description: req.body.description
         },
         function (err, item) {
@@ -129,10 +133,12 @@ function addItem(req, res) {
 function saveItem(req, res) {
     console.log(req.body);
     var item = new ItemsModel({
-            id: req.body.id,
-            name: req.body.name,
-            pic: req.body.pic,
-            description: req.body.description
+        id: req.body.id,
+        pic: req.body.pic,
+        name: req.body.name,
+        category: req.body.category,
+        group: req.body.group,
+        description: req.body.description
     });
     item.save(function (err) {
         if (!err) {
