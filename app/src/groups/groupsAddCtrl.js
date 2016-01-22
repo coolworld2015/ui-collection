@@ -6,10 +6,10 @@
         .controller('GroupsAddCtrl', GroupsAddCtrl);
 
     GroupsAddCtrl.$inject = ['$state', '$rootScope', '$timeout', 'GroupsService', 'GroupsLocalStorage',
-        'CategoriesLocalStorage'];
+        'categories'];
 
     function GroupsAddCtrl($state, $rootScope, $timeout, GroupsService, GroupsLocalStorage,
-                           CategoriesLocalStorage) {
+                           categories) {
         var vm = this;
         var optionalCategory = {name: 'Select category'};
 
@@ -28,8 +28,8 @@
         init();
 
         function init() {
-            var category = CategoriesLocalStorage.getCategories();
-            vm.categoryOptions = [].concat(category);
+            vm.category = categories;
+            vm.categoryOptions = [].concat(vm.category);
             vm.categoryOptions.unshift(optionalCategory);
             vm.categorySelectedItem = vm.categoryOptions[0];
             $rootScope.loading = false;

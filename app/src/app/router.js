@@ -170,7 +170,10 @@
                 params: {item: {}},
                 templateUrl: 'groups/groups-add.html',
                 controller: 'GroupsAddCtrl',
-                controllerAs: 'groupsAddCtrl'
+                controllerAs: 'groupsAddCtrl',
+                resolve: {
+                    categories: resolveResource('api/categories/get', 'categories', sort)
+                }
             })
 
             .state('groups-edit', {
@@ -204,7 +207,11 @@
                 params: {item: {}},
                 templateUrl: 'items/items-add.html',
                 controller: 'ItemsAddCtrl',
-                controllerAs: 'itemsAddCtrl'
+                controllerAs: 'itemsAddCtrl',
+                resolve: {
+                    categories: resolveResource('api/categories/get', 'categories', sort),
+                    groups: resolveResource('api/groups/get', 'groups', sort)
+                }
             })
 
             .state('items-edit', {

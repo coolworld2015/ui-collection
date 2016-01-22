@@ -6,10 +6,10 @@
         .controller('ItemsAddCtrl', ItemsAddCtrl);
 
     ItemsAddCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'ItemsService', 'ItemsLocalStorage',
-        'CategoriesLocalStorage', 'GroupsLocalStorage'];
+        'categories', 'groups'];
 
     function ItemsAddCtrl($scope, $state, $rootScope, $timeout, ItemsService, ItemsLocalStorage,
-                          CategoriesLocalStorage, GroupsLocalStorage) {
+                          categories, groups) {
         $scope.convertPicToJSON = convertPicToJSON;
         var vm = this;
         var optionalCategory = {name: 'Select category'};
@@ -32,12 +32,12 @@
         init();
 
         function init() {
-            vm.category = CategoriesLocalStorage.getCategories();
+            vm.category = categories;
             vm.categoryOptions = [].concat(vm.category);
             vm.categoryOptions.unshift(optionalCategory);
             vm.categorySelectedItem = vm.categoryOptions[0];
 
-            vm.group = GroupsLocalStorage.getGroups();
+            vm.group = groups;
             vm.groupOptions = [].concat(vm.group);
             vm.groupOptions.unshift(optionalGroup);
             vm.groupSelectedItem = vm.groupOptions[0];
