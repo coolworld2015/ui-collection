@@ -11,6 +11,7 @@
         var vm = this;
 
         angular.extend(vm, {
+            init: init,
             categoriesSubmit: categoriesSubmit,
             categoriesDialog: categoriesDialog,
             categoriesEditBack: categoriesEditBack,
@@ -22,6 +23,13 @@
         $timeout(function () {
             window.scrollTo(0, 0);
         });
+
+        init();
+
+        function init() {
+            $rootScope.myError = false;
+            $rootScope.loading = false;
+        }
 
         function categoriesSubmit() {
             if (vm.form.$invalid) {
@@ -46,7 +54,10 @@
                     .catch(errorHandler);
             } else {
                 CategoriesLocalStorage.editItem(item);
-                $state.go('categories');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('categories');
+                }, 100);
             }
         }
 
@@ -55,12 +66,17 @@
                 id: vm.id,
                 name: vm.name
             };
-            $state.go('categories-dialog', {item: obj});
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('categories-dialog', {item: obj});
+            }, 100);
         }
 
         function categoriesEditBack() {
             $rootScope.loading = true;
-            $state.go('categories');
+            $timeout(function () {
+                $state.go('categories');
+            }, 100);
         }
 
         function errorHandler() {

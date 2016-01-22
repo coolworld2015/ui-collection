@@ -20,6 +20,7 @@
 
         $timeout(function () {
             window.scrollTo(0, 0);
+            $rootScope.loading = false;
         });
 
         function categoriesDelete() {
@@ -35,13 +36,18 @@
                     .catch(errorHandler);
             } else {
                 CategoriesLocalStorage.deleteItem(vm.id);
-                $state.go('categories');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('categories');
+                }, 100);
             }
         }
 
         function categoriesEditBack() {
             $rootScope.loading = true;
-            $state.go('categories');
+            $timeout(function () {
+                $state.go('categories');
+            }, 100);
         }
 
         function errorHandler() {

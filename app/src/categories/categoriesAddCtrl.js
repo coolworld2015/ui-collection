@@ -52,12 +52,18 @@
                     .catch(errorHandler);
             } else {
                 CategoriesLocalStorage.addItem(item);
-                $state.go('categories');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('categories');
+                }, 100);
             }
         }
 
         function categoriesAddBack() {
-            $state.go('categories');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('categories');
+            }, 100);
         }
 
         function errorHandler() {
