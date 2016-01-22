@@ -11,7 +11,7 @@
     function GroupsAddCtrl($state, $rootScope, $timeout, GroupsService, GroupsLocalStorage,
                            CategoriesLocalStorage) {
         var vm = this;
-        var optionalClient = {name: 'Select category'};
+        var optionalCategory = {name: 'Select category'};
 
         angular.extend(vm, {
             init: init,
@@ -30,7 +30,7 @@
         function init() {
             vm.clients = CategoriesLocalStorage.getCategories();
             vm.options = [].concat(vm.clients);
-            vm.options.unshift(optionalClient);
+            vm.options.unshift(optionalCategory);
             vm.selectedItem = vm.options[0];
             $rootScope.loading = false;
         }

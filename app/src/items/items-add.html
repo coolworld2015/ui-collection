@@ -19,6 +19,19 @@
 
 			<tr>
 				<td>
+					<select class="form-control input" required
+							ng-model="itemsAddCtrl.selectedItem"
+							ng-options="option.name for option in itemsAddCtrl.options
+							track by option.name"
+							ng-change="itemsAddCtrl.updateChange(itemsAddCtrl.selectedItem)">
+					</select>
+
+					<div ng-show="itemsAddCtrl.error" class="valid">Value required</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
 					<input type="text" class="form-control input" required
 						   style="font-size:20px;
 						   color: white;

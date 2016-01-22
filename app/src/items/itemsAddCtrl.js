@@ -5,14 +5,18 @@
         .module('app')
         .controller('ItemsAddCtrl', ItemsAddCtrl);
 
-    ItemsAddCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'ItemsService', 'ItemsLocalStorage'];
+    ItemsAddCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'ItemsService', 'ItemsLocalStorage',
+        'CategoriesLocalStorage'];
 
-    function ItemsAddCtrl($scope, $state, $rootScope, $timeout, ItemsService, ItemsLocalStorage) {
+    function ItemsAddCtrl($scope, $state, $rootScope, $timeout, ItemsService, ItemsLocalStorage,
+                          CategoriesLocalStorage) {
         $scope.convertPicToJSON = convertPicToJSON;
         var vm = this;
+        var optionalCategory = {name: 'Select category'};
 
         angular.extend(vm, {
             init: init,
+            updateChange: updateChange,
             convertPicToJSON: convertPicToJSON,
             itemsAddSubmit: itemsAddSubmit,
             itemsAddBack: itemsAddBack,
@@ -26,8 +30,17 @@
         init();
 
         function init() {
+            vm.clients = CategoriesLocalStorage.getCategories();
+            vm.options = [].concat(vm.clients);
+            vm.options.unshift(optionalCategory);
+            vm.selectedItem = vm.options[0];
             $rootScope.loading = false;
             vm.pic = $rootScope.picBlank;
+        }
+
+        function updateChange(item) {
+            vm.error = false;
+            vm.categoryName = item.name;
         }
 
         function convertPicToJSON() {
@@ -44,6 +57,11 @@
         }
 
         function itemsAddSubmit() {
+            if (vm.selectedItem.name == 'Select category') {
+                vm.error = true;
+                return;
+            }
+
             if (vm.form.$invalid) {
                 return;
             }
@@ -56,6 +74,7 @@
                 id: id,
                 name: vm.name,
                 pic: vm.pic,
+                category: vm.categoryName,
                 description: vm.description
             };
 
