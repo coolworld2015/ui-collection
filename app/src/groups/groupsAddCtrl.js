@@ -70,12 +70,18 @@
                     .catch(errorHandler);
             } else {
                 GroupsLocalStorage.addItem(item);
-                $state.go('groups');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('groups');
+                }, 100);
             }
         }
 
         function groupsAddBack() {
-            $state.go('groups');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('groups');
+            }, 100);
         }
 
         function errorHandler() {

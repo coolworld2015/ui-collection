@@ -13,6 +13,7 @@
         var vm = this;
 
         angular.extend(vm, {
+            init: init,
             groupsSubmit: groupsSubmit,
             groupsDialog: groupsDialog,
             groupsEditBack: groupsEditBack,
@@ -24,6 +25,13 @@
         $timeout(function () {
             window.scrollTo(0, 0);
         });
+
+        init();
+
+        function init() {
+            $rootScope.myError = false;
+            $rootScope.loading = false;
+        }
 
         function groupsSubmit() {
             if (vm.form.$invalid) {
@@ -48,7 +56,10 @@
                     .catch(errorHandler);
             } else {
                 GroupsLocalStorage.editItem(item);
-                $state.go('groups');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('groups');
+                }, 100);
             }
         }
 
@@ -57,12 +68,17 @@
                 id: vm.id,
                 name: vm.name
             };
-            $state.go('groups-dialog', {item: obj});
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('groups-dialog', {item: obj});
+            }, 100);
         }
 
         function groupsEditBack() {
             $rootScope.loading = true;
-            $state.go('groups');
+            $timeout(function () {
+                $state.go('groups');
+            }, 100);
         }
 
         function errorHandler() {

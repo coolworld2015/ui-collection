@@ -52,11 +52,17 @@
         }
 
         function groupsEditForm(item) {
-            $state.go('groups-edit', {item: item});
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('groups-edit', {item: item});
+            }, 100);
         }
 
         function groupsAdd() {
-            $state.go('groups-add');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('groups-add');
+            }, 100);
         }
 
         function goToBack() {
@@ -68,7 +74,10 @@
         }
 
         function groupsBack() {
-            $state.go('main');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('main');
+            }, 100);
         }
 
         function errorHandler() {

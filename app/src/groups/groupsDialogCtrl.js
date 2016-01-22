@@ -20,6 +20,7 @@
 
         $timeout(function () {
             window.scrollTo(0, 0);
+            $rootScope.loading = false;
         });
 
         function groupsDelete() {
@@ -35,13 +36,18 @@
                     .catch(errorHandler);
             } else {
                 GroupsLocalStorage.deleteItem(vm.id);
-                $state.go('groups');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('groups');
+                }, 100);
             }
         }
 
         function groupsEditBack() {
             $rootScope.loading = true;
-            $state.go('groups');
+            $timeout(function () {
+                $state.go('groups');
+            }, 100);
         }
 
         function errorHandler() {
