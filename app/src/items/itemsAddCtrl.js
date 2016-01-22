@@ -6,17 +6,19 @@
         .controller('ItemsAddCtrl', ItemsAddCtrl);
 
     ItemsAddCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout', 'ItemsService', 'ItemsLocalStorage',
-        'CategoriesLocalStorage'];
+        'CategoriesLocalStorage', 'GroupsLocalStorage'];
 
     function ItemsAddCtrl($scope, $state, $rootScope, $timeout, ItemsService, ItemsLocalStorage,
-                          CategoriesLocalStorage) {
+                          CategoriesLocalStorage, GroupsLocalStorage) {
         $scope.convertPicToJSON = convertPicToJSON;
         var vm = this;
         var optionalCategory = {name: 'Select category'};
+        var optionalGroup = {name: 'Select group'};
 
         angular.extend(vm, {
             init: init,
-            updateChange: updateChange,
+            updateChangeCategory: updateChangeCategory,
+            updateChangeGroup: updateChangeGroup,
             convertPicToJSON: convertPicToJSON,
             itemsAddSubmit: itemsAddSubmit,
             itemsAddBack: itemsAddBack,
@@ -30,17 +32,28 @@
         init();
 
         function init() {
-            vm.clients = CategoriesLocalStorage.getCategories();
-            vm.options = [].concat(vm.clients);
-            vm.options.unshift(optionalCategory);
-            vm.selectedItem = vm.options[0];
+            var category = CategoriesLocalStorage.getCategories();
+            vm.categoryOptions = [].concat(category);
+            vm.categoryOptions.unshift(optionalCategory);
+            vm.categorySelectedItem = vm.categoryOptions[0];
+
+            var group = GroupsLocalStorage.getGroups();
+            vm.groupOptions = [].concat(group);
+            vm.groupOptions.unshift(optionalGroup);
+            vm.groupSelectedItem = vm.groupOptions[0];
+
             $rootScope.loading = false;
             vm.pic = $rootScope.picBlank;
         }
 
-        function updateChange(item) {
+        function updateChangeCategory(item) {
             vm.error = false;
             vm.categoryName = item.name;
+        }
+
+        function updateChangeGroup(item) {
+            vm.error = false;
+            vm.groupName = item.name;
         }
 
         function convertPicToJSON() {
@@ -57,7 +70,7 @@
         }
 
         function itemsAddSubmit() {
-            if (vm.selectedItem.name == 'Select category') {
+            if (vm.categorySelectedItem.name == 'Select category') {
                 vm.error = true;
                 return;
             }
@@ -75,6 +88,7 @@
                 name: vm.name,
                 pic: vm.pic,
                 category: vm.categoryName,
+                group: vm.groupName,
                 description: vm.description
             };
 

@@ -10,10 +10,10 @@
             <tr>
                 <td>
                     <select class="form-control input" required
-                            ng-model="groupsAddCtrl.selectedItem"
-                            ng-options="option.name for option in groupsAddCtrl.options
+                            ng-model="groupsAddCtrl.categorySelectedItem"
+                            ng-options="option.name for option in groupsAddCtrl.categoryOptions
 							track by option.name"
-                            ng-change="groupsAddCtrl.updateChange(groupsAddCtrl.selectedItem)">
+                            ng-change="groupsAddCtrl.updateChange(groupsAddCtrl.categorySelectedItem)">
                     </select>
 
                     <div ng-show="groupsAddCtrl.error" class="valid">Value required</div>

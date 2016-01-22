@@ -28,10 +28,10 @@
         init();
 
         function init() {
-            vm.clients = CategoriesLocalStorage.getCategories();
-            vm.options = [].concat(vm.clients);
-            vm.options.unshift(optionalCategory);
-            vm.selectedItem = vm.options[0];
+            var category = CategoriesLocalStorage.getCategories();
+            vm.categoryOptions = [].concat(category);
+            vm.categoryOptions.unshift(optionalCategory);
+            vm.categorySelectedItem = vm.categoryOptions[0];
             $rootScope.loading = false;
         }
 
@@ -41,7 +41,7 @@
         }
 
         function groupsAddSubmit() {
-            if (vm.selectedItem.name == 'Select category') {
+            if (vm.categorySelectedItem.name == 'Select category') {
                 vm.error = true;
                 return;
             }

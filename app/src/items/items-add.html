@@ -20,12 +20,23 @@
 			<tr>
 				<td>
 					<select class="form-control input" required
-							ng-model="itemsAddCtrl.selectedItem"
-							ng-options="option.name for option in itemsAddCtrl.options
+							ng-model="itemsAddCtrl.categorySelectedItem"
+							ng-options="option.name for option in itemsAddCtrl.categoryOptions
 							track by option.name"
-							ng-change="itemsAddCtrl.updateChange(itemsAddCtrl.selectedItem)">
+							ng-change="itemsAddCtrl.updateChangeCategory(itemsAddCtrl.categorySelectedItem)">
 					</select>
+					<div ng-show="itemsAddCtrl.error" class="valid">Value required</div>
+				</td>
+			</tr>
 
+			<tr>
+				<td>
+					<select class="form-control input" required
+							ng-model="itemsAddCtrl.groupSelectedItem"
+							ng-options="option.name for option in itemsAddCtrl.groupOptions
+							track by option.name"
+							ng-change="itemsAddCtrl.updateChangeGroup(itemsAddCtrl.groupSelectedItem)">
+					</select>
 					<div ng-show="itemsAddCtrl.error" class="valid">Value required</div>
 				</td>
 			</tr>
