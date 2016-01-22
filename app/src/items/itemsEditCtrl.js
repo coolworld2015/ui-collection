@@ -12,6 +12,7 @@
         var vm = this;
 
         angular.extend(vm, {
+            init: init,
             convertPicToJSON: convertPicToJSON,
             openPic: openPic,
             itemsSubmit: itemsSubmit,
@@ -26,6 +27,12 @@
             window.scrollTo(0, 0);
         });
 
+        init();
+
+        function init() {
+            $rootScope.myError = false;
+            $rootScope.loading = false;
+        }
 
         function convertPicToJSON() {
             var fileInput = document.getElementById("picFileInput");
@@ -37,13 +44,15 @@
                     vm.pic = reader.result;
                 });
             };
-            console.log(file);
             reader.readAsDataURL(file);
         }
 
         function openPic() {
+            $rootScope.loading = true;
             window.open(vm.pic);
-            return false;
+            $timeout(function () {
+                $rootScope.loading = false;
+            }, 3000);
         }
 
         function itemsSubmit() {
@@ -69,7 +78,10 @@
                     .catch(errorHandler);
             } else {
                 ItemsLocalStorage.editItem(item);
-                $state.go('items');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('items');
+                }, 100);
             }
         }
 
@@ -78,12 +90,17 @@
                 id: vm.id,
                 name: vm.name
             };
-            $state.go('items-dialog', {item: obj});
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('items-dialog', {item: obj});
+            }, 100);
         }
 
         function itemsEditBack() {
             $rootScope.loading = true;
-            $state.go('items');
+            $timeout(function () {
+                $state.go('items');
+            }, 100);
         }
 
         function errorHandler() {

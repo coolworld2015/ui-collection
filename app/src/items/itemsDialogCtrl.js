@@ -20,6 +20,7 @@
 
         $timeout(function () {
             window.scrollTo(0, 0);
+            $rootScope.loading = false;
         });
 
         function itemsDelete() {
@@ -35,13 +36,18 @@
                     .catch(errorHandler);
             } else {
                 ItemsLocalStorage.deleteItem(vm.id);
-                $state.go('items');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('items');
+                }, 100);
             }
         }
 
         function itemsEditBack() {
             $rootScope.loading = true;
-            $state.go('items');
+            $timeout(function () {
+                $state.go('items');
+            }, 100);
         }
 
         function errorHandler() {

@@ -40,7 +40,6 @@
                     vm.pic = reader.result;
                 });
             };
-            console.log(file);
             reader.readAsDataURL(file);
         }
 

@@ -52,11 +52,17 @@
         }
 
         function itemsEditForm(item) {
-            $state.go('items-edit', {item: item});
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('items-edit', {item: item});
+            }, 100);
         }
 
         function itemsAdd() {
-            $state.go('items-add');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('items-add');
+            }, 100);
         }
 
         function goToBack() {
@@ -68,7 +74,10 @@
         }
 
         function itemsBack() {
-            $state.go('main');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('main');
+            }, 100);
         }
 
         function errorHandler() {

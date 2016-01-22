@@ -40,7 +40,6 @@
                     vm.pic = reader.result;
                 });
             };
-            console.log(file);
             reader.readAsDataURL(file);
         }
 
@@ -69,12 +68,18 @@
                     .catch(errorHandler);
             } else {
                 ItemsLocalStorage.addItem(item);
-                $state.go('items');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('items');
+                }, 100);
             }
         }
 
         function itemsAddBack() {
-            $state.go('items');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('items');
+            }, 100);
         }
 
         function errorHandler() {
