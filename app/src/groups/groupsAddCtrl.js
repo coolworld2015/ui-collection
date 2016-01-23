@@ -6,10 +6,10 @@
         .controller('GroupsAddCtrl', GroupsAddCtrl);
 
     GroupsAddCtrl.$inject = ['$state', '$rootScope', '$timeout', 'GroupsService', 'GroupsLocalStorage',
-        'categories', 'CategoriesLocalStorage'];
+        'categories', 'CategoriesLocalStorage', 'CategoriesService'];
 
     function GroupsAddCtrl($state, $rootScope, $timeout, GroupsService, GroupsLocalStorage,
-                           categories, CategoriesLocalStorage) {
+                           categories, CategoriesLocalStorage, CategoriesService) {
         var vm = this;
         var optionalCategory = {name: 'Select category'};
 
@@ -57,7 +57,16 @@
 			for (var i = 0; i < vm.category.length; i++) {
                 if (vm.category[i].id == vm.categoryID) {
                     vm.category[i].groups.push(' ' + vm.name);
-					CategoriesLocalStorage.editItem(vm.category[i]);
+					
+					if ($rootScope.mode == 'ON-LINE (Heroku)') {
+					CategoriesService.editItem(vm.category[i])
+						.then(function () {
+						})
+						.catch(errorHandler);
+					} else {
+						CategoriesLocalStorage.editItem(vm.category[i]);		
+					}
+					
                 }
             }
 			

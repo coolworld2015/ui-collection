@@ -29,7 +29,7 @@
         function init() {
             $rootScope.myError = false;
             $rootScope.loading = false;
-			vm.groups.sort(sort);
+			vm.groups.sort();
         }
 
         function categoriesSubmit() {
@@ -83,10 +83,6 @@
         function errorHandler() {
             $rootScope.loading = false;
             $rootScope.myError = true;
-        }
-		
-		function sort(a, b) {
-            return parseInt(a.number) - parseInt(b.number);
         }
     }
 })();
