@@ -6,10 +6,10 @@
         .controller('GroupsAddCtrl', GroupsAddCtrl);
 
     GroupsAddCtrl.$inject = ['$state', '$rootScope', '$timeout', 'GroupsService', 'GroupsLocalStorage',
-        'categories'];
+        'categories', 'CategoriesLocalStorage'];
 
     function GroupsAddCtrl($state, $rootScope, $timeout, GroupsService, GroupsLocalStorage,
-                           categories) {
+                           categories, CategoriesLocalStorage) {
         var vm = this;
         var optionalCategory = {name: 'Select category'};
 
@@ -38,6 +38,7 @@
         function updateChange(item) {
             vm.error = false;
             vm.categoryName = item.name;
+            vm.categoryID = item.id;
         }
 
         function groupsAddSubmit() {
@@ -52,7 +53,14 @@
 
             $rootScope.myError = false;
             $rootScope.loading = true;
-
+			
+			for (var i = 0; i < vm.category.length; i++) {
+                if (vm.category[i].id == vm.categoryID) {
+                    vm.category[i].groups.push(' ' + vm.name);
+					CategoriesLocalStorage.editItem(vm.category[i]);
+                }
+            }
+			
             var id = (Math.random() * 1000000).toFixed();
             var item = {
                 id: id,
