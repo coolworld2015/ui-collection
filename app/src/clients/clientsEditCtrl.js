@@ -49,8 +49,12 @@
 
         function openPic() {
 			$rootScope.loading = true;
-            window.open(vm.pic);
+
 		    $timeout(function () {
+				window.open(vm.pic);
+			}, 100);
+			
+			$timeout(function () {
 				$rootScope.loading = false;
 			}, 3000);
         }
