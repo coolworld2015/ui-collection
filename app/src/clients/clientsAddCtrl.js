@@ -28,6 +28,7 @@
         function init() {
             $rootScope.loading = false;
             vm.pic = $rootScope.picBlank;
+            vm.pic = $rootScope.noImage;
         }
 
         function convertPicToJSON() {
