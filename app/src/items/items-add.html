@@ -13,12 +13,6 @@
 		<table class="table table-bordered">
 			<tr>
 				<td>
-					<input type="file" id="picFileInput" multiple onchange="angular.element(this).scope().convertPicToJSON()">
-				</td>
-			</tr>
-
-			<tr>
-				<td>
 					<select class="form-control input" required
 							ng-model="itemsAddCtrl.categorySelectedItem"
 							ng-options="option.name for option in itemsAddCtrl.categoryOptions
@@ -56,7 +50,7 @@
 					</div>
 				</td>
 			</tr>
-
+		
 			<tr>
 				<td>
 					<textarea rows=5 type="text" class="form-control input" required
@@ -72,6 +66,12 @@
 					</div>
 				</td>
 			</tr>
+			
+			<tr>
+				<td>
+					<input type="file" id="picFileInput" multiple onchange="angular.element(this).scope().convertPicToJSON()">
+				</td>
+			</tr>			
 		</table>
 
 		<button type="submit" class="btn btn-primary button">Submit</button>&nbsp

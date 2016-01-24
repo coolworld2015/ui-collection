@@ -13,12 +13,6 @@
 		<table class="table table-bordered">
 			<tr>
 				<td>
-					<input type="file" id="picFileInput" multiple onchange="angular.element(this).scope().convertPicToJSON()">
-				</td>
-			</tr>
-
-			<tr>
-				<td>
 					<input type="text" class="form-control input" required
 						   style="font-size:20px;
 						   color: white;
@@ -72,6 +66,12 @@
 					</div>
 				</td>
 			</tr>
+			
+			<tr>
+				<td>
+					<input type="file" id="picFileInput" multiple onchange="angular.element(this).scope().convertPicToJSON()">
+				</td>
+			</tr>			
 		</table>
 
 		<button type="submit" class="btn btn-primary button">Submit</button>&nbsp

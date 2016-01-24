@@ -81,11 +81,16 @@
                     })
                     .catch(errorHandler);
             } else {
-                ClientsLocalStorage.editItem(item);
-				$rootScope.loading = true;
-				$timeout(function () {
-					$state.go('clients');
-				}, 100);	
+				try {
+					ClientsLocalStorage.editItem(item);
+					$rootScope.loading = true;
+					$timeout(function () {
+						$state.go('clients');
+					}, 100);
+				} catch(e) {
+					errorHandler();
+					alert(e);
+				}	
             }
         }
 
@@ -101,7 +106,8 @@
         }
 
         function clientsEditBack() {
-			$rootScope.loading = true;
+			$rootScope.myError = false;
+            $rootScope.loading = true;
 			$timeout(function () {
 				$state.go('clients');
 			}, 100);			

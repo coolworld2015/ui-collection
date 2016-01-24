@@ -130,15 +130,21 @@
                     })
                     .catch(errorHandler);
             } else {
-                ItemsLocalStorage.addItem(item);
-                $rootScope.loading = true;
-                $timeout(function () {
-                    $state.go('items');
-                }, 100);
-            }
+				try {
+					ItemsLocalStorage.addItem(item);
+					$rootScope.loading = true;
+					$timeout(function () {
+						$state.go('items');
+					}, 100);
+				} catch(e) {
+					errorHandler();
+					alert(e);
+				}
+             }
         }
 
         function itemsAddBack() {
+			$rootScope.myError = false;
             $rootScope.loading = true;
             $timeout(function () {
                 $state.go('items');

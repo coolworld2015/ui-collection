@@ -68,16 +68,22 @@
                     })
                     .catch(errorHandler);
             } else {
-                ClientsLocalStorage.addItem(item);
-				$rootScope.loading = true;
-				$timeout(function () {
-					$state.go('clients');
-				}, 100);
+				try {
+					ClientsLocalStorage.addItem(item);
+					$rootScope.loading = true;
+					$timeout(function () {
+						$state.go('clients');
+					}, 100);
+				} catch(e) {
+					errorHandler();
+					alert(e);
+				}				
             }
         }
 
         function clientsAddBack() {
-			$rootScope.loading = true;
+			$rootScope.myError = false;
+            $rootScope.loading = true;
 			$timeout(function () {
 				$state.go('clients');
 			}, 100);
