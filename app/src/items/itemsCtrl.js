@@ -14,6 +14,7 @@
 
         angular.extend(vm, {
             init: init,
+			updateChange: updateChange,
             currentPage: currentPage,
             itemsEditForm: itemsEditForm,
             itemsAdd: itemsAdd,
@@ -35,13 +36,17 @@
             vm.itemsFilter = [];
 
             $scope.currentPage = 1;
-            $scope.numPerPage = 10;
+            $scope.numPerPage = $rootScope.numPerPageItems;
             $scope.maxSize = 5;
 
             $rootScope.myError = false;
             $rootScope.loading = false;
         }
 
+        function updateChange() {
+            $rootScope.numPerPageItems = $scope.numPerPage;
+        }
+		
         function currentPage() {
             if (Object.prototype.toString.call(vm.items) == '[object Array]') {
                 var begin = (($scope.currentPage - 1) * $scope.numPerPage);

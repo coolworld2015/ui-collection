@@ -40,7 +40,8 @@
 	<hr style="margin-top: -20px;">
 		<span class="label label-primary" style="font-size:17px;">Items per page:
 			<input style="border:none; width: 30px; font-size:17px; background-color:#337ab7" 
-			type="text" ng-model="numPerPage" value={{numPerPage}}>
+			type="text" ng-model="numPerPage" value={{numPerPage}}
+			ng-change="itemsCtrl.updateChange()">
 		</span>	
 	<div><pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></pagination></div>
 	<button class="btn btn-primary button" ng-click="itemsCtrl.itemsAdd()">Add</button>&nbsp
