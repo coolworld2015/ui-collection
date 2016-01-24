@@ -34,7 +34,8 @@
             vm.title = 'Items';
             vm.items = items;
             vm.itemsFilter = [];
-
+			vm.blank = $rootScope.noImage;
+			
             $scope.currentPage = 1;
             $scope.numPerPage = $rootScope.numPerPageItems;
             $scope.maxSize = 5;

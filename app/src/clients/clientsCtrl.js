@@ -33,7 +33,8 @@
             vm.title = 'Contacts';
             vm.clients = clients;
             vm.clientsFilter = [];
-
+			vm.blank = $rootScope.noImage;
+			
             $scope.currentPage = 1;
             $scope.numPerPage = 10;
             $scope.maxSize = 5;

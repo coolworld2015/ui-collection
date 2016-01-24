@@ -30,6 +30,9 @@
         init();
 
         function init() {
+			if ($stateParams.item.pic == 'blank') {
+				vm.pic = $rootScope.noImage;
+			}
             $rootScope.myError = false;
             $rootScope.loading = false;
         }

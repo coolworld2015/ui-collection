@@ -27,7 +27,6 @@
 
         function init() {
             $rootScope.loading = false;
-            vm.pic = $rootScope.picBlank;
             vm.pic = $rootScope.noImage;
         }
 
@@ -56,7 +55,7 @@
             var item = {
                 id: id,
                 name: vm.name,
-                pic: vm.pic,
+                pic: 'blank',
                 description: vm.description
             };
 

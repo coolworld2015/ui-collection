@@ -43,7 +43,6 @@
             vm.groupSelectedItem = vm.groupOptions[0];
 
             $rootScope.loading = false;
-            vm.pic = $rootScope.picBlank;
 			vm.pic = $rootScope.noImage;
         }
 
@@ -116,7 +115,7 @@
             var item = {
                 id: id,
                 name: vm.name,
-                pic: vm.pic,
+                pic: 'blank',
                 category: vm.categoryName,
                 group: vm.groupName,
                 description: vm.description

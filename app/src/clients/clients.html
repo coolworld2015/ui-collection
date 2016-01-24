@@ -25,7 +25,12 @@
 				<div style="border-style: solid;
 						border-width: thick;
 						float: left;">
-					<img ng-src="{{item.pic}}" width=100 height=100>
+					<div ng-if="item.pic == 'blank'">
+						<img ng-src="{{clientsCtrl.blank}}" width=100 height=100>
+					</div>
+					<div ng-if="item.pic != 'blank'">
+						<img ng-src="{{item.pic}}" width=100 height=100>
+					</div>
 				</div>
 				<div style="width:50%;
 							float: left;
