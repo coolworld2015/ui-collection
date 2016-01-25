@@ -17,6 +17,8 @@
             setClients: setClients,
 
             uploadClients: uploadClients,
+            findName: findName,
+
             _sort: sort
         };
 
@@ -68,6 +70,18 @@
         function uploadClients(clients) {
             localStorage.setItem('ui-collection.clients', JSON.stringify(clients));
             ClientsLocalStorage.clients = undefined;
+        }
+
+        function findName(name) {
+            getClients();
+            var clients = ClientsLocalStorage.clients;
+            var results = [];
+            for (var i = 0; i < clients.length; i++) {
+                if (clients[i].name == name) {
+                    results.push(clients[i]);
+                }
+            }
+            return results;
         }
 
         function sort(a, b) {

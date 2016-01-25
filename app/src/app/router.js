@@ -100,24 +100,25 @@
                 controller: 'SearchResultsCtrl',
                 controllerAs: 'searchResultsCtrl',
                 resolve: {
-                    items: ['$http', '$stateParams', '$rootScope', function ($http, $stateParams, $rootScope) {
-                        var api, url;
-                        api = 'api/clients/findName/';
-                        if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
-                            url = $rootScope.myConfig.webUrl + api;
-                        } else {
-                            url = $rootScope.myConfig.webUrl + api;
-                            return $http.get(url + $stateParams.name)
-                                .then(function (data) {
-                                    return data.data;
-                                })
-                                .catch(function () {
-                                    $rootScope.loading = false;
-                                    $rootScope.error = true;
-                                    return [];
-                                });
-                        }
-                    }]
+                    items: ['$http', '$stateParams', '$rootScope', 'ClientsLocalStorage',
+                        function ($http, $stateParams, $rootScope, ClientsLocalStorage) {
+                            if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
+                                var data = ClientsLocalStorage.findName($stateParams.name);
+                                return data;
+                            } else {
+                                var api = 'api/clients/findName/';
+                                var webUrl = $rootScope.myConfig.webUrl + api;
+                                return $http.get(webUrl + $stateParams.name)
+                                    .then(function (data) {
+                                        return data.data;
+                                    })
+                                    .catch(function () {
+                                        $rootScope.loading = false;
+                                        $rootScope.error = true;
+                                        return [];
+                                    });
+                            }
+                        }]
                 }
             })
 //-------------------------------------------------------------------------------------------------------
