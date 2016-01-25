@@ -15,6 +15,7 @@
             init: init,
             convertPicToJSON: convertPicToJSON,
             clientsAddSubmit: clientsAddSubmit,
+			_addItem: addItem,
             clientsAddBack: clientsAddBack,
             _errorHandler: errorHandler
         });
@@ -62,6 +63,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
                 ClientsService.addItem(item)
                     .then(function () {
+						addItem(item);
                         $rootScope.myError = false;
                         $state.go('clients');
                     })
@@ -79,7 +81,11 @@
 				}				
             }
         }
-
+		
+        function addItem(item) {
+            ClientsService.clients.push(item);
+        }
+		
         function clientsAddBack() {
 			$rootScope.myError = false;
             $rootScope.loading = true;

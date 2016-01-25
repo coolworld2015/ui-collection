@@ -11,10 +11,14 @@
 
         function resolveResource(url, state, sort) {
             resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage', 'CategoriesLocalStorage',
-                'GroupsLocalStorage', 'ItemsLocalStorage'];
+                'GroupsLocalStorage', 'ItemsLocalStorage',
+				'ClientsService'];
             function resolver($http, $q, $rootScope, ClientsLocalStorage, CategoriesLocalStorage,
-                              GroupsLocalStorage, ItemsLocalStorage) {
+                              GroupsLocalStorage, ItemsLocalStorage,
+							  ClientsService) {
                 var data;
+				var deferred = $q.defer();
+
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
                     switch (state) {
                         case 'clients':
@@ -37,19 +41,45 @@
                             return data;
                             break;
                     }
-                }
+                } else {
+					switch (state) {
+                        case 'clients':
+							if ($rootScope.clients === undefined) {
+								var webUrl = $rootScope.myConfig.webUrl + url;
+								return $http.get(webUrl)
+									.then(function (result) {
+										ClientsService.clients = result.data;
+										$rootScope.clients = true;
+										$rootScope.loading = false;
+										return ClientsService.clients.sort(sort);
+									})						
+									.catch(function (reject) {
+										$rootScope.loading = false;
+										$rootScope.myError = true;
+										return $q.reject(reject);
+									});	
+							} else {
+								return ClientsService.clients.sort(sort);
+							}
+							return deferred.promise;
+                            break;
 
-                var webUrl = $rootScope.myConfig.webUrl + url;
-                return $http.get(webUrl)
-                    .then(function (result) {
-                        $rootScope.loading = false;
-                        return result.data.sort(sort);
-                    })
-                    .catch(function (reject) {
-                        $rootScope.loading = false;
-                        $rootScope.myError = true;
-                        return $q.reject(reject);
-                    });
+                        case 'categories':
+                            data = CategoriesLocalStorage.getCategories();
+                            return data;
+                            break;
+
+                        case 'groups':
+                            data = GroupsLocalStorage.getGroups();
+                            return data;
+                            break;
+
+                        case 'items':
+                            data = ItemsLocalStorage.getItems();
+                            return data;
+                            break;
+                    }
+				}
             }
 
             return resolver;

@@ -16,6 +16,7 @@
             convertPicToJSON: convertPicToJSON,
             openPic: openPic,
             clientsSubmit: clientsSubmit,
+			_editItem: editItem,
             clientsDialog: clientsDialog,
             clientsEditBack: clientsEditBack,
             _errorHandler: errorHandler
@@ -79,6 +80,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
                 ClientsService.editItem(item)
                     .then(function () {
+						editItem(item)
                         $rootScope.myError = false;
                         $state.go('clients');
                     })
@@ -96,7 +98,17 @@
 				}	
             }
         }
-
+		
+        function editItem(item) {
+            var clients = ClientsService.clients;
+            for (var i = 0; i < clients.length; i++) {
+                if (clients[i].id == item.id) {
+                    clients.splice(i, 1, item);
+                    break;
+                }
+            }
+        }
+		
         function clientsDialog() {
             var obj = {
                 id: vm.id,
