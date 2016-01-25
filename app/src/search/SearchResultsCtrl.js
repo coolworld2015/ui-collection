@@ -5,9 +5,9 @@
         .module('app')
         .controller('SearchResultsCtrl', SearchResultsCtrl);
 
-    SearchResultsCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'items'];
+    SearchResultsCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'items', '$stateParams'];
 
-    function SearchResultsCtrl($scope, $rootScope, $state, $timeout, items) {
+    function SearchResultsCtrl($scope, $rootScope, $state, $timeout, items, $stateParams) {
         $scope.$watch('numPerPage', currentPage);
         $scope.$watch('currentPage', currentPage);
         var vm = this;
@@ -31,7 +31,7 @@
         init();
 
         function init() {
-            vm.title = 'Items';
+            vm.title = 'Results for "' + $stateParams.name + '"';
             vm.items = items;
             vm.itemsFilter = [];
 			vm.blank = $rootScope.noImage;

@@ -100,15 +100,16 @@
                 controller: 'SearchResultsCtrl',
                 controllerAs: 'searchResultsCtrl',
                 resolve: {
-                    items: ['$http', '$stateParams', '$rootScope', 'ClientsLocalStorage',
-                        function ($http, $stateParams, $rootScope, ClientsLocalStorage) {
+                    items: ['$http', '$stateParams', '$rootScope', 'ItemsLocalStorage',
+                        function ($http, $stateParams, $rootScope, ItemsLocalStorage) {
+                            var name = $stateParams.name;
                             if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
-                                var data = ClientsLocalStorage.findName($stateParams.name);
+                                var data = ItemsLocalStorage.findName(name);
                                 return data;
                             } else {
-                                var api = 'api/clients/findName/';
+                                var api = 'api/items/findName/';
                                 var webUrl = $rootScope.myConfig.webUrl + api;
-                                return $http.get(webUrl + $stateParams.name)
+                                return $http.get(webUrl + name)
                                     .then(function (data) {
                                         return data.data;
                                     })

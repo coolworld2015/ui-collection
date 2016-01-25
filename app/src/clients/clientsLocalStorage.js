@@ -18,7 +18,6 @@
 
             uploadClients: uploadClients,
             findName: findName,
-
             _sort: sort
         };
 
@@ -77,7 +76,7 @@
             var clients = ClientsLocalStorage.clients;
             var results = [];
             for (var i = 0; i < clients.length; i++) {
-                if (clients[i].name == name) {
+                if (clients[i].name.toUpperCase().indexOf(name.toUpperCase()) > -1) {
                     results.push(clients[i]);
                 }
             }

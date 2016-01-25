@@ -17,6 +17,7 @@
             setItems: setItems,
 
             uploadItems: uploadItems,
+            findName: findName,
             _sort: sort
         };
 
@@ -68,6 +69,18 @@
         function uploadItems(items) {
             localStorage.setItem('ui-collection.items', JSON.stringify(items));
             ItemsLocalStorage.items = undefined;
+        }
+
+        function findName(name) {
+            getItems();
+            var items = ItemsLocalStorage.items;
+            var results = [];
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].name.toUpperCase().indexOf(name.toUpperCase()) > -1) {
+                    results.push(items[i]);
+                }
+            }
+            return results;
         }
 
         function sort(a, b) {

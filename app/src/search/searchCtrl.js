@@ -5,9 +5,9 @@
         .module('app')
         .controller('SearchCtrl', SearchCtrl);
 
-    SearchCtrl.$inject = ['$scope', '$state', '$rootScope', '$timeout'];
+    SearchCtrl.$inject = ['$state', '$rootScope', '$timeout'];
 
-    function SearchCtrl($scope, $state, $rootScope, $timeout) {
+    function SearchCtrl($state, $rootScope, $timeout) {
         var vm = this;
 
         angular.extend(vm, {
@@ -51,7 +51,7 @@
         }
 
         function searchBack() {
-			$rootScope.myError = false;
+            $rootScope.myError = false;
             $rootScope.loading = true;
             $timeout(function () {
                 $state.go('main');
