@@ -16,29 +16,29 @@
                               GroupsLocalStorage, ItemsLocalStorage) {
                 var data;
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
-                    if (state == 'clients') {
-                        data = ClientsLocalStorage.getClients();
-                        return data;
+                    switch (state) {
+                        case 'clients':
+                            data = ClientsLocalStorage.getClients();
+                            return data;
+                            break;
+
+                        case 'categories':
+                            data = CategoriesLocalStorage.getCategories();
+                            return data;
+                            break;
+
+                        case 'groups':
+                            data = GroupsLocalStorage.getGroups();
+                            return data;
+                            break;
+
+                        case 'items':
+                            data = ItemsLocalStorage.getItems();
+                            return data;
+                            break;
                     }
                 }
-                if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
-                    if (state == 'categories') {
-                        data = CategoriesLocalStorage.getCategories();
-                        return data;
-                    }
-                }
-                if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
-                    if (state == 'groups') {
-                        data = GroupsLocalStorage.getGroups();
-                        return data;
-                    }
-                }
-                if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
-                    if (state == 'items') {
-                        data = ItemsLocalStorage.getItems();
-                        return data;
-                    }
-                }
+
                 var webUrl = $rootScope.myConfig.webUrl + url;
                 return $http.get(webUrl)
                     .then(function (result) {
@@ -66,9 +66,9 @@
             return 0;
         }
 
-        //function sort1(a, b) {
-        //    return parseInt(a.number) - parseInt(b.number);
-        //}
+        function sortNumber(a, b) {
+            return parseInt(a.number) - parseInt(b.number);
+        }
 
         $urlRouterProvider.otherwise('/main');
 
@@ -85,6 +85,23 @@
                 templateUrl: 'config/config.html',
                 controller: 'ConfigCtrl',
                 controllerAs: 'configCtrl'
+            })
+//-------------------------------------------------------------------------------------------------------
+            .state('search', {
+                url: '/search',
+                templateUrl: 'search/search.html',
+                controller: 'SearchCtrl',
+                controllerAs: 'searchCtrl'
+            })
+
+            .state('search-results', {
+                url: '/search-results',
+                templateUrl: 'search/search-results.html',
+                controller: 'SearchResultsCtrl',
+                controllerAs: 'searchResultsCtrl',
+                resolve: {
+                    results: resolveResource('api/clients/get', 'clients', sort)
+                }
             })
 //-------------------------------------------------------------------------------------------------------
             .state('clients', {
