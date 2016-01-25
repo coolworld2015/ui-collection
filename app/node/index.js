@@ -29,7 +29,7 @@ var fileClients = require('./file-clients').Clients;
 
 app.get('/file/api/clients/get', fileClients.getAll); 
 app.get('/file/api/clients/findId/:id', fileClients.findById);
-app.get('/file/api/clients/findName/:name', fileClients.findByName);
+app.get('/file/api/clients/findByName/:name', fileClients.findByName);
 app.post('/file/api/clients/add', fileClients.addItem);
 app.post('/file/api/clients/delete', fileClients.removeItem);
 app.post('/file/api/clients/update', fileClients.updateItem);
@@ -55,7 +55,7 @@ var fileCategories = require('./file-categories').Categories;
 
 app.get('/file/api/categories/get', fileCategories.getAll);
 app.get('/file/api/categories/findId/:id', fileCategories.findById);
-app.get('/file/api/categories/findName/:name', fileCategories.findByName);
+app.get('/file/api/categories/findByName/:name', fileCategories.findByName);
 app.post('/file/api/categories/add', fileCategories.addItem);
 app.post('/file/api/categories/delete', fileCategories.removeItem);
 app.post('/file/api/categories/update', fileCategories.updateItem);
@@ -81,7 +81,7 @@ var fileGroups = require('./file-groups').Groups;
 
 app.get('/file/api/groups/get', fileGroups.getAll);
 app.get('/file/api/groups/findId/:id', fileGroups.findById);
-app.get('/file/api/groups/findName/:name', fileGroups.findByName);
+app.get('/file/api/groups/findByName/:name', fileGroups.findByName);
 app.post('/file/api/groups/add', fileGroups.addItem);
 app.post('/file/api/groups/delete', fileGroups.removeItem);
 app.post('/file/api/groups/update', fileGroups.updateItem);
@@ -107,7 +107,7 @@ var fileItems = require('./file-items').Items;
 
 app.get('/file/api/items/get', fileItems.getAll);
 app.get('/file/api/items/findId/:id', fileItems.findById);
-app.get('/file/api/items/findName/:name', fileItems.findByName);
+app.get('/file/api/items/findByName/:name', fileItems.findByName);
 app.post('/file/api/items/add', fileItems.addItem);
 app.post('/file/api/items/delete', fileItems.removeItem);
 app.post('/file/api/items/update', fileItems.updateItem);

@@ -17,7 +17,7 @@
             setItems: setItems,
 
             uploadItems: uploadItems,
-            findName: findName,
+            findByName: findByName,
             _sort: sort
         };
 
@@ -71,7 +71,7 @@
             ItemsLocalStorage.items = undefined;
         }
 
-        function findName(name) {
+        function findByName(name) {
             getItems();
             var items = ItemsLocalStorage.items;
             var results = [];

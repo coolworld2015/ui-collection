@@ -17,7 +17,7 @@
             setClients: setClients,
 
             uploadClients: uploadClients,
-            findName: findName,
+            findByName: findByName,
             _sort: sort
         };
 
@@ -71,7 +71,7 @@
             ClientsLocalStorage.clients = undefined;
         }
 
-        function findName(name) {
+        function findByName(name) {
             getClients();
             var clients = ClientsLocalStorage.clients;
             var results = [];

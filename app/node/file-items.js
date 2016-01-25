@@ -33,7 +33,7 @@ function findByName(req, res) {
     var name = req.params.name;
     var results = [];
     for (var i = 0; i < jsonItems.length; i++) {
-        if (jsonItems[i].name.indexOf(name) > -1) {
+        if (jsonItems[i].name.toUpperCase().indexOf(name.toUpperCase()) > -1) {
             results.push(jsonItems[i]);
         }
     }
