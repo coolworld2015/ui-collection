@@ -1,6 +1,5 @@
 var fs = require("fs");
-//var fileName = "./items.json";
-var fileName = "./collection.json";
+var fileName = "./items.json";
 var jsonItems = require(fileName);
 
 var Items = {
