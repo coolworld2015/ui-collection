@@ -9,6 +9,7 @@ var Items = {
     getItems: getItems,
     findItem: findItem,
     findPostItem: findPostItem,
+    findByName: findByName,
     editItem: editItem,
     editPostItem: editPostItem,
     updateItem: updateItem,
@@ -46,6 +47,18 @@ function findItem(req, res) {
 function findPostItem(req, res) {
     ItemsModel.findOne({
         id: req.body.id
+    }, function (err, item) {
+        if (err) {
+            res.send({error: err.message});
+        }
+        console.log(item);
+        res.send(item);
+    });
+}
+
+function findByName(req, res) {
+    ItemsModel.find({
+        "name": new RegExp(req.params.name, 'i')
     }, function (err, item) {
         if (err) {
             res.send({error: err.message});

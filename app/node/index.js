@@ -118,6 +118,7 @@ var mongoItems = require('./mongo-items').Items;
 app.get('/api/items/get', mongoItems.getItems);
 app.get('/api/items/find/:id', mongoItems.findItem);
 app.post('/api/items/find', mongoItems.findPostItem);
+app.get('/api/items/findByName/:name', mongoItems.findByName);
 app.get('/api/items/edit/:id/:name', mongoItems.editItem);
 app.post('/api/items/edit/', mongoItems.editPostItem);
 app.post('/api/items/update', mongoItems.updateItem);

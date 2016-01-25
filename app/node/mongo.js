@@ -1,9 +1,7 @@
 var mongoose = require('mongoose');
 
-//mongoose.connect('mongodb://localhost:27017/warehouse');
-//mongoose.connect('mongodb://admin:admin@ds053728.mongolab.com:53728/warehouse');
-
-mongoose.connect('mongodb://admin:admin@ds047355.mongolab.com:47355/collection');
+mongoose.connect('mongodb://admin:admin@ds049935.mongolab.com:49935/ui-collection');
+//mongoose.connect('mongodb://localhost:27017/ui-collection');
 
 var db = mongoose.connection;
 
