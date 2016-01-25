@@ -12,6 +12,7 @@
 
         angular.extend(vm, {
             init: init,
+            updateChange: updateChange,
             searchSubmit: searchSubmit,
             searchBack: searchBack,
             _errorHandler: errorHandler
@@ -35,13 +36,18 @@
             $rootScope.loading = false;
         }
 
+        function updateChange(item) {
+            vm.error = false;
+            vm.search = item.name;
+        }
+
         function searchSubmit() {
             if (vm.form.$invalid) {
                 return;
             }
             $rootScope.loading = true;
             $rootScope.error = false;
-            $state.go('root.search-results', {name: vm.name});
+            $state.go('search-results', {name: vm.name, search: vm.search});
         }
 
         function searchBack() {

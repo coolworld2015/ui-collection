@@ -95,12 +95,29 @@
             })
 
             .state('search-results', {
-                url: '/search-results',
+                url: '/search-results?name',
                 templateUrl: 'search/search-results.html',
                 controller: 'SearchResultsCtrl',
                 controllerAs: 'searchResultsCtrl',
                 resolve: {
-                    results: resolveResource('api/clients/get', 'clients', sort)
+                    items: ['$http', '$stateParams', '$rootScope', function ($http, $stateParams, $rootScope) {
+                        var api, url;
+                        api = 'api/clients/findName/';
+                        if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
+                            url = $rootScope.myConfig.webUrl + api;
+                        } else {
+                            url = $rootScope.myConfig.webUrl + api;
+                            return $http.get(url + $stateParams.name)
+                                .then(function (data) {
+                                    return data.data;
+                                })
+                                .catch(function () {
+                                    $rootScope.loading = false;
+                                    $rootScope.error = true;
+                                    return [];
+                                });
+                        }
+                    }]
                 }
             })
 //-------------------------------------------------------------------------------------------------------

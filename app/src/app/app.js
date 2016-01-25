@@ -46,8 +46,8 @@
         $rootScope.numPerPageItems = 10;
 		
 		$rootScope.myConfig = {
-            webUrl: 'http://ui-collection.herokuapp.com/' //TODO change URL
-            //webUrl: 'http://localhost:3000/file/'
+            //webUrl: 'http://ui-collection.herokuapp.com/' //TODO change URL
+            webUrl: 'http://localhost:3000/file/'
         };
     }
 
