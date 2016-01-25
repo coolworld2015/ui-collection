@@ -43,8 +43,8 @@ function findByName(req, res) {
 function addItem(req, res) {
 	var obj = {
 		id: req.body.id,
-		pic: req.body.pic,
 		name: req.body.name,
+		groups: req.body.groups,
 		description: req.body.description
 	};
 	jsonCategories.push(obj);
@@ -57,8 +57,8 @@ function updateItem(req, res) {
 	var id = req.body.id;
 	var obj = {
 		id: req.body.id,
-		pic: req.body.pic,
 		name: req.body.name,
+		groups: req.body.groups,
 		description: req.body.description
 	};
 	for (var i = 0; i < jsonCategories.length; i++) {
