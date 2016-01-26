@@ -11,6 +11,7 @@
         var webUrl = $rootScope.myConfig.webUrl;
 
         return {
+            groups: [],
             getGroups: getGroups,
             addItem: addItem,
             editItem: editItem,

@@ -12,12 +12,11 @@
         function resolveResource(url, state, sort) {
             resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage', 'CategoriesLocalStorage',
                 'GroupsLocalStorage', 'ItemsLocalStorage',
-				'ClientsService'];
+				'ClientsService', 'CategoriesService', 'GroupsService', 'ItemsService'];
             function resolver($http, $q, $rootScope, ClientsLocalStorage, CategoriesLocalStorage,
                               GroupsLocalStorage, ItemsLocalStorage,
-							  ClientsService) {
+							  ClientsService, CategoriesService, GroupsService, ItemsService) {
                 var data;
-				var deferred = $q.defer();
 
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
                     switch (state) {
@@ -61,22 +60,66 @@
 							} else {
 								return ClientsService.clients.sort(sort);
 							}
-							return deferred.promise;
                             break;
 
                         case 'categories':
-                            data = CategoriesLocalStorage.getCategories();
-                            return data;
+                            if ($rootScope.categories === undefined) {
+                                var webUrl = $rootScope.myConfig.webUrl + url;
+                                return $http.get(webUrl)
+                                    .then(function (result) {
+                                        CategoriesService.categories = result.data;
+                                        $rootScope.categories = true;
+                                        $rootScope.loading = false;
+                                        return CategoriesService.categories.sort(sort);
+                                    })
+                                    .catch(function (reject) {
+                                        $rootScope.loading = false;
+                                        $rootScope.myError = true;
+                                        return $q.reject(reject);
+                                    });
+                            } else {
+                                return CategoriesService.categories.sort(sort);
+                            }
                             break;
 
                         case 'groups':
-                            data = GroupsLocalStorage.getGroups();
-                            return data;
+                            if ($rootScope.groups === undefined) {
+                                var webUrl = $rootScope.myConfig.webUrl + url;
+                                return $http.get(webUrl)
+                                    .then(function (result) {
+                                        GroupsService.groups = result.data;
+                                        $rootScope.groups = true;
+                                        $rootScope.loading = false;
+                                        return GroupsService.groups.sort(sort);
+                                    })
+                                    .catch(function (reject) {
+                                        $rootScope.loading = false;
+                                        $rootScope.myError = true;
+                                        return $q.reject(reject);
+                                    });
+                            } else {
+                                return GroupsService.groups.sort(sort);
+                            }
                             break;
 
                         case 'items':
-                            data = ItemsLocalStorage.getItems();
-                            return data;
+                            if ($rootScope.items === undefined) {
+                                var webUrl = $rootScope.myConfig.webUrl + url;
+                                return $http.get(webUrl)
+                                    .then(function (result) {
+                                        ItemsService.items = result.data;
+                                        $rootScope.items = true;
+                                        $rootScope.loading = false;
+                                        return ItemsService.items.sort(sort);
+                                    })
+                                    .catch(function (reject) {
+                                        $rootScope.loading = false;
+                                        $rootScope.myError = true;
+                                        return $q.reject(reject);
+                                    });
+                            } else {
+                                return ItemsService.items.sort(sort);
+                            }
                             break;
                     }
 				}
