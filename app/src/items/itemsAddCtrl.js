@@ -145,7 +145,7 @@
         }
 
         function addItem(item) {
-            ItemsService.clients.push(item);
+            ItemsService.items.push(item);
         }
 
         function itemsAddBack() {
