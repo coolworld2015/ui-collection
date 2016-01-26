@@ -21,6 +21,7 @@
             updateChangeGroup: updateChangeGroup,
             convertPicToJSON: convertPicToJSON,
             itemsAddSubmit: itemsAddSubmit,
+            _addItem: addItem,
             itemsAddBack: itemsAddBack,
             _errorHandler: errorHandler
         });
@@ -124,6 +125,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
                 ItemsService.addItem(item)
                     .then(function () {
+                        addItem(item);
                         $rootScope.myError = false;
                         $state.go('items');
                     })
@@ -140,6 +142,10 @@
 					alert(e);
 				}
              }
+        }
+
+        function addItem(item) {
+            ItemsService.clients.push(item);
         }
 
         function itemsAddBack() {

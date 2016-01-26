@@ -16,6 +16,7 @@
             convertPicToJSON: convertPicToJSON,
             openPic: openPic,
             itemsSubmit: itemsSubmit,
+            _editItem: editItem,
             itemsDialog: itemsDialog,
             itemsEditBack: itemsEditBack,
             _errorHandler: errorHandler
@@ -81,6 +82,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
                 ItemsService.editItem(item)
                     .then(function () {
+                        editItem(item);
                         $rootScope.myError = false;
                         $state.go('items');
                     })
@@ -96,6 +98,16 @@
 					errorHandler();
 					alert(e);
 				}
+            }
+        }
+
+        function editItem(item) {
+            var items = ItemsService.items;
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].id == item.id) {
+                    items.splice(i, 1, item);
+                    break;
+                }
             }
         }
 

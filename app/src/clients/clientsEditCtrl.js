@@ -80,7 +80,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
                 ClientsService.editItem(item)
                     .then(function () {
-						editItem(item)
+						editItem(item);
                         $rootScope.myError = false;
                         $state.go('clients');
                     })
