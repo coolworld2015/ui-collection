@@ -11,7 +11,7 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.
 zipalign -v 4 android-release-unsigned.apk ui-collection.apk
 
 UI-Collection.
-It's DataBase OFF-Line.
+It's Database OFF-Line.
 You don't need Internet for using it.
-Max size of data about 5M.
+Max size of data about 5 megabytes.
 Enjoy it.
