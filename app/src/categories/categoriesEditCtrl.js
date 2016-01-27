@@ -13,6 +13,7 @@
         angular.extend(vm, {
             init: init,
             categoriesSubmit: categoriesSubmit,
+            _editItem: editItem,
             categoriesDialog: categoriesDialog,
             categoriesEditBack: categoriesEditBack,
             _errorHandler: errorHandler
@@ -49,6 +50,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
                 CategoriesService.editItem(item)
                     .then(function () {
+                        editItem(item);
                         $rootScope.myError = false;
                         $state.go('categories');
                     })
@@ -59,6 +61,16 @@
                 $timeout(function () {
                     $state.go('categories');
                 }, 100);
+            }
+        }
+
+        function editItem(item) {
+            var categories = CategoriesService.categories;
+            for (var i = 0; i < categories.length; i++) {
+                if (categories[i].id == item.id) {
+                    categories.splice(i, 1, item);
+                    break;
+                }
             }
         }
 
