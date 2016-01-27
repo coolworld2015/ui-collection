@@ -14,7 +14,7 @@
 
         angular.extend(vm, {
             init: init,
-			updateChange: updateChange,
+            updateChange: updateChange,
             currentPage: currentPage,
             itemsEditForm: itemsEditForm,
             itemsAdd: itemsAdd,
@@ -34,8 +34,8 @@
             vm.title = 'Results for "' + $stateParams.name + '"';
             vm.items = items;
             vm.itemsFilter = [];
-			vm.blank = $rootScope.noImage;
-			
+            vm.blank = $rootScope.noImage;
+
             $scope.currentPage = 1;
             $scope.numPerPage = $rootScope.numPerPageItems;
             $scope.maxSize = 5;
@@ -47,7 +47,7 @@
         function updateChange() {
             $rootScope.numPerPageItems = $scope.numPerPage;
         }
-		
+
         function currentPage() {
             if (Object.prototype.toString.call(vm.items) == '[object Array]') {
                 var begin = (($scope.currentPage - 1) * $scope.numPerPage);
@@ -60,7 +60,7 @@
         function itemsEditForm(item) {
             $rootScope.loading = true;
             $timeout(function () {
-                $state.go('items-edit', {item: item});
+                $state.go('items-edit', {item: item, finds: $stateParams.finds});
             }, 100);
         }
 

@@ -47,7 +47,7 @@
             }
             $rootScope.loading = true;
             $rootScope.error = false;
-            $state.go('search-results', {name: vm.name, search: vm.search});
+            $state.go('search-results', {name: vm.name, search: vm.search, finds: true});
         }
 
         function searchBack() {

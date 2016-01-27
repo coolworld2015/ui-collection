@@ -126,7 +126,11 @@
 			$rootScope.myError = false;
             $rootScope.loading = true;
             $timeout(function () {
-                $state.go('items');
+                if ($stateParams.finds) {
+                    $state.go('search');
+                } else {
+                    $state.go('items');
+                }
             }, 100);
         }
 

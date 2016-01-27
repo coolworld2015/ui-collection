@@ -168,7 +168,7 @@
             })
 
             .state('search-results', {
-                url: '/search-results?name',
+                url: '/search-results?name?search?finds',
                 templateUrl: 'search/search-results.html',
                 controller: 'SearchResultsCtrl',
                 controllerAs: 'searchResultsCtrl',
@@ -324,7 +324,7 @@
             })
 
             .state('items-edit', {
-                url: '/items-edit',
+                url: '/items-edit?finds',
                 params: {item: {}},
                 templateUrl: 'items/items-edit.html',
                 controller: 'ItemsEditCtrl',
