@@ -15,6 +15,7 @@
         angular.extend(vm, {
             init: init,
             groupsSubmit: groupsSubmit,
+            _editItem: editItem,
             groupsDialog: groupsDialog,
             groupsEditBack: groupsEditBack,
             _errorHandler: errorHandler
@@ -50,6 +51,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
                 GroupsService.editItem(item)
                     .then(function () {
+                        editItem(item);
                         $rootScope.myError = false;
                         $state.go('groups');
                     })
@@ -60,6 +62,16 @@
                 $timeout(function () {
                     $state.go('groups');
                 }, 100);
+            }
+        }
+
+        function editItem(item) {
+            var groups = GroupsService.groups;
+            for (var i = 0; i < groups.length; i++) {
+                if (groups[i].id == item.id) {
+                    groups.splice(i, 1, item);
+                    break;
+                }
             }
         }
 

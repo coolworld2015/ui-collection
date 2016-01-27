@@ -17,6 +17,7 @@
             init: init,
             updateChange: updateChange,
             groupsAddSubmit: groupsAddSubmit,
+            _addItem: addItem,
             groupsAddBack: groupsAddBack,
             _errorHandler: errorHandler
         });
@@ -81,6 +82,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
                 GroupsService.addItem(item)
                     .then(function () {
+                        addItem(item);
                         $rootScope.myError = false;
                         $state.go('groups');
                     })
@@ -92,6 +94,10 @@
                     $state.go('groups');
                 }, 100);
             }
+        }
+
+        function addItem(item) {
+            GroupsService.groups.push(item);
         }
 
         function groupsAddBack() {

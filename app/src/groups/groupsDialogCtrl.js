@@ -12,6 +12,7 @@
 
         angular.extend(vm, {
             groupsDelete: groupsDelete,
+            _deleteItem: deleteItem,
             groupsEditBack: groupsEditBack,
             _errorHandler: errorHandler
         });
@@ -30,6 +31,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
                 GroupsService.deleteItem(vm.id)
                     .then(function () {
+                        deleteItem(vm.id);
                         $rootScope.myError = false;
                         $state.go('groups');
                     })
@@ -40,6 +42,16 @@
                 $timeout(function () {
                     $state.go('groups');
                 }, 100);
+            }
+        }
+
+        function deleteItem(id) {
+            var groups = GroupsService.groups;
+            for (var i = 0; i < groups.length; i++) {
+                if (groups[i].id == id) {
+                    groups.splice(i, 1);
+                    break;
+                }
             }
         }
 
