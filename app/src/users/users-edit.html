@@ -1,12 +1,20 @@
-<center ng-init="usersEditCtrl.init()">
+<center>
+	<div class="header">Collection</div>
+	<br><br>
+	<img ng-src="logo.jpg" width=150 height=150 ng-click="usersEditCtrl.goToBack()">
+	<hr>
 	<form ng-submit="usersEditCtrl.usersSubmit()" novalidate name="usersEditCtrl.form">
-		<div class="header">User: {{usersEditCtrl.name}}</div>
+		<div class="header">&nbsp;{{usersEditCtrl.name}}</div>
 		<br><br>
 		<table class="table table-bordered">
 			<tr>
 				<td>
 					<input type="text" class="form-control input" required
-						   placeholder="User login" name="name"
+						   style="font-size:20px;
+						   color: white;
+						   background-color: black;
+						   border-style: none;"
+						   placeholder="Name" name="name"
 						   ng-model="usersEditCtrl.name">
 
 					<div ng-if="usersEditCtrl.form.$submitted">
@@ -18,7 +26,11 @@
 			<tr>
 				<td>
 					<input type="text" class="form-control input" required
-						   placeholder="User password" name="pass"
+						   style="font-size:20px;
+						   color: white;
+						   background-color: black;
+						   border-style: none;"
+						   placeholder="Password" name="pass"
 						   ng-model="usersEditCtrl.pass">
 
 					<div ng-if="usersEditCtrl.form.$submitted">
@@ -29,10 +41,14 @@
 
 			<tr>
 				<td>
-					<input type="text" class="form-control input" required
-						   placeholder="User description" name="description"
-						   ng-model="usersEditCtrl.description">
-
+					<textarea rows=5 type="text" class="form-control input" required
+							  style="font-size:20px;
+						   color: white;
+						   background-color: black;
+						   border-style: none;"
+							  placeholder="Description" name="description"
+							  ng-model="usersEditCtrl.description">
+					</textarea>
 					<div ng-if="usersEditCtrl.form.$submitted">
 						<div ng-show="usersEditCtrl.form.description.$error.required" class="valid">Value required</div>
 					</div>
@@ -44,4 +60,5 @@
 		<button type="button" class="btn btn-primary button" ng-click="usersEditCtrl.usersDialog()">Delete</button><br><br>
 		<button type="button" class="btn btn-primary button" ng-click="usersEditCtrl.usersEditBack()">Back</button>
 	</form>
+	<br><br>
 </center>

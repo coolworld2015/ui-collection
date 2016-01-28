@@ -5,14 +5,15 @@
         .module('app')
         .controller('UsersEditCtrl', UsersEditCtrl);
 
-    UsersEditCtrl.$inject = ['$state', '$rootScope', '$filter', 'UsersService', 'UsersLocalStorage', '$stateParams'];
+    UsersEditCtrl.$inject = ['$state', '$rootScope', '$timeout', 'UsersService', 'UsersLocalStorage', '$stateParams'];
 
-    function UsersEditCtrl($state, $rootScope, $filter, UsersService, UsersLocalStorage, $stateParams) {
+    function UsersEditCtrl($state, $rootScope, $timeout, UsersService, UsersLocalStorage, $stateParams) {
         var vm = this;
 
         angular.extend(vm, {
             init: init,
             usersSubmit: usersSubmit,
+            _editItem: editItem,
             usersDialog: usersDialog,
             usersEditBack: usersEditBack,
 			_errorHandler: errorHandler
@@ -20,8 +21,15 @@
 
         angular.extend(vm, $stateParams.item);
 
+        $timeout(function () {
+            window.scrollTo(0, 0);
+        });
+
+        init();
+
         function init() {
-            vm.total = $filter('number')(vm.sum, 2);
+            $rootScope.myError = false;
+            $rootScope.loading = false;
         }
 
         function usersSubmit() {
@@ -42,14 +50,28 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
 				UsersService.editItem(item)
 					.then(function () {
+                        editItem(item);
 						$rootScope.myError = false;
-						$state.go('main.users');
+						$state.go('users');
 					})
 					.catch(errorHandler);
 			} else {
 				UsersLocalStorage.editItem(item);
-				$state.go('main.users');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('users');
+                }, 100);
 			}
+        }
+
+        function editItem(item) {
+            var users = UsersService.users;
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].id == item.id) {
+                    users.splice(i, 1, item);
+                    break;
+                }
+            }
         }
 
         function usersDialog() {
@@ -57,11 +79,17 @@
                 id: vm.id,
                 name: vm.name
             };
-            $state.go('main.users-dialog', {item: obj});
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('users-dialog', {item: obj});
+            }, 100);
         }
 
         function usersEditBack() {
-            $state.go('main.users');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('users');
+            }, 100);
         }
 		
         function errorHandler() {

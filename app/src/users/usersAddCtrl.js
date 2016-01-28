@@ -42,6 +42,7 @@
             if ($rootScope.mode == 'ON-LINE (Heroku)') {
 				UsersService.addItem(item)
 					.then(function () {
+                        addItem(item);
 						$rootScope.myError = false;
 						$state.go('users');
 					})
@@ -53,6 +54,10 @@
                     $state.go('users');
                 }, 100);
 			}
+        }
+
+        function addItem(item) {
+            UsersService.users.push(item);
         }
 
         function usersAddBack() {
