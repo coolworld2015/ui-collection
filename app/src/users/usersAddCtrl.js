@@ -11,10 +11,17 @@
         var vm = this;
 
         angular.extend(vm, {
+            init: init,
             usersAddSubmit: usersAddSubmit,
             usersAddBack: usersAddBack,
 			_errorHandler: errorHandler
         });
+
+        init();
+
+        function init() {
+            $rootScope.loading = false;
+        }
 
         function usersAddSubmit() {
             if (vm.form.$invalid) {

@@ -5,9 +5,9 @@
         .module('app')
         .controller('UsersCtrl', UsersCtrl);
 
-    UsersCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'UsersService', 'UsersLocalStorage'];
+    UsersCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'users'];
 
-    function UsersCtrl($scope, $rootScope, $state, $timeout, UsersService, UsersLocalStorage) {
+    function UsersCtrl($scope, $rootScope, $state, $timeout, users) {
         $scope.$watch('numPerPage', currentPage);
         $scope.$watch('currentPage', currentPage);
         var vm = this;
@@ -31,32 +31,15 @@
 
         function init() {
             vm.title = 'Users';
-            vm.users = [];
+            vm.users = users;
             vm.usersFilter = [];
 
             $scope.currentPage = 1;
             $scope.numPerPage = 10;
             $scope.maxSize = 5;
 
-            if ($rootScope.mode == 'ON-LINE (Heroku)') {
-                getUsersOn();
-            } else {
-                vm.users = UsersLocalStorage.getUsers();
-                $rootScope.myError = false;
-                $rootScope.loading = false;
-            }
-        }
-
-        function getUsersOn() {
-            UsersService.getUsers()
-                .then(function (data) {
-                    $scope.filteredUsers = [];
-                    vm.users = data.data;
-                    currentPage();
-                    $rootScope.myError = false;
-                    $rootScope.loading = false;
-                })
-                .catch(errorHandler);
+            $rootScope.myError = false;
+            $rootScope.loading = false;
         }
 
         function currentPage() {
@@ -69,11 +52,17 @@
         }
 
         function usersEditForm(item) {
-            $state.go('users-edit', {item: item});
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('users-edit', {item: item});
+            }, 100);
         }
 
         function usersAdd() {
-            $state.go('users-add');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('users-add');
+            }, 100);
         }
 
         function goToBack() {

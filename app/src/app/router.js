@@ -11,11 +11,11 @@
 
         function resolveResource(url, state, sort) {
             resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage', 'CategoriesLocalStorage',
-                'GroupsLocalStorage', 'ItemsLocalStorage',
-                'ClientsService', 'CategoriesService', 'GroupsService', 'ItemsService'];
+                'GroupsLocalStorage', 'ItemsLocalStorage', 'UsersLocalStorage',
+                'ClientsService', 'CategoriesService', 'GroupsService', 'ItemsService', 'UsersService'];
             function resolver($http, $q, $rootScope, ClientsLocalStorage, CategoriesLocalStorage,
-                              GroupsLocalStorage, ItemsLocalStorage,
-                              ClientsService, CategoriesService, GroupsService, ItemsService) {
+                              GroupsLocalStorage, ItemsLocalStorage, UsersLocalStorage,
+                              ClientsService, CategoriesService, GroupsService, ItemsService, UsersService) {
                 var data;
 
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
@@ -37,6 +37,11 @@
 
                         case 'items':
                             data = ItemsLocalStorage.getItems();
+                            return data;
+                            break;
+
+                        case 'users':
+                            data = UsersLocalStorage.getUsers();
                             return data;
                             break;
                     }
@@ -119,6 +124,26 @@
                                     });
                             } else {
                                 return ItemsService.items.sort(sort);
+                            }
+                            break;
+
+                        case 'users':
+                            if ($rootScope.users === undefined) {
+                                var webUrl = $rootScope.myConfig.webUrl + url;
+                                return $http.get(webUrl)
+                                    .then(function (result) {
+                                        UsersService.users = result.data;
+                                        $rootScope.users = true;
+                                        $rootScope.loading = false;
+                                        return UsersService.users.sort(sort);
+                                    })
+                                    .catch(function (reject) {
+                                        $rootScope.loading = false;
+                                        $rootScope.myError = true;
+                                        return $q.reject(reject);
+                                    });
+                            } else {
+                                return UsersService.users.sort(sort);
                             }
                             break;
                     }
@@ -417,7 +442,10 @@
                 },
                 templateUrl: 'users/users.html',
                 controller: 'UsersCtrl',
-                controllerAs: 'usersCtrl'
+                controllerAs: 'usersCtrl',
+                resolve: {
+                    users: resolveResource('api/users/get', 'users', sort)
+                }
             })
 
             .state('users-add', {
