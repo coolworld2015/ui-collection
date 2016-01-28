@@ -30,7 +30,9 @@
         function init() {
             $rootScope.myError = false;
             $rootScope.loading = false;
-			vm.groups.sort();
+            if (vm.groups) {
+                vm.groups.sort();
+            }
         }
 
         function categoriesSubmit() {

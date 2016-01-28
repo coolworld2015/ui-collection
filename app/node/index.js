@@ -130,13 +130,26 @@ app.post('/api/items/delete', mongoItems.removeItem);
 
 //------------------------------------------------------------------------
 //------------------------------------------------------------------------
-var mongoUsers = require('./mongo-users').Users;
+var fileUsers = require('./file-users').Users;
 
-app.get('/api/users/get', mongoUsers.getUsers);
-app.post('/api/users/find', mongoUsers.findPostUser);
-
-app.post('/api/users/add', mongoUsers.addUser);
-app.post('/api/users/update', mongoUsers.updateUser);
-app.post('/api/users/delete', mongoUsers.removeUser);
-
-app.get('/api/users/drop', mongoUsers.removeAllUsers);
+app.get('/file/api/users/get', fileUsers.getAll);
+app.get('/file/api/users/findId/:id', fileUsers.findById);
+app.get('/file/api/users/findByName/:name', fileUsers.findByName);
+app.post('/file/api/users/add', fileUsers.addItem);
+app.post('/file/api/users/delete', fileUsers.removeItem);
+app.post('/file/api/users/update', fileUsers.updateItem);
+//------------------------------------------------------------------------
+//var mongoUsers = require('./mongo-users').Users;
+//
+//app.get('/api/items/get', mongoUsers.getItems);
+//app.get('/api/items/find/:id', mongoUsers.findItem);
+//app.post('/api/items/find', mongoUsers.findPostItem);
+//app.get('/api/items/findByName/:name', mongoUsers.findByName);
+//app.get('/api/items/edit/:id/:name', mongoUsers.editItem);
+//app.post('/api/items/edit/', mongoUsers.editPostItem);
+//app.post('/api/items/update', mongoUsers.updateItem);
+//app.post('/api/items/add', mongoUsers.addItem);
+//app.post('/api/items/save', mongoUsers.saveItem);
+//app.get('/api/items/drop', mongoUsers.removeAllItems);
+//app.post('/api/items/drop', mongoUsers.removeAllItems);
+//app.post('/api/items/delete', mongoUsers.removeItem);
