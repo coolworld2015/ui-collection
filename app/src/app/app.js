@@ -11,7 +11,7 @@
 	runHandler.$inject = ['$rootScope','$state'];
 	
     function runHandler($rootScope, $state) {
-        $rootScope.$on('$stateChangeStart1', function (event, toState, toParams) {
+        $rootScope.$on('$stateChangeStart1', function (event, toState, toParams) { //TODO Change $stateChangeStart
             var requireLogin = toState.data.requireLogin;
             if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
                 event.preventDefault();
@@ -51,7 +51,7 @@
             //webUrl: 'http://localhost:3000/file/' //TODO Local JSON DB
         };
 
-        $rootScope.mode = 'OFF-LINE (LocalStorage)'; //TODO !!! ONLY for Google Market
+        //$rootScope.mode = 'OFF-LINE (LocalStorage)'; //TODO !!! ONLY for Google Market
     }
 
 })();

@@ -143,18 +143,35 @@
             return parseInt(a.number) - parseInt(b.number);
         }
 
+        //$urlRouterProvider.otherwise('/login');  //TODO
         $urlRouterProvider.otherwise('/main');
 
         $stateProvider
             .state('main', {
                 url: '/main',
+                data: {
+                    requireLogin: true
+                },
                 templateUrl: 'app/main.html',
                 controller: 'MainCtrl',
                 controllerAs: 'mainCtrl'
             })
 
+            .state('login', {
+                url: '/login',
+                data: {
+                    requireLogin: false
+                },
+                templateUrl: 'login/login.html',
+                controller: 'LoginCtrl',
+                controllerAs: 'loginCtrl'
+            })
+
             .state('config', {
                 url: '/config',
+                data: {
+                    requireLogin: true
+                },
                 templateUrl: 'config/config.html',
                 controller: 'ConfigCtrl',
                 controllerAs: 'configCtrl'
@@ -162,6 +179,9 @@
 //-------------------------------------------------------------------------------------------------------
             .state('search', {
                 url: '/search',
+                data: {
+                    requireLogin: true
+                },
                 templateUrl: 'search/search.html',
                 controller: 'SearchCtrl',
                 controllerAs: 'searchCtrl'
@@ -169,6 +189,9 @@
 
             .state('search-results', {
                 url: '/search-results?name?search?finds',
+                data: {
+                    requireLogin: true
+                },
                 templateUrl: 'search/search-results.html',
                 controller: 'SearchResultsCtrl',
                 controllerAs: 'searchResultsCtrl',
@@ -198,6 +221,9 @@
 //-------------------------------------------------------------------------------------------------------
             .state('clients', {
                 url: '/clients',
+                data: {
+                    requireLogin: true
+                },
                 templateUrl: 'clients/clients.html',
                 controller: 'ClientsCtrl',
                 controllerAs: 'clientsCtrl',
@@ -208,6 +234,9 @@
 
             .state('clients-add', {
                 url: '/clients-add',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'clients/clients-add.html',
                 controller: 'ClientsAddCtrl',
@@ -216,6 +245,9 @@
 
             .state('clients-edit', {
                 url: '/clients-edit',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'clients/clients-edit.html',
                 controller: 'ClientsEditCtrl',
@@ -224,6 +256,9 @@
 
             .state('clients-dialog', {
                 url: '/clients-dialog',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'clients/clients-dialog.html',
                 controller: 'ClientsDialogCtrl',
@@ -232,6 +267,9 @@
 //-------------------------------------------------------------------------------------------------------
             .state('categories', {
                 url: '/categories',
+                data: {
+                    requireLogin: true
+                },
                 templateUrl: 'categories/categories.html',
                 controller: 'CategoriesCtrl',
                 controllerAs: 'categoriesCtrl',
@@ -242,6 +280,9 @@
 
             .state('categories-add', {
                 url: '/categories-add',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'categories/categories-add.html',
                 controller: 'CategoriesAddCtrl',
@@ -250,6 +291,9 @@
 
             .state('categories-edit', {
                 url: '/categories-edit',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'categories/categories-edit.html',
                 controller: 'CategoriesEditCtrl',
@@ -258,6 +302,9 @@
 
             .state('categories-dialog', {
                 url: '/categories-dialog',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'categories/categories-dialog.html',
                 controller: 'CategoriesDialogCtrl',
@@ -266,6 +313,9 @@
 //-------------------------------------------------------------------------------------------------------
             .state('groups', {
                 url: '/groups',
+                data: {
+                    requireLogin: true
+                },
                 templateUrl: 'groups/groups.html',
                 controller: 'GroupsCtrl',
                 controllerAs: 'groupsCtrl',
@@ -276,6 +326,9 @@
 
             .state('groups-add', {
                 url: '/groups-add',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'groups/groups-add.html',
                 controller: 'GroupsAddCtrl',
@@ -287,6 +340,9 @@
 
             .state('groups-edit', {
                 url: '/groups-edit',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'groups/groups-edit.html',
                 controller: 'GroupsEditCtrl',
@@ -295,6 +351,9 @@
 
             .state('groups-dialog', {
                 url: '/groups-dialog',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'groups/groups-dialog.html',
                 controller: 'GroupsDialogCtrl',
@@ -303,6 +362,9 @@
 //-------------------------------------------------------------------------------------------------------
             .state('items', {
                 url: '/items',
+                data: {
+                    requireLogin: true
+                },
                 templateUrl: 'items/items.html',
                 controller: 'ItemsCtrl',
                 controllerAs: 'itemsCtrl',
@@ -313,6 +375,9 @@
 
             .state('items-add', {
                 url: '/items-add',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'items/items-add.html',
                 controller: 'ItemsAddCtrl',
@@ -325,6 +390,9 @@
 
             .state('items-edit', {
                 url: '/items-edit?finds',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'items/items-edit.html',
                 controller: 'ItemsEditCtrl',
@@ -333,6 +401,9 @@
 
             .state('items-dialog', {
                 url: '/items-dialog',
+                data: {
+                    requireLogin: true
+                },
                 params: {item: {}},
                 templateUrl: 'items/items-dialog.html',
                 controller: 'ItemsDialogCtrl',
