@@ -415,13 +415,9 @@
                 data: {
                     requireLogin: true
                 },
-                views: {
-                    'display': {
-                        templateUrl: 'users/users.html',
-                        controller: 'UsersCtrl',
-                        controllerAs: 'usersCtrl'
-                    }
-                }
+                templateUrl: 'users/users.html',
+                controller: 'UsersCtrl',
+                controllerAs: 'usersCtrl'
             })
 
             .state('users-add', {
@@ -430,13 +426,9 @@
                     requireLogin: true
                 },
                 params: {item: {}},
-                views: {
-                    'display': {
-                        templateUrl: 'users/users-add.html',
-                        controller: 'UsersAddCtrl',
-                        controllerAs: 'usersAddCtrl'
-                    }
-                }
+                templateUrl: 'users/users-add.html',
+                controller: 'UsersAddCtrl',
+                controllerAs: 'usersAddCtrl'
             })
 
             .state('users-edit', {
@@ -445,13 +437,9 @@
                     requireLogin: true
                 },
                 params: {item: {}},
-                views: {
-                    'display': {
-                        templateUrl: 'users/users-edit.html',
-                        controller: 'UsersEditCtrl',
-                        controllerAs: 'usersEditCtrl'
-                    }
-                }
+                templateUrl: 'users/users-edit.html',
+                controller: 'UsersEditCtrl',
+                controllerAs: 'usersEditCtrl'
             })
 
             .state('users-dialog', {
@@ -460,13 +448,9 @@
                     requireLogin: true
                 },
                 params: {item: {}},
-                views: {
-                    'display': {
-                        templateUrl: 'users/users-dialog.html',
-                        controller: 'UsersDialogCtrl',
-                        controllerAs: 'usersDialogCtrl'
-                    }
-                }
+                templateUrl: 'users/users-dialog.html',
+                controller: 'UsersDialogCtrl',
+                controllerAs: 'usersDialogCtrl'
             });
 //-------------------------------------------------------------------------------------------------------
     }
