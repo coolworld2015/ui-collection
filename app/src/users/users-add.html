@@ -1,4 +1,8 @@
 <center>
+	<div class="header">Collection</div>
+	<br><br>
+	<img ng-src="logo.jpg" width=150 height=150 ng-click="usersAddCtrl.goToBack()">
+	<hr>
 	<form ng-submit="usersAddCtrl.usersAddSubmit()" novalidate name="usersAddCtrl.form">
 		<div class="header">New record</div>
 		<br><br>
@@ -6,7 +10,11 @@
 			<tr>
 				<td>
 					<input type="text" class="form-control input" required
-						   placeholder="User login" name="name"
+						   style="font-size:20px;
+						   color: white;
+						   background-color: black;
+						   border-style: none;"
+						   placeholder="Name" name="name"
 						   ng-model="usersAddCtrl.name">
 
 					<div ng-if="usersAddCtrl.form.$submitted">
@@ -18,6 +26,10 @@
 			<tr>
 				<td>
 					<input type="text" class="form-control input" required
+						   style="font-size:20px;
+						   color: white;
+						   background-color: black;
+						   border-style: none;"
 						   placeholder="User password" name="pass"
 						   ng-model="usersAddCtrl.pass">
 
@@ -29,10 +41,14 @@
 
 			<tr>
 				<td>
-					<input type="text" class="form-control input" required
-						   placeholder="User description" name="description"
-						   ng-model="usersAddCtrl.description">
-
+					<textarea rows=5 type="text" class="form-control input" required
+							  style="font-size:20px;
+						   color: white;
+						   background-color: black;
+						   border-style: none;"
+							  placeholder="Description" name="description"
+							  ng-model="usersAddCtrl.description">
+					</textarea>
 					<div ng-if="usersAddCtrl.form.$submitted">
 						<div ng-show="usersAddCtrl.form.description.$error.required" class="valid">Value required</div>
 					</div>

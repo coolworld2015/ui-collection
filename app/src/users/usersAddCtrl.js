@@ -5,9 +5,9 @@
         .module('app')
         .controller('UsersAddCtrl', UsersAddCtrl);
 
-    UsersAddCtrl.$inject = ['$state', '$rootScope', 'UsersService', 'UsersLocalStorage'];
+    UsersAddCtrl.$inject = ['$state', '$rootScope', '$timeout', 'UsersService', 'UsersLocalStorage'];
 
-    function UsersAddCtrl($state, $rootScope, UsersService, UsersLocalStorage) {
+    function UsersAddCtrl($state, $rootScope, $timeout, UsersService, UsersLocalStorage) {
         var vm = this;
 
         angular.extend(vm, {
@@ -36,17 +36,23 @@
 				UsersService.addItem(item)
 					.then(function () {
 						$rootScope.myError = false;
-						$state.go('main.users');
+						$state.go('users');
 					})
 					.catch(errorHandler);
 			} else {
 				UsersLocalStorage.addItem(item);
-				$state.go('main.users');
+                $rootScope.loading = true;
+                $timeout(function () {
+                    $state.go('users');
+                }, 100);
 			}
         }
 
         function usersAddBack() {
-            $state.go('main.users');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('users');
+            }, 100);
         }
 		
         function errorHandler() {
