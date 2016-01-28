@@ -1,7 +1,11 @@
-<center ng-init="loginCtrl.init()">
+<center>
+	<div class="header">Collection</div>
+	<br><br>
+	<img ng-src="logo.jpg" width=150 height=150>
+	<hr>
 	<form ng-submit="loginCtrl.toLogin()" novalidate name="loginCtrl.form">
 		<div class="header">Login</div>
-		<br><br><br>
+		<br><br>
 		<table class="table table-bordered">
 			<tr>
 				<td style="width:100%">
@@ -26,7 +30,6 @@
 				</td>
 			</tr>
 		</table>
-		<br>
 			<div ng-show="loginCtrl.error" class="alert alert-danger input" style="margin-bottom:40px">
 				Error. Wrong name or password
 			</div>

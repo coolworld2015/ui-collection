@@ -12,10 +12,10 @@
         function resolveResource(url, state, sort) {
             resolver.$inject = ['$http', '$q', '$rootScope', 'ClientsLocalStorage', 'CategoriesLocalStorage',
                 'GroupsLocalStorage', 'ItemsLocalStorage',
-				'ClientsService', 'CategoriesService', 'GroupsService', 'ItemsService'];
+                'ClientsService', 'CategoriesService', 'GroupsService', 'ItemsService'];
             function resolver($http, $q, $rootScope, ClientsLocalStorage, CategoriesLocalStorage,
                               GroupsLocalStorage, ItemsLocalStorage,
-							  ClientsService, CategoriesService, GroupsService, ItemsService) {
+                              ClientsService, CategoriesService, GroupsService, ItemsService) {
                 var data;
 
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
@@ -41,25 +41,25 @@
                             break;
                     }
                 } else {
-					switch (state) {
+                    switch (state) {
                         case 'clients':
-							if ($rootScope.clients === undefined) {
-								var webUrl = $rootScope.myConfig.webUrl + url;
-								return $http.get(webUrl)
-									.then(function (result) {
-										ClientsService.clients = result.data;
-										$rootScope.clients = true;
-										$rootScope.loading = false;
-										return ClientsService.clients.sort(sort);
-									})						
-									.catch(function (reject) {
-										$rootScope.loading = false;
-										$rootScope.myError = true;
-										return $q.reject(reject);
-									});	
-							} else {
-								return ClientsService.clients.sort(sort);
-							}
+                            if ($rootScope.clients === undefined) {
+                                var webUrl = $rootScope.myConfig.webUrl + url;
+                                return $http.get(webUrl)
+                                    .then(function (result) {
+                                        ClientsService.clients = result.data;
+                                        $rootScope.clients = true;
+                                        $rootScope.loading = false;
+                                        return ClientsService.clients.sort(sort);
+                                    })
+                                    .catch(function (reject) {
+                                        $rootScope.loading = false;
+                                        $rootScope.myError = true;
+                                        return $q.reject(reject);
+                                    });
+                            } else {
+                                return ClientsService.clients.sort(sort);
+                            }
                             break;
 
                         case 'categories':
@@ -122,7 +122,7 @@
                             }
                             break;
                     }
-				}
+                }
             }
 
             return resolver;
@@ -143,7 +143,7 @@
             return parseInt(a.number) - parseInt(b.number);
         }
 
-        //$urlRouterProvider.otherwise('/login');  //TODO
+        //$urlRouterProvider.otherwise('/login');  //TODO Change to Login
         $urlRouterProvider.otherwise('/main');
 
         $stateProvider
@@ -156,7 +156,7 @@
                 controller: 'MainCtrl',
                 controllerAs: 'mainCtrl'
             })
-
+//-------------------------------------------------------------------------------------------------------
             .state('login', {
                 url: '/login',
                 data: {
@@ -166,7 +166,7 @@
                 controller: 'LoginCtrl',
                 controllerAs: 'loginCtrl'
             })
-
+//-------------------------------------------------------------------------------------------------------
             .state('config', {
                 url: '/config',
                 data: {
@@ -408,6 +408,65 @@
                 templateUrl: 'items/items-dialog.html',
                 controller: 'ItemsDialogCtrl',
                 controllerAs: 'itemsDialogCtrl'
+            })
+//-------------------------------------------------------------------------------------------------------
+            .state('users', {
+                url: '/users',
+                data: {
+                    requireLogin: true
+                },
+                views: {
+                    'display': {
+                        templateUrl: 'users/users.html',
+                        controller: 'UsersCtrl',
+                        controllerAs: 'usersCtrl'
+                    }
+                }
+            })
+
+            .state('users-add', {
+                url: '/users-add',
+                data: {
+                    requireLogin: true
+                },
+                params: {item: {}},
+                views: {
+                    'display': {
+                        templateUrl: 'users/users-add.html',
+                        controller: 'UsersAddCtrl',
+                        controllerAs: 'usersAddCtrl'
+                    }
+                }
+            })
+
+            .state('users-edit', {
+                url: '/users-edit',
+                data: {
+                    requireLogin: true
+                },
+                params: {item: {}},
+                views: {
+                    'display': {
+                        templateUrl: 'users/users-edit.html',
+                        controller: 'UsersEditCtrl',
+                        controllerAs: 'usersEditCtrl'
+                    }
+                }
+            })
+
+            .state('users-dialog', {
+                url: '/users-dialog',
+                data: {
+                    requireLogin: true
+                },
+                params: {item: {}},
+                views: {
+                    'display': {
+                        templateUrl: 'users/users-dialog.html',
+                        controller: 'UsersDialogCtrl',
+                        controllerAs: 'usersDialogCtrl'
+                    }
+                }
             });
 //-------------------------------------------------------------------------------------------------------
     }
