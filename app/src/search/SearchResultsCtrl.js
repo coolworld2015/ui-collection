@@ -21,6 +21,7 @@
             goToBack: goToBack,
             goToHead: goToHead,
             itemsBack: itemsBack,
+			_sort: sort,
             _errorHandler: errorHandler
         });
 
@@ -32,7 +33,7 @@
 
         function init() {
             vm.title = 'Results for "' + $stateParams.name + '"';
-            vm.items = items;
+            vm.items = items.sort(sort);
             vm.itemsFilter = [];
             vm.blank = $rootScope.noImage;
 
@@ -85,7 +86,18 @@
                 $state.go('search');
             }, 100);
         }
-
+		
+        function sort(a, b) {
+            var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+            if (nameA < nameB) {
+                return -1
+            }
+            if (nameA > nameB) {
+                return 1
+            }
+            return 0;
+        }
+		
         function errorHandler() {
             $rootScope.loading = false;
             $rootScope.myError = true;
