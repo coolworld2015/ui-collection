@@ -127,3 +127,16 @@ app.post('/api/items/save', mongoItems.saveItem);
 app.get('/api/items/drop', mongoItems.removeAllItems);
 app.post('/api/items/drop', mongoItems.removeAllItems);
 app.post('/api/items/delete', mongoItems.removeItem);
+
+//------------------------------------------------------------------------
+//------------------------------------------------------------------------
+var mongoUsers = require('./mongo-users').Users;
+
+app.get('/api/users/get', mongoUsers.getUsers);
+app.post('/api/users/find', mongoUsers.findPostUser);
+
+app.post('/api/users/add', mongoUsers.addUser);
+app.post('/api/users/update', mongoUsers.updateUser);
+app.post('/api/users/delete', mongoUsers.removeUser);
+
+app.get('/api/users/drop', mongoUsers.removeAllUsers);

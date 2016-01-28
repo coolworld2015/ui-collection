@@ -60,3 +60,14 @@ var Items = new Schema({
 
 var ItemsModel = mongoose.model('Items', Items);
 module.exports.ItemsModel = ItemsModel;
+
+//---------------------------------------------------------------------------------------------
+var Users = new Schema({
+    id: {type: String, required: true},
+    name: {type: String, required: true},
+    pass: {type: String, required: true},
+    description: {type: String, required: true}
+});
+
+var UsersModel = mongoose.model('Users', Users);
+module.exports.UsersModel = UsersModel;

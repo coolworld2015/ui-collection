@@ -29,7 +29,6 @@
             if (vm.form.$invalid) {
                 return;
             }
-			$rootScope.loading = true;
             checkUser(vm.name, vm.pass);
         }
 		
