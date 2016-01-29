@@ -51,7 +51,7 @@
             //webUrl: 'http://localhost:3000/file/' //TODO Local JSON DB
         };
 
-        //$rootScope.mode = 'OFF-LINE (LocalStorage)'; //TODO !!! ONLY for Google Market
+        $rootScope.mode = 'OFF-LINE (LocalStorage)'; //TODO !!! ONLY for Google Market
     }
 
 })();

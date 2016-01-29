@@ -13,7 +13,7 @@
     if( /(android)/i.test(navigator.userAgent) ) {
         admobid = {
             //banner: 'ca-app-pub-4884500146569199/4949665866' // UI-Horoscope
-            banner: 'ca-app-pub-4884500146569199/3277785061'
+            banner: 'ca-app-pub-4884500146569199/3277785061' // UI-Collection
         };
     }
 
