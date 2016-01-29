@@ -151,6 +151,8 @@
 								'<hr>' +									
 								'{{collectionCtrl.plot}}' +			
 								'<hr>' +										
+								'{{collectionCtrl.year}}' +			
+								'<hr>' +										
                                 '<table border=1>' +
                                 '<tr ng-repeat="item in collectionCtrl.items">' +
                                 '<td><img ng-src={{item.pic}} style="width:100px; height:80px;"></td>' +
@@ -309,6 +311,7 @@
 				
 				vm.title = results.Title;
 				vm.plot = results.Plot;
+				vm.year = results.Year;
 				vm.pic = results.Poster;
 				if (vm.pic == 'N/A') {
 					vm.pic = false;
