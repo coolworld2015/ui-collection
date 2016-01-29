@@ -5,33 +5,38 @@
         .module('app')
         .controller('ConfigCtrl', ConfigCtrl);
 
-    ConfigCtrl.$inject = ['$scope', '$rootScope', '$state', '$http', 'ClientsLocalStorage'];
+    ConfigCtrl.$inject = ['$scope', '$rootScope', '$state', '$http', 'ClientsLocalStorage', 'ItemsLocalStorage'];
 
-    function ConfigCtrl($scope, $rootScope, $state, $http, ClientsLocalStorage) {
+    function ConfigCtrl($scope, $rootScope, $state, $http, ClientsLocalStorage, ItemsLocalStorage) {
         var vm = this;
-		
+
         angular.extend(vm, {
-			init: init,
+            init: init,
             toggleMode: toggleMode,
             doAction: doAction,
+            _getClientsHeroku: getClientsHeroku,
+            _getItemsHeroku: getItemsHeroku,
+            _loading: loading,
+            _error: error,
+            _complete: complete,
             toMain: toMain
         });
-		
-		init();
-		
-		function init() {
-			vm.webUrl = $rootScope.myConfig.webUrl;
-            vm.mode= $rootScope.mode;
-			$rootScope.myError = false;
-			$rootScope.loading = false;
 
-			vm.options = [
-				{name: 'Select transaction', value:'none'}, 
-				{name: 'Get clients (Heroku)', value: 'heroku.clients.get'},
-				{name: 'Get goods (Heroku)', value: 'heroku.goods.get'}
-			];
-			vm.selectedItem = vm.options[0];
-		}
+        init();
+
+        function init() {
+            vm.webUrl = $rootScope.myConfig.webUrl;
+            vm.mode = $rootScope.mode;
+            $rootScope.myError = false;
+            $rootScope.loading = false;
+
+            vm.options = [
+                {name: 'Select transaction', value: 'none'},
+                {name: 'Get contacts (Heroku)', value: 'heroku.clients.get'},
+                {name: 'Get items (Heroku)', value: 'heroku.items.get'}
+            ];
+            vm.selectedItem = vm.options[0];
+        }
 
         function toggleMode() {
             if (vm.mode == 'OFF-LINE (LocalStorage)') {
@@ -49,56 +54,66 @@
             loading();
 
             switch (vm.selectedItem.value) {
-				case 'none':
-				{
-					error();
+                case 'none':
+                {
+                    error();
                     break;
                 }
 
                 case 'heroku.clients.get':
                 {
-					getClientsHeroku();
+                    getClientsHeroku();
                     break;
                 }
-				
-                case 'heroku.goods.get':
+
+                case 'heroku.items.get':
                 {
-					getGoodsHeroku();
+                    getItemsHeroku();
                     break;
-                }				
+                }
             }
         }
-		 			
+
         function getClientsHeroku() {
-			var url = vm.webUrl + 'api/clients/get';
+            $rootScope.loading = true;
+            var url = vm.webUrl + 'api/clients/get';
             $http.get(url)
                 .then(function (results) {
-					console.log(results.data);
-					ClientsLocalStorage.uploadClients(results.data);
-					complete();
+                    try {
+                        ClientsLocalStorage.uploadClients(results.data);
+                        complete();
+                        $rootScope.loading = false;
+                    } catch (e) {
+                        error();
+                        alert(e);
+                    }
                 })
                 .catch(function (data) {
-                    console.log('catch - ' + data.status);
-                    console.log(data);
-					error();
+                    error();
+                    $rootScope.loading = false;
                 });
-        }  
-		
-        function getGoodsHeroku() {
-			var url = vm.webUrl + 'api/goods/get';
+        }
+
+        function getItemsHeroku() {
+            $rootScope.loading = true;
+            var url = vm.webUrl + 'api/items/get';
             $http.get(url)
                 .then(function (results) {
-					console.log(results.data);
-					//GoodsLocalStorage.uploadGoods(results.data);
-					complete();
+                    try {
+                        ItemsLocalStorage.uploadItems(results.data);
+                        complete();
+                        $rootScope.loading = false;
+                    } catch (e) {
+                        error();
+                        alert(e);
+                    }
                 })
                 .catch(function (data) {
-                    console.log('catch - ' + data.status);
-                    console.log(data);
-					error();
+                    error();
+                    $rootScope.loading = false;
                 });
-        } 
-		
+        }
+
         function loading() {
             $scope.$broadcast('scrollThere');
             vm.complete = false;
@@ -108,9 +123,9 @@
 
         function error() {
             vm.complete = false;
-			vm.loading = false;
-			$rootScope.loading = false;
-			$rootScope.myError = true;
+            vm.loading = false;
+            $rootScope.loading = false;
+            $rootScope.myError = true;
         }
 
         function complete() {
