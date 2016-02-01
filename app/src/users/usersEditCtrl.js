@@ -28,6 +28,10 @@
         init();
 
         function init() {
+            if ($stateParams.item.name == undefined) {
+                $state.go('users');
+            }
+
             $rootScope.myError = false;
             $rootScope.loading = false;
         }

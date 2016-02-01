@@ -28,6 +28,10 @@
         init();
 
         function init() {
+            if ($stateParams.item.name == undefined) {
+                $state.go('categories');
+            }
+
             $rootScope.myError = false;
             $rootScope.loading = false;
             if (vm.groups) {

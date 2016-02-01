@@ -30,6 +30,10 @@
         init();
 
         function init() {
+            if ($stateParams.item.name == undefined) {
+                $state.go('groups');
+            }
+
             $rootScope.myError = false;
             $rootScope.loading = false;
         }

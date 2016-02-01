@@ -31,6 +31,10 @@
         init();
 
         function init() {
+            if ($stateParams.item.name == undefined) {
+                $state.go('clients');
+            }
+
 			if ($stateParams.item.pic == 'blank') {
 				vm.pic = $rootScope.noImage;
 			}			
