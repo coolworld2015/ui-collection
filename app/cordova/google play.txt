@@ -1,4 +1,4 @@
-cordova build android --release
+cordova build android --release 
 
 get android-release-unsigned.apk
 
