@@ -13,6 +13,7 @@
         return {
             users: [],
 			getUsers: getUsers,
+            findByName: findByName,
             addItem: addItem,
             editItem: editItem,
             deleteItem: deleteItem
@@ -26,7 +27,16 @@
                     return result;
                 });
         }
-		
+
+        function findByName(name) {
+            var url = webUrl + 'api/users/findByName/' + name;
+            return $http.get(url)
+                .then(function (result) {
+                    result.data.sort();
+                    return result;
+                });
+        }
+
          function addItem(item) {
             var url = webUrl + 'api/users/add';
             return $http.post(url, item)
