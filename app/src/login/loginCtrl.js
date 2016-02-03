@@ -51,7 +51,7 @@
             UsersService.findByName(name)
                 .then(function (data) {
                     $rootScope.loading = false;
-                    var user = data.data[0];
+                    var user = data.data;
 
                     if (user && (user.name == name && user.pass == pass)) {
                         $rootScope.currentUser = {

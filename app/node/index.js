@@ -143,6 +143,7 @@ app.post('/file/api/users/update', fileUsers.updateItem);
 var mongoUsers = require('./mongo-users').Users;
 
 app.get('/api/users/get', mongoUsers.getUsers);
+app.get('/api/users/findByName/:name', mongoUsers.findByName);
 app.post('/api/users/find', mongoUsers.findPostUser);
 app.post('/api/users/update', mongoUsers.updateUser);
 app.post('/api/users/add', mongoUsers.addUser);

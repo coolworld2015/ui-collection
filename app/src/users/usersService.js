@@ -32,7 +32,7 @@
             var url = webUrl + 'api/users/findByName/' + name;
             return $http.get(url)
                 .then(function (result) {
-                    result.data.sort();
+                    result.data;
                     return result;
                 });
         }

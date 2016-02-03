@@ -37,7 +37,7 @@ function findByName(req, res) {
             results.push(jsonUsers[i]);
         }
     }
-    return res.send(results);
+    return res.send(results[0]);
 }
 
 function addItem(req, res) {
