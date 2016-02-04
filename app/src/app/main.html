@@ -4,22 +4,22 @@
         <br><br>
         <img ng-src="logo.jpg" width=150 height=150>
         <br><br>
-		<div  ng-click="mainCtrl.go()">
-		<hr>
-			<a ui-sref="search" class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Search items</a>
-			<a ui-sref="items" class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Items</a>
-			<a ui-sref="groups"  class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Groups</a>
-			<a ui-sref="categories" class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Categories</a>
-			<a ui-sref="clients" class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Contacts</a>
+		<div>
+            <hr>
+                <a ng-click="mainCtrl.go('search')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Search movies</a>
+                <a ng-click="mainCtrl.go('items')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Items</a>
+                <a ng-click="mainCtrl.go('groups')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Groups</a>
+                <a ng-click="mainCtrl.go('categories')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Categories</a>
+                <a ng-click="mainCtrl.go('clients')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Contacts</a>
 
-			<!-- ONLY for Google Market
-			-->
+                <!-- ONLY for Google Market
+                -->
 
-			<a ui-sref="users" class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Users</a>
-			<a ui-sref="login" class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Logout</a>
-			<a ui-sref="config" class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Configurations</a>
+                <a ng-click="mainCtrl.go('users')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Users</a>
+                <a ng-click="mainCtrl.go('login')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Logout</a>
+                <a ng-click="mainCtrl.go('config')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Configurations</a>
 
-		<hr>
+            <hr>
 		</div>
     </div>
 </center>
