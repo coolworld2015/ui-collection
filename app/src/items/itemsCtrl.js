@@ -44,11 +44,11 @@
             $rootScope.loading = false;
 			
 			if ($rootScope.itemsComplete != true) {
+				$rootScope.itemsComplete = true;
 				ItemsService.getAllItems()
 					.then(function (result) {
 						ItemsService.items = result.data;
 						vm.items = ItemsService.items
-						$rootScope.itemsComplete = true;
 					})
                     .catch(errorHandler);
 			}
