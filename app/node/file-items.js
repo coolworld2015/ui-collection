@@ -4,11 +4,13 @@ var jsonItems = require(fileName);
 
 var Items = {
     getAll: getAll,
+	getFirstHundred: getFirstHundred,
     findById: findById,
     findByName: findByName,
     addItem: addItem,
     updateItem: updateItem,
-    removeItem: removeItem
+    removeItem: removeItem,
+	_sort: sort
 };
 
 module.exports.Items = Items;
@@ -16,6 +18,12 @@ module.exports.Items = Items;
 function getAll(req, res) {
     console.log(jsonItems.length);
     res.send(jsonItems);
+}
+
+function getFirstHundred(req, res) {
+    var hundred = [].concat(jsonItems.sort(sort));
+	hundred.splice(10, 10000);
+    res.send(hundred);
 }
 
 function findById(req, res) {
@@ -87,4 +95,15 @@ function removeItem(req, res) {
         }
     }
     res.send('Ok');
+}
+
+function sort(a, b) {
+	var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+	if (nameA < nameB) {
+		return -1
+	}
+	if (nameA > nameB) {
+		return 1
+	}
+	return 0;
 }

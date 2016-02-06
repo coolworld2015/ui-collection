@@ -12,6 +12,7 @@
 
         return {
 			items: [],
+			getAllItems: getAllItems,
             getItems: getItems,
             addItem: addItem,
             editItem: editItem,
@@ -20,6 +21,15 @@
             _sort: sort
         };
 
+        function getAllItems() {
+            var url = webUrl + 'api/items/getAll';
+            return $http.get(url)
+                .then(function (result) {
+                    result.data.sort(sort);
+                    return result;
+                });
+        }
+		
         function getItems() {
             var url = webUrl + 'api/items/get';
             return $http.get(url)
@@ -28,7 +38,7 @@
                     return result;
                 });
         }
-
+		
         function addItem(item) {
             var url = webUrl + 'api/items/add';
             return $http.post(url, item)

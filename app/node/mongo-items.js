@@ -7,6 +7,7 @@ var ItemsModel = require('./mongo').ItemsModel;
 
 var Items = {
     getItems: getItems,
+	getFirstHundred: getFirstHundred,
     findItem: findItem,
     findPostItem: findPostItem,
     findByName: findByName,
@@ -16,7 +17,8 @@ var Items = {
     addItem: addItem,
     saveItem: saveItem,
     removeAllItems: removeAllItems,
-    removeItem: removeItem
+    removeItem: removeItem,
+	_sort: sort
 };
 
 module.exports.Items = Items;
@@ -25,6 +27,19 @@ function getItems(req, res) {
     return ItemsModel.find(function (err, items) {
         if (!err) {
             return res.send(items);
+        } else {
+            res.statusCode = 500;
+            return res.send({error: 'Server error'});
+        }
+    });
+}
+
+function getFirstHundred(req, res) {
+    return ItemsModel.find(function (err, items) {
+        if (!err) {
+			var hundred = [].concat(items.sort(sort));
+			hundred.splice(10, 10000);
+            return res.send(hundred);
         } else {
             res.statusCode = 500;
             return res.send({error: 'Server error'});
@@ -175,4 +190,15 @@ function removeItem(req, res) {
         console.log('Item with id: ', req.body.id, ' was removed');
     });
     res.send('Item with id: ' + req.body.id + ' was removed');
+}
+
+function sort(a, b) {
+	var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+	if (nameA < nameB) {
+		return -1
+	}
+	if (nameA > nameB) {
+		return 1
+	}
+	return 0;
 }

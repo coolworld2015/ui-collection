@@ -5,9 +5,9 @@
         .module('app')
         .controller('ItemsCtrl', ItemsCtrl);
 
-    ItemsCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'items'];
+    ItemsCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'items', 'ItemsService'];
 
-    function ItemsCtrl($scope, $rootScope, $state, $timeout, items) {
+    function ItemsCtrl($scope, $rootScope, $state, $timeout, items, ItemsService) {
         $scope.$watch('numPerPage', currentPage);
         $scope.$watch('currentPage', currentPage);
         var vm = this;
@@ -42,6 +42,16 @@
 
             $rootScope.myError = false;
             $rootScope.loading = false;
+			
+			if ($rootScope.itemsComplete != true) {
+				ItemsService.getAllItems()
+					.then(function (result) {
+						ItemsService.items = result.data;
+						vm.items = ItemsService.items
+						$rootScope.itemsComplete = true;
+					})
+                    .catch(errorHandler);
+			}
         }
 
         function updateChange() {

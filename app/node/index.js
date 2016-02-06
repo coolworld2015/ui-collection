@@ -105,7 +105,8 @@ app.post('/api/groups/delete', mongoGroups.removeGroup);
 //------------------------------------------------------------------------
 var fileItems = require('./file-items').Items;
 
-app.get('/file/api/items/get', fileItems.getAll);
+app.get('/file/api/items/getAll', fileItems.getAll);
+app.get('/file/api/items/get', fileItems.getFirstHundred);
 app.get('/file/api/items/findId/:id', fileItems.findById);
 app.get('/file/api/items/findByName/:name', fileItems.findByName);
 app.post('/file/api/items/add', fileItems.addItem);
@@ -115,7 +116,8 @@ app.post('/file/api/items/update', fileItems.updateItem);
 //------------------------------------------------------------------------
 var mongoItems = require('./mongo-items').Items;
 
-app.get('/api/items/get', mongoItems.getItems);
+app.get('/api/items/getAll', mongoItems.getItems);
+app.get('/api/items/get', mongoItems.getFirstHundred);
 app.get('/api/items/find/:id', mongoItems.findItem);
 app.post('/api/items/find', mongoItems.findPostItem);
 app.get('/api/items/findByName/:name', mongoItems.findByName);
