@@ -5,9 +5,11 @@
         .module('app')
         .controller('ConfigCtrl', ConfigCtrl);
 
-    ConfigCtrl.$inject = ['$scope', '$rootScope', '$state', '$http', 'ClientsLocalStorage', 'ItemsLocalStorage'];
+    ConfigCtrl.$inject = ['$scope', '$rootScope', '$state', '$http',
+        'UsersLocalStorage', 'CategoriesLocalStorage', 'GroupsLocalStorage', 'ClientsLocalStorage', 'ItemsLocalStorage'];
 
-    function ConfigCtrl($scope, $rootScope, $state, $http, ClientsLocalStorage, ItemsLocalStorage) {
+    function ConfigCtrl($scope, $rootScope, $state, $http,
+                        UsersLocalStorage, CategoriesLocalStorage, GroupsLocalStorage, ClientsLocalStorage, ItemsLocalStorage) {
         var vm = this;
 
         angular.extend(vm, {
@@ -15,6 +17,9 @@
             toggleMode: toggleMode,
             doAction: doAction,
             _getAllHeroku: getAllHeroku,
+            _getUsersHeroku: getUsersHeroku,
+            _getGroupsHeroku: getGroupsHeroku,
+            _getCategoriesHeroku: getCategoriesHeroku,
             _getClientsHeroku: getClientsHeroku,
             _getItemsHeroku: getItemsHeroku,
             _loading: loading,
@@ -34,6 +39,9 @@
             vm.options = [
                 {name: 'Select transaction', value: 'none'},
                 {name: 'Get all transactions', value: 'heroku.get.all'},
+                {name: 'Get users (Heroku)', value: 'heroku.users.get'},
+                {name: 'Get groups (Heroku)', value: 'heroku.groups.get'},
+                {name: 'Get categories (Heroku)', value: 'heroku.categories.get'},
                 {name: 'Get contacts (Heroku)', value: 'heroku.clients.get'},
                 {name: 'Get items (Heroku)', value: 'heroku.items.get'}
             ];
@@ -68,6 +76,24 @@
                     break;
                 }
 
+                case 'heroku.users.get':
+                {
+                    getUsersHeroku();
+                    break;
+                }
+
+                case 'heroku.groups.get':
+                {
+                    getGroupsHeroku();
+                    break;
+                }
+
+                case 'heroku.categories.get':
+                {
+                    getCategoriesHeroku();
+                    break;
+                }
+
                 case 'heroku.clients.get':
                 {
                     getClientsHeroku();
@@ -84,6 +110,7 @@
 
         function getAllHeroku() {
             $rootScope.loading = true;
+
             var url = vm.webUrl + 'api/items/get';
             $http.get(url)
                 .then(function (results) {
@@ -95,23 +122,132 @@
                             .then(function (results) {
                                 try {
                                     ClientsLocalStorage.uploadClients(results.data);
-                                    complete();
-                                    $rootScope.loading = false;
+
+                                    var url = vm.webUrl + 'api/categories/get';
+                                    $http.get(url)
+                                        .then(function (results) {
+                                            try {
+                                                CategoriesLocalStorage.uploadCategories(results.data);
+
+                                                var url = vm.webUrl + 'api/groups/get';
+                                                $http.get(url)
+                                                    .then(function (results) {
+                                                        try {
+                                                            GroupsLocalStorage.uploadGroups(results.data);
+
+                                                            var url = vm.webUrl + 'api/users/get';
+                                                            $http.get(url)
+                                                                .then(function (results) {
+                                                                    try {
+                                                                        UsersLocalStorage.uploadUsers(results.data);
+                                                                        complete();
+                                                                        $rootScope.loading = false;
+                                                                    } catch (e) {
+                                                                        error();
+                                                                        alert(e);
+                                                                    }
+                                                                })
+                                                                .catch(function () {
+                                                                    error();
+                                                                    $rootScope.loading = false;
+                                                                });
+
+                                                        } catch (e) {
+                                                            error();
+                                                            alert(e);
+                                                        }
+                                                    })
+                                                    .catch(function () {
+                                                        error();
+                                                        $rootScope.loading = false;
+                                                    });
+
+                                            } catch (e) {
+                                                error();
+                                                alert(e);
+                                            }
+                                        })
+                                        .catch(function () {
+                                            error();
+                                            $rootScope.loading = false;
+                                        });
+
                                 } catch (e) {
                                     error();
                                     alert(e);
                                 }
                             })
-                            .catch(function (data) {
+                            .catch(function () {
                                 error();
                                 $rootScope.loading = false;
                             });
+
                     } catch (e) {
                         error();
                         alert(e);
                     }
                 })
-                .catch(function (data) {
+                .catch(function () {
+                    error();
+                    $rootScope.loading = false;
+                });
+        }
+
+        function getUsersHeroku() {
+            $rootScope.loading = true;
+            var url = vm.webUrl + 'api/users/get';
+            $http.get(url)
+                .then(function (results) {
+                    try {
+                        UsersLocalStorage.uploadUsers(results.data);
+                        complete();
+                        $rootScope.loading = false;
+                    } catch (e) {
+                        error();
+                        alert(e);
+                    }
+                })
+                .catch(function () {
+                    error();
+                    $rootScope.loading = false;
+                });
+        }
+
+        function getGroupsHeroku() {
+            $rootScope.loading = true;
+            var url = vm.webUrl + 'api/groups/get';
+            $http.get(url)
+                .then(function (results) {
+                    try {
+                        GroupsLocalStorage.uploadGroups(results.data);
+                        complete();
+                        $rootScope.loading = false;
+                    } catch (e) {
+                        error();
+                        alert(e);
+                    }
+                })
+                .catch(function () {
+                    error();
+                    $rootScope.loading = false;
+                });
+        }
+
+        function getCategoriesHeroku() {
+            $rootScope.loading = true;
+            var url = vm.webUrl + 'api/categories/get';
+            $http.get(url)
+                .then(function (results) {
+                    try {
+                        CategoriesLocalStorage.uploadCategories(results.data);
+                        complete();
+                        $rootScope.loading = false;
+                    } catch (e) {
+                        error();
+                        alert(e);
+                    }
+                })
+                .catch(function () {
                     error();
                     $rootScope.loading = false;
                 });
@@ -131,7 +267,7 @@
                         alert(e);
                     }
                 })
-                .catch(function (data) {
+                .catch(function () {
                     error();
                     $rootScope.loading = false;
                 });
@@ -151,7 +287,7 @@
                         alert(e);
                     }
                 })
-                .catch(function (data) {
+                .catch(function () {
                     error();
                     $rootScope.loading = false;
                 });
