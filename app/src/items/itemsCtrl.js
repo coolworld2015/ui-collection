@@ -42,7 +42,7 @@
 
             $rootScope.myError = false;
             $rootScope.loading = false;
-            
+
             if ($rootScope.mode != 'OFF-LINE (LocalStorage)') {
                 if ($rootScope.itemsComplete != true) {
                     $rootScope.itemsComplete = true;

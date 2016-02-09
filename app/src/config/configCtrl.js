@@ -14,6 +14,7 @@
             init: init,
             toggleMode: toggleMode,
             doAction: doAction,
+            _getAllHeroku: getAllHeroku,
             _getClientsHeroku: getClientsHeroku,
             _getItemsHeroku: getItemsHeroku,
             _loading: loading,
@@ -32,6 +33,7 @@
 
             vm.options = [
                 {name: 'Select transaction', value: 'none'},
+                {name: 'Get all transactions', value: 'heroku.get.all'},
                 {name: 'Get contacts (Heroku)', value: 'heroku.clients.get'},
                 {name: 'Get items (Heroku)', value: 'heroku.items.get'}
             ];
@@ -60,6 +62,12 @@
                     break;
                 }
 
+                case 'heroku.get.all':
+                {
+                    getAllHeroku();
+                    break;
+                }
+
                 case 'heroku.clients.get':
                 {
                     getClientsHeroku();
@@ -72,6 +80,41 @@
                     break;
                 }
             }
+        }
+
+        function getAllHeroku() {
+            $rootScope.loading = true;
+            var url = vm.webUrl + 'api/items/get';
+            $http.get(url)
+                .then(function (results) {
+                    try {
+                        ItemsLocalStorage.uploadItems(results.data);
+
+                        var url = vm.webUrl + 'api/clients/get';
+                        $http.get(url)
+                            .then(function (results) {
+                                try {
+                                    ClientsLocalStorage.uploadClients(results.data);
+                                    complete();
+                                    $rootScope.loading = false;
+                                } catch (e) {
+                                    error();
+                                    alert(e);
+                                }
+                            })
+                            .catch(function (data) {
+                                error();
+                                $rootScope.loading = false;
+                            });
+                    } catch (e) {
+                        error();
+                        alert(e);
+                    }
+                })
+                .catch(function (data) {
+                    error();
+                    $rootScope.loading = false;
+                });
         }
 
         function getClientsHeroku() {
