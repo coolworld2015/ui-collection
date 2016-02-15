@@ -10,10 +10,6 @@
             <tr>
                 <td>
                     <input type="text" class="form-control input" required
-                           style="font-size:20px;
-						   color: white;
-						   background-color: black;
-						   border-style: none;"
                            placeholder="Name" name="name"
                            ng-model="groupsEditCtrl.name">
 
@@ -25,11 +21,7 @@
 
             <tr>
                 <td>
-                    <input readonly type="text" class="form-control input"
-                           style="font-size:20px;
-						   color: white;
-						   background-color: black;
-						   border-style: none;"
+                    <input readonly type="text" class="form-control readonly"
                            placeholder="Category"
                            ng-model="groupsEditCtrl.category">
                 </td>
@@ -38,10 +30,6 @@
             <tr>
                 <td>
 					<textarea rows=5 type="text" class="form-control input" required
-                              style="font-size:20px;
-						   color: white; 
-						   background-color: black;
-						   border-style: none;"
                               placeholder="Description" name="description"
                               ng-model="groupsEditCtrl.description">
 					</textarea>
@@ -55,7 +43,8 @@
         </table>
 
         <button type="submit" class="btn btn-primary button">Submit</button>&nbsp
-        <button type="button" class="btn btn-primary button" ng-click="groupsEditCtrl.groupsDialog()">Delete</button><br><br>
+        <button type="button" class="btn btn-primary button" ng-click="groupsEditCtrl.groupsDialog()">Delete</button>
+        <br><br>
         <button type="button" class="btn btn-primary button" ng-click="groupsEditCtrl.groupsEditBack()">Back</button>
     </form>
     <br><br>
