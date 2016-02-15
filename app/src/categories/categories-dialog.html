@@ -1,18 +1,16 @@
 <center>
-	<div class="header">Collection</div>
-	<br><br>
-	<img ng-src="logo.jpg" width=150 height=150 ng-click="categoriesDialogCtrl.goToBack()">
-	<hr>
-		<br>
-		<span style="font-size:24px; color: white;">
-			<strong>
-				Are you sure you want to delete {{categoriesDialogCtrl.name}}?
-			</strong>					
+    <div class="header">Collection</div>
+    <br><br>
+    <img ng-src="logo.jpg" class="logo" ng-click="categoriesDialogCtrl.goToBack()">
+    <hr>
+    <br>
+		<span class="dialog">
+                Are you sure you want to delete {{categoriesDialogCtrl.name}}?
 		</span>
-		<br><br>
-			<hr>
-		<br><br>
-	<button class="btn btn-primary button" ng-click="categoriesDialogCtrl.categoriesDelete()">Yes</button>&nbsp
-	<button class="btn btn-primary button" ng-click="categoriesDialogCtrl.categoriesEditBack()">No</button>
-	<br><br>	
+    <br><br>
+    <hr>
+    <br><br>
+    <button class="btn btn-primary button" ng-click="categoriesDialogCtrl.categoriesDelete()">Yes</button>&nbsp
+    <button class="btn btn-primary button" ng-click="categoriesDialogCtrl.categoriesEditBack()">No</button>
+    <br><br>
 </center>
