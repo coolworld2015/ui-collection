@@ -27,6 +27,14 @@ body {
     border-style: none;
 }
 
+.search {
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    background-color: white;
+    border-style: none;
+}
+
 .items {
     color: white;
     background-color: black;
@@ -128,4 +136,8 @@ body {
 
 .conf {
     font-size:25px;
+}
+
+.blanker {
+    margin-top: 1000px;
 }
