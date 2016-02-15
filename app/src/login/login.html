@@ -10,10 +10,7 @@
 			<tr>
 				<td>
 					<input type="text" class="form-control input" required
-						   style="font-size:20px;
-						   color: white;
-						   background-color: black;
-						   border-style: none;"
+
 						   placeholder="Login" name="name"
 						   ng-model="loginCtrl.name">
 
@@ -25,10 +22,6 @@
 			<tr>
 				<td>
 					<input type="password" class="form-control input" required
-						   style="font-size:20px;
-						   color: white;
-						   background-color: black;
-						   border-style: none;"
 						   placeholder="Password" name="pass"
 						   ng-model="loginCtrl.pass">
 
@@ -38,7 +31,7 @@
 				</td>
 			</tr>
 		</table>
-			<div ng-show="loginCtrl.error" class="valid" style="top: -5px; margin: 10px;">
+			<div ng-show="loginCtrl.error" class="valid fix">
 				Error. Wrong name or password
 			</div>
 
