@@ -1,23 +1,23 @@
 <center>
-    <div class="list-group">
+    <div>
 		<div class="header">Collection</div>
         <br><br>
         <img ng-src="logo.jpg" width=150 height=150>
         <br><br>
 		<div>
             <hr>
-                <a ng-click="mainCtrl.go('search')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Search movies</a>
-                <a ng-click="mainCtrl.go('items')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Items</a>
-                <a ng-click="mainCtrl.go('groups')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Groups</a>
-                <a ng-click="mainCtrl.go('categories')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Categories</a>
-                <a ng-click="mainCtrl.go('clients')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Contacts</a>
+                <div ng-click="mainCtrl.go('search')" class="items">Search movies</div><br>
+                <div ng-click="mainCtrl.go('items')" class="items">Items</div><br>
+                <div ng-click="mainCtrl.go('groups')" class="items">Groups</div><br>
+                <div ng-click="mainCtrl.go('categories')" class="items">Categories</div><br>
+                <div ng-click="mainCtrl.go('clients')" class="items">Contacts</div><br>
 
                 <!-- ONLY for Google Market
                 -->
 
-                <a ng-click="mainCtrl.go('users')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Users</a>
-                <a ng-click="mainCtrl.go('login')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Logout</a>
-                <a ng-click="mainCtrl.go('config')" href='#' class="list-group-item" style="font-size:24px; font-weight: bold; color: white; background-color: black; border: black;">Configurations</a>
+                <div ng-click="mainCtrl.go('users')" class="items">Users</div><br>
+                <div ng-click="mainCtrl.go('login')" class="items">Logout</div><br>
+                <div ng-click="mainCtrl.go('config')" class="items">Configurations</div>
 
             <hr>
 		</div>

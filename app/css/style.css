@@ -3,8 +3,8 @@ body {
 }
 
 .test {
-    font-size:20px;
-    color : white;
+    font-size: 20px;
+    color: white;
     background-color: black;
     border-style: none;
 }
@@ -28,10 +28,19 @@ body {
 
 .input {
     font-weight: bold;
-    font-size:20px;
-    color : white;
+    font-size: 20px;
+    color: white;
     background-color: black;
     border-style: none;
+}
+
+.items {
+    color: white;
+    background-color: black;
+    font-size: 24px;
+    font-weight: bold;
+    border: black;
+    cursor: pointer;
 }
 
 .valid {
