@@ -1,7 +1,7 @@
 <center>
     <div class="header">Collection</div>
     <br><br>
-    <img ng-src="logo.jpg" width=150 height=150 ng-click="itemsCtrl.goToBack()">
+    <img ng-src="logo.jpg" class="logo" ng-click="itemsCtrl.goToBack()">
     <hr>
     <div class="header" ng-click="itemsCtrl.goToBack()">
         {{itemsCtrl.title}} ({{itemsFilter.length}} / {{itemsCtrl.items.length}})
@@ -17,9 +17,7 @@
 			filter:itemsCtrl.query as itemsFilter
 			track by $index">
             <td ng-click="itemsCtrl.itemsEditForm(item)" class="input">
-                <div style="border-style: solid;
-						border-width: thick;
-						float: left;">
+                <div class="img-div">
                     <div ng-if="item.pic == 'blank'">
                         <img ng-src="{{itemsCtrl.blank}}" class="img">
                     </div>
@@ -35,8 +33,7 @@
     </table>
     <hr class="fix-hr">
 		<span class="label label-primary per-page">Items per page:
-			<input style="border:none; width: 30px; font-size:17px; background-color:#337ab7"
-                   type="text" ng-model="numPerPage" value={{numPerPage}}
+			<input class="per-page-input" type="text" ng-model="numPerPage" value={{numPerPage}}
                    ng-change="itemsCtrl.updateChange()">
 		</span>
 
@@ -44,8 +41,7 @@
         <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm"
                     boundary-links="true"></pagination>
     </div>
-    <button class="btn btn-primary button" ng-click="itemsCtrl.itemsAdd()">Add</button>
-    &nbsp
+    <button class="btn btn-primary button" ng-click="itemsCtrl.itemsAdd()">Add</button>&nbsp
     <button class="btn btn-primary button" ng-click="itemsCtrl.itemsBack()" scroll-here>Back</button>
     <br><br>
 </center>
