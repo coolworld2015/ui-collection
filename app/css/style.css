@@ -121,3 +121,11 @@ body {
     color: red;
     background-color: transparent;
 }
+
+.error-conf {
+    margin-bottom:-8px
+}
+
+.conf {
+    font-size:25px;
+}

@@ -298,6 +298,7 @@
             vm.complete = false;
             vm.error = false;
             vm.loading = true;
+            $rootScope.myError = false;
         }
 
         function error() {
