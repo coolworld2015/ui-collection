@@ -2,13 +2,6 @@ body {
     background-color: black;
 }
 
-.test {
-    font-size: 20px;
-    color: white;
-    background-color: black;
-    border-style: none;
-}
-
 .header {
     width: 100%;
     display: inline-block;
@@ -43,6 +36,19 @@ body {
     cursor: pointer;
 }
 
+.img {
+    width: 100px;
+    height: 100px;
+}
+
+.name {
+    width: 50%;
+    float: left;
+    color: white;
+    font-size: 20px;
+    padding: 40px 0 0 15px;
+}
+
 .valid {
     color: red;
     font-weight: bold;
@@ -55,6 +61,14 @@ body {
 .fix {
     top: -5px;
     margin: 10px;
+}
+
+.fix-hr {
+    margin-top: -20px;
+}
+
+.per-page {
+    font-size: 17px;
 }
 
 .loading {
