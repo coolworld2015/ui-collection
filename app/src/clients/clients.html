@@ -19,10 +19,10 @@
             <td ng-click="clientsCtrl.clientsEditForm(item)" class="input">
                 <div class="img-div">
                     <div ng-if="item.pic == 'blank'">
-                        <img ng-src="{{clientsCtrl.blank}}" width=100 height=100>
+                        <img ng-src="{{clientsCtrl.blank}}" class="img">
                     </div>
                     <div ng-if="item.pic != 'blank'">
-                        <img ng-src="{{item.pic}}" width=100 height=100>
+                        <img ng-src="{{item.pic}}" class="img">
                     </div>
                 </div>
                 <div class="name">
