@@ -86,15 +86,16 @@
                                 template: '<div><center>' +
 								'<button ng-click="collectionCtrl.addItem()">Add Item</button>&nbsp' +
 								'<hr>' +
-								'<img ng-src={{collectionCtrl.imageSrc}}>' +
-								'<br><br>' +
-								'<input type="file" id="myfileinput" multiple onchange="angular.element(this).scope().convert()">' +
-								'<hr>' +
+								//'<img ng-src={{collectionCtrl.imageSrc}}>' +
+								//'<br><br>' +
+								//'<input type="file" id="myfileinput" multiple onchange="angular.element(this).scope().convert()">' +
+								//'<hr>' +
 								'<table border=1>' +
                                 '<tr ng-repeat="item in collectionCtrl.items">' +
-                                '<td><img ng-src={{item.pic}} style="width:100px; height:80px;"></td>' +
+                                //'<td><img ng-src={{item.pic}} style="width:100px; height:80px;"></td>' +
                                 '<td>{{item.id}}</td>' +
                                 '<td>{{item.name}}</td>' +
+                                '<td>{{item.phone}}</td>' +
                                 //'<td>{{collectionCtrl.server}}{{item.pic}}</td>' +
                                 '<td ng-click="collectionCtrl.editItem(item)">Edit</td>' +
                                 '<td ng-click="collectionCtrl.delItem(item)">Delete</td>' +
@@ -102,7 +103,7 @@
                                 '</table>' +
                                 '</div>',
                                 resolve: {
-                                    results: resolveResource('api/clients/get')
+                                    results: resolveResource('api/items/get')
                                 },
                                 controller: 'CollectionCtrl',
                                 controllerAs: 'collectionCtrl'
@@ -147,7 +148,7 @@
 								'<img ng-src={{collectionCtrl.pic}} style="width:200px; height:250px;">' +
 								'</div>' +		
 								'<br>' +		
-								'{{collectionCtrl.title}}' +			
+								'{{collectionCtrl.name}}' +			
 								'<hr>' +									
 								'{{collectionCtrl.plot}}' +			
 								'<hr>' +										
@@ -176,7 +177,7 @@
 								} else {
 									url = $rootScope.myConfig.local + api;
 								}
-								url = 'http://www.omdbapi.com/?t=';
+								//url = 'http://www.omdbapi.com/?t=';
 								return $http.get(url + $stateParams.name)
 								.then(function(data) {
 									return data.data;
@@ -307,7 +308,7 @@
 			init();
 			
 			function init() {
-				vm.items = [];
+				//vm.items = [];
 				
 				vm.title = results.Title;
 				vm.plot = results.Plot;
