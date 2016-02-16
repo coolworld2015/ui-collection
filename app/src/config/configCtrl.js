@@ -141,7 +141,6 @@
                                                                     try {
                                                                         UsersLocalStorage.uploadUsers(results.data);
                                                                         complete();
-                                                                        $rootScope.loading = false;
                                                                     } catch (e) {
                                                                         error();
                                                                         alert(e);
@@ -149,7 +148,6 @@
                                                                 })
                                                                 .catch(function () {
                                                                     error();
-                                                                    $rootScope.loading = false;
                                                                 });
 
                                                         } catch (e) {
@@ -159,7 +157,6 @@
                                                     })
                                                     .catch(function () {
                                                         error();
-                                                        $rootScope.loading = false;
                                                     });
 
                                             } catch (e) {
@@ -169,7 +166,6 @@
                                         })
                                         .catch(function () {
                                             error();
-                                            $rootScope.loading = false;
                                         });
 
                                 } catch (e) {
@@ -179,7 +175,6 @@
                             })
                             .catch(function () {
                                 error();
-                                $rootScope.loading = false;
                             });
 
                     } catch (e) {
@@ -189,7 +184,6 @@
                 })
                 .catch(function () {
                     error();
-                    $rootScope.loading = false;
                 });
         }
 
@@ -201,7 +195,6 @@
                     try {
                         UsersLocalStorage.uploadUsers(results.data);
                         complete();
-                        $rootScope.loading = false;
                     } catch (e) {
                         error();
                         alert(e);
@@ -209,7 +202,6 @@
                 })
                 .catch(function () {
                     error();
-                    $rootScope.loading = false;
                 });
         }
 
@@ -221,7 +213,6 @@
                     try {
                         GroupsLocalStorage.uploadGroups(results.data);
                         complete();
-                        $rootScope.loading = false;
                     } catch (e) {
                         error();
                         alert(e);
@@ -229,7 +220,6 @@
                 })
                 .catch(function () {
                     error();
-                    $rootScope.loading = false;
                 });
         }
 
@@ -241,7 +231,6 @@
                     try {
                         CategoriesLocalStorage.uploadCategories(results.data);
                         complete();
-                        $rootScope.loading = false;
                     } catch (e) {
                         error();
                         alert(e);
@@ -249,7 +238,6 @@
                 })
                 .catch(function () {
                     error();
-                    $rootScope.loading = false;
                 });
         }
 
@@ -261,7 +249,6 @@
                     try {
                         ClientsLocalStorage.uploadClients(results.data);
                         complete();
-                        $rootScope.loading = false;
                     } catch (e) {
                         error();
                         alert(e);
@@ -269,7 +256,6 @@
                 })
                 .catch(function () {
                     error();
-                    $rootScope.loading = false;
                 });
         }
 
@@ -281,7 +267,6 @@
                     try {
                         ItemsLocalStorage.uploadItems(results.data);
                         complete();
-                        $rootScope.loading = false;
                     } catch (e) {
                         error();
                         alert(e);
@@ -289,16 +274,15 @@
                 })
                 .catch(function () {
                     error();
-                    $rootScope.loading = false;
                 });
         }
 
         function loading() {
-            $scope.$broadcast('scrollThere');
+            $rootScope.loading = true;
+            $rootScope.myError = false;
             vm.complete = false;
             vm.error = false;
             vm.loading = true;
-            $rootScope.myError = false;
         }
 
         function error() {
@@ -309,6 +293,7 @@
         }
 
         function complete() {
+			$rootScope.loading = false;
             vm.error = false;
             vm.loading = false;
             vm.complete = true;
