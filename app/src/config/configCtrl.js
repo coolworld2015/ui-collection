@@ -5,10 +5,10 @@
         .module('app')
         .controller('ConfigCtrl', ConfigCtrl);
 
-    ConfigCtrl.$inject = ['$scope', '$rootScope', '$state', '$http',
+    ConfigCtrl.$inject = ['$scope', '$rootScope', '$state', '$http', '$timeout',
         'UsersLocalStorage', 'CategoriesLocalStorage', 'GroupsLocalStorage', 'ClientsLocalStorage', 'ItemsLocalStorage'];
 
-    function ConfigCtrl($scope, $rootScope, $state, $http,
+    function ConfigCtrl($scope, $rootScope, $state, $http, $timeout,
                         UsersLocalStorage, CategoriesLocalStorage, GroupsLocalStorage, ClientsLocalStorage, ItemsLocalStorage) {
         var vm = this;
 
@@ -315,7 +315,10 @@
         }
 
         function toMain() {
-            $state.go('main');
+            $rootScope.loading = true;
+            $timeout(function () {
+                $state.go('main');
+            }, 100);
         }
     }
 })();
