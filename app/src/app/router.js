@@ -17,6 +17,7 @@
                               GroupsLocalStorage, ItemsLocalStorage, UsersLocalStorage,
                               ClientsService, CategoriesService, GroupsService, ItemsService, UsersService) {
                 var data;
+                var webUrl = $rootScope.myConfig.webUrl;
 
                 if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
                     switch (state) {
@@ -49,8 +50,7 @@
                     switch (state) {
                         case 'clients':
                             if ($rootScope.clients === undefined) {
-                                var webUrl = $rootScope.myConfig.webUrl + url;
-                                return $http.get(webUrl)
+                                return $http.get(webUrl + url)
                                     .then(function (result) {
                                         ClientsService.clients = result.data;
                                         $rootScope.clients = true;
@@ -69,8 +69,7 @@
 
                         case 'categories':
                             if ($rootScope.categories === undefined) {
-                                var webUrl = $rootScope.myConfig.webUrl + url;
-                                return $http.get(webUrl)
+                                return $http.get(webUrl + url)
                                     .then(function (result) {
                                         CategoriesService.categories = result.data;
                                         $rootScope.categories = true;
@@ -89,8 +88,7 @@
 
                         case 'groups':
                             if ($rootScope.groups === undefined) {
-                                var webUrl = $rootScope.myConfig.webUrl + url;
-                                return $http.get(webUrl)
+                                return $http.get(webUrl + url)
                                     .then(function (result) {
                                         GroupsService.groups = result.data;
                                         $rootScope.groups = true;
@@ -109,8 +107,7 @@
 
                         case 'items':
                             if ($rootScope.items === undefined) {
-                                var webUrl = $rootScope.myConfig.webUrl + url;
-                                return $http.get(webUrl)
+                                return $http.get(webUrl + url)
                                     .then(function (result) {
                                         ItemsService.items = result.data;
                                         $rootScope.items = true;
@@ -129,8 +126,7 @@
 
                         case 'users':
                             if ($rootScope.users === undefined) {
-                                var webUrl = $rootScope.myConfig.webUrl + url;
-                                return $http.get(webUrl)
+                                return $http.get(webUrl + url)
                                     .then(function (result) {
                                         UsersService.users = result.data;
                                         $rootScope.users = true;
