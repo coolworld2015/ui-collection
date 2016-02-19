@@ -35,7 +35,7 @@
                 $state.go('items');
             }
 
-			if ($stateParams.item.pic == 'blank') {
+			if ($stateParams.item.pic == undefined) {
 				vm.pic = $rootScope.noImage;
 			}
             $rootScope.myError = false;

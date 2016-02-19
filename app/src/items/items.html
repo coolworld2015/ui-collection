@@ -18,10 +18,10 @@
 			track by $index">
             <td ng-click="itemsCtrl.itemsEditForm(item)" class="input">
                 <div class="img-div">
-                    <div ng-if="item.pic == 'blank'">
+                    <div ng-if="item.pic == undefined">
                         <img ng-src="{{itemsCtrl.blank}}" class="img">
                     </div>
-                    <div ng-if="item.pic != 'blank'">
+                    <div ng-if="item.pic">
                         <img ng-src="{{item.pic}}" class="img">
                     </div>
                 </div>
