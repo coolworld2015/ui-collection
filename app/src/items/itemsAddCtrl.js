@@ -116,7 +116,7 @@
             var item = {
                 id: id,
                 name: vm.name,
-                pic: 'blank',
+                pic: vm.pic,
                 category: vm.categoryName,
                 group: vm.groupName,
                 description: vm.description

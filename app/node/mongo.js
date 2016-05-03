@@ -71,3 +71,15 @@ var Users = new Schema({
 
 var UsersModel = mongoose.model('Users', Users);
 module.exports.UsersModel = UsersModel;
+
+//---------------------------------------------------------------------------------------------
+var Audit = new Schema({
+    id: {type: String, required: true},
+    name: {type: String, required: true},
+    date: {type: String, required: true},
+    ip: {type: String, required: true},
+    description: {type: String, required: true}
+});
+
+var AuditModel = mongoose.model('Audit', Audit);
+module.exports.AuditModel = AuditModel;
