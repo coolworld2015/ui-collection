@@ -247,7 +247,7 @@
             })
 
             .state('search-results', {
-                url: '/search-results?name?search?finds',
+                url: '/search-results?name?search',
                 data: {
                     requireLogin: true
                 },
@@ -258,11 +258,18 @@
                     items: ['$http', '$stateParams', '$rootScope', 'ItemsLocalStorage',
                         function ($http, $stateParams, $rootScope, ItemsLocalStorage) {
                             var name = $stateParams.name;
+                            var search = $stateParams.search;
+							var api;
                             if ($rootScope.mode == 'OFF-LINE (LocalStorage)') {
                                 var data = ItemsLocalStorage.findByName(name);
                                 return data;
                             } else {
-                                var api = 'api/items/findByName/';
+								switch (search) {
+									case 'Search by name': api = 'api/items/findByName/'; break;
+									case 'Search by category': api = 'api/items/findByCategory/'; break;
+									case 'Search by group': api = 'api/items/findByGroup/'; break;
+									case 'Search by description': api = 'api/items/findByDescription/'; break;
+								}
                                 var webUrl = $rootScope.myConfig.webUrl + api;
                                 return $http.get(webUrl + name)
                                     .then(function (data) {

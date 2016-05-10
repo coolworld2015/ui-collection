@@ -11,6 +11,9 @@ var Items = {
     findItem: findItem,
     findPostItem: findPostItem,
     findByName: findByName,
+    findByCategory: findByCategory,
+    findByGroup: findByGroup,
+    findByDescription: findByDescription,
     editItem: editItem,
     editPostItem: editPostItem,
     updateItem: updateItem,
@@ -74,6 +77,42 @@ function findPostItem(req, res) {
 function findByName(req, res) {
     ItemsModel.find({
         "name": new RegExp(req.params.name, 'i')
+    }, function (err, item) {
+        if (err) {
+            res.send({error: err.message});
+        }
+        console.log(item);
+        res.send(item);
+    });
+}
+
+function findByCategory(req, res) {
+    ItemsModel.find({
+        "category": new RegExp(req.params.name, 'i')
+    }, function (err, item) {
+        if (err) {
+            res.send({error: err.message});
+        }
+        console.log(item);
+        res.send(item);
+    });
+}
+
+function findByGroup(req, res) {
+    ItemsModel.find({
+        "group": new RegExp(req.params.name, 'i')
+    }, function (err, item) {
+        if (err) {
+            res.send({error: err.message});
+        }
+        console.log(item);
+        res.send(item);
+    });
+}
+
+function findByDescription(req, res) {
+    ItemsModel.find({
+        "description": new RegExp(req.params.name, 'i')
     }, function (err, item) {
         if (err) {
             res.send({error: err.message});
