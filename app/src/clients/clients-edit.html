@@ -8,13 +8,15 @@
         </div>
  		
 		<hr>
-		<div ng-if="clientsEditCtrl.testArray.length > 0">
-			<span ng-repeat="item in clientsEditCtrl.testArray track by $index">
-				<span ng-if="item == 'blank'">
-					<img ng-src="{{clientsEditCtrl.blank}}" class="img">
-				</span>
-				<span ng-if="item!= 'blank'">
-					<img ng-src="{{item}}" class="img">
+		<div ng-if="clientsEditCtrl.picsArray.length > 1">
+			<span ng-repeat="item in clientsEditCtrl.picsArray track by $index">
+				<span ng-click="clientsEditCtrl.setPic(item)">
+					<span ng-if="item == 'blank'">
+						<img ng-src="{{clientsEditCtrl.blank}}" class="img">
+					</span>
+					<span ng-if="item!= 'blank'">
+						<img ng-src="{{item}}" class="img">
+					</span>
 				</span>				
 			</span>
 		</div>

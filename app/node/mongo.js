@@ -20,7 +20,8 @@ var Clients = new Schema({
     id: {type: String, required: true},
     name: {type: String, required: true},
     pic: {type: String, required: true},
-    description: {type: String, required: true}
+	pics: [],
+	description: {type: String, required: true}
 });
 
 var ClientsModel = mongoose.model('Clients', Clients);

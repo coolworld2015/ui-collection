@@ -99,6 +99,7 @@ function updateClient(req, res) {
 
         client.name = req.body.name;
         client.pic = req.body.pic;
+        client.pics = req.body.pics;
         client.description = req.body.description;
 
         client.save(function (err) {
@@ -116,6 +117,7 @@ function addClient(req, res) {
             id: req.body.id,
             name: req.body.name,
             pic: req.body.pic,
+            pics: req.body.pics,
             description: req.body.description
         },
         function (err, client) {
@@ -132,6 +134,7 @@ function saveClient(req, res) {
             id: req.body.id,
             name: req.body.name,
             pic: req.body.pic,
+            pics: req.body.pics,
             description: req.body.description
     });
     client.save(function (err) {

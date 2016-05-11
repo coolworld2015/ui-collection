@@ -57,6 +57,7 @@
                 id: id,
                 name: vm.name,
                 pic: vm.pic,
+                pics: [vm.pic],
                 description: vm.description
             };
 
