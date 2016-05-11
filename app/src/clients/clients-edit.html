@@ -6,7 +6,26 @@
         <div class="img-large-border">
             <img ng-src="{{clientsEditCtrl.pic}}" class="img-large" ng-click="clientsEditCtrl.openPic()">
         </div>
-        <br>
+ 		
+		<hr>
+		<div ng-if="clientsEditCtrl.testArray.length > 0">
+			<span ng-repeat="item in clientsEditCtrl.testArray track by $index">
+				<span ng-if="item == 'blank'">
+					<img ng-src="{{clientsEditCtrl.blank}}" class="img">
+				</span>
+				<span ng-if="item!= 'blank'">
+					<img ng-src="{{item}}" class="img">
+				</span>				
+			</span>
+		</div>
+ 
+		<hr>
+		<div class="btn btn-primary button" style="width:100%; margin-top:-20;" 
+			ng-click="clientsEditCtrl.addPic()">
+			Click here to add picture
+		</div>
+		<br><br>
+		
         <table class="table table-bordered">
             <tr>
                 <td>
