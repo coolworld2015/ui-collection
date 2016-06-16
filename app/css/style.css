@@ -67,24 +67,27 @@ body {
 .img {
     width: 100px;
     height: 100px;
+	border-radius: 20%;			
 }
 
 .img-large {
     width:200px;
     height:210px;
+	border-radius: 20%;	
 }
 
 .img-large-border {
     border-color: white;
-    border-style: solid;
+    //border-style: solid;
     border-width: thick;
     width: 210px;
 }
 
 .img-div {
-    border-style: solid;
+    //border-style: solid;
     border-width: thick;
     float: left;
+	border-radius: 20%;	
 }
 
 .name {
