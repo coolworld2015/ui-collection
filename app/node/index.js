@@ -38,6 +38,28 @@ app.get('/api/auth', function(req, res) {
 	return res.send(token);
 });
 
+app.post('/api/login', function(req, res) {
+	var UsersModel = require('./mongo').UsersModel;
+    UsersModel.findOne({
+        name: req.body.name
+    }, function (err, user) {
+        if (err) {
+            res.send({error: err.message});
+        } else {
+			if (user.pass == req.body.pass) {
+				console.log(user);
+				res.send(token);
+			} else {
+				res.status(403).send({ 
+					success: false, 
+					message: 'No token provided.' 
+				});
+			}
+		}
+
+    });
+});
+
 app.get('/api/users/get', function(req, res) {
 	var agent = req.headers.authorization;
 	console.log('agent - ' + agent);
@@ -61,7 +83,6 @@ app.get('/api/users/get', function(req, res) {
 			});
 		}
 	});
-
 });
 
 //------------------------------------------------------------------------

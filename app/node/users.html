@@ -36,17 +36,24 @@
 							'<button ng-click="collectionCtrl.getToken()">Get Token</button>&nbsp' +							
 							'<button ng-click="collectionCtrl.getUsers()">Get Users</button>&nbsp' +
 							'<hr>' +
-							'<div ng-show="collectionCtrl.items.length == 1">' +
-							'<table border=1>' +
-							'<tr ng-repeat="item in collectionCtrl.items">' +
+							'<div ng-if="collectionCtrl.items.length == 1">' +
+								'<table border=1>' +
+								'<tr ng-repeat="item in collectionCtrl.items">' +
 
-							'<td>{{item.id}}</td>' +
-							'<td>{{item.name}}</td>' +
-							'<td>{{item.phone}}</td>' +
+								'<td>{{item.id}}</td>' +
+								'<td>{{item.name}}</td>' +
+								'<td>{{item.phone}}</td>' +
 
-							'</tr>' +
-							'</table>' +
+								'</tr>' +
+								'</table>' +
 							'</div>' +
+							
+							'<div ng-if="collectionCtrl.items.length == 0">' +
+							'<input type="text" style="width: 200px;" ng-model="collectionCtrl.name"><br><br>' +
+							'<input type="password" style="width: 200px;" ng-model="collectionCtrl.pass"><br><br>' +
+							'<input type="button" value="Login" ng-click="collectionCtrl.onLogin()">' +
+							'</div>' +
+							
 							'</div>',
 							controller: 'CollectionCtrl',
 							controllerAs: 'collectionCtrl'
@@ -64,7 +71,7 @@
 			
 			angular.extend(vm, {
 				init: init,
-				editItem: editItem,
+				onLogin: onLogin,
 				getUsers: getUsers,
 				getToken: getToken,				
 			});
@@ -75,28 +82,25 @@
 				vm.items = [];
 			}
 
-            function editItem(item) {
-				var url, api;
-				api = 'api/clients/update';
-				if ($rootScope.mode == 'Heroku') {
-					url = $rootScope.myConfig.heroku + api;
-				} else {
-					url = $rootScope.myConfig.local + api;
-				}
-
+            function onLogin(item) {
+				$rootScope.loading = true;
+				$rootScope.error = false;
+				
                 var item = {
-                    "id": item.id,
-					"name": item.name + '_Updated',
-					"pic": item.pic
+					"name": vm.name,
+					"pass": vm.pass
                 };
-                $http.post(url, item)
-                        .then(function (data) {
-                            console.log(data);				
-							$rootScope.$broadcast('resetOptions');							
-                            $state.go('root');
+				
+                $http.post('http://localhost:3000/api/login', item)
+                        .then(function (results) {
+							$rootScope.loading = false;
+							$rootScope.access_token = results.data;
+							console.log(results);
                         })
-                        .catch(function (data) {
-                            console.log('catch - ' + data.status);
+                        .catch(function (error) {
+							$rootScope.loading = false;
+							$rootScope.error = true;
+							console.log(error);
                         });
             }
 			
