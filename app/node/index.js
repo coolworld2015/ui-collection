@@ -34,7 +34,7 @@ var secret = 'secret';
 var token = jwt.sign({auth:  'magic'}, secret, { expiresIn: 60 * 60 });
 
 app.get('/api/auth', function(req, res) {
-	console.log('token - ' + token);
+	//console.log('token - ' + token);
 	return res.send(token);
 });
 
@@ -45,16 +45,22 @@ app.post('/api/login', function(req, res) {
     }, function (err, user) {
         if (err) {
             res.send({error: err.message});
-        } else {
+        } 
+		if (user) {
 			if (user.pass == req.body.pass) {
-				console.log(user);
+				//console.log(user);
 				res.send(token);
 			} else {
 				res.status(403).send({ 
 					success: false, 
-					message: 'No token provided.' 
+					message: 'No such pass.' 
 				});
 			}
+		} else {
+			res.status(403).send({ 
+				success: false, 
+				message: 'No such user.' 
+			});
 		}
 
     });
@@ -62,7 +68,7 @@ app.post('/api/login', function(req, res) {
 
 app.get('/api/users/get', function(req, res) {
 	var agent = req.headers.authorization;
-	console.log('agent - ' + agent);
+	//console.log('agent - ' + agent);
 	
 	jwt.verify(agent, secret, function(err, decoded) {
 		if (err) {
@@ -71,7 +77,7 @@ app.get('/api/users/get', function(req, res) {
 				message: 'No token provided.' 
 			});
 		} else {
-			console.log(decoded);
+			//console.log(decoded);
 			var UsersModel = require('./mongo').UsersModel;
 			return UsersModel.find(function (err, users) {
 				if (!err) {
