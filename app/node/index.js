@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
 var jwt = require('jsonwebtoken');
 var secret = 'secret';
 
-var token = jwt.sign({auth:  'magic'}, secret, { expiresIn: 60 * 60 });
+var token = jwt.sign({auth:  'magic'}, secret, { expiresIn: 60 * 60 * 100000});
 
 app.get('/api/auth', function(req, res) {
 	//console.log('token - ' + token);
