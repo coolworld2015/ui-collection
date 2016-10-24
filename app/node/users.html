@@ -36,6 +36,7 @@
 							'<button ng-click="collectionCtrl.getToken()">Get Token</button>&nbsp' +							
 							'<button ng-click="collectionCtrl.getUsers()">Get Users</button>&nbsp' +
 							'<hr>' +
+							'<div ng-show="collectionCtrl.items.length == 1">' +
 							'<table border=1>' +
 							'<tr ng-repeat="item in collectionCtrl.items">' +
 
@@ -45,6 +46,7 @@
 
 							'</tr>' +
 							'</table>' +
+							'</div>' +
 							'</div>',
 							controller: 'CollectionCtrl',
 							controllerAs: 'collectionCtrl'
@@ -99,28 +101,38 @@
             }
 			
             function getUsers() {
+				$rootScope.loading = true;
+				$rootScope.error = false;
+				
 				$http.get('http://localhost:3000/api/users/get',
 					{
 						headers: {'Authorization': $rootScope.access_token}
 					})
 					.then(function (results) {
+						$rootScope.loading = false;
 						vm.items = results.data;
 						console.log(results);
 					})
 					.catch(function (error) {
-						console.log('catch - ' + error.status);
+						$rootScope.loading = false;
+						$rootScope.error = true;
 						console.log(error);
 					});
 			}			
 			            
 			function getToken() {
+				$rootScope.loading = true;
+				$rootScope.error = false;
+				
 				$http.get('http://localhost:3000/api/auth')
 					.then(function (results) {
+						$rootScope.loading = false;
 						$rootScope.access_token = results.data;
 						console.log(results);
 					})
 					.catch(function (error) {
-						console.log('catch - ' + error.status);
+						$rootScope.loading = false;
+						$rootScope.error = true;
 						console.log(error);
 					});
 			}	

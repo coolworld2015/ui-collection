@@ -50,8 +50,15 @@ app.get('/api/users/get', function(req, res) {
 			});
 		} else {
 			console.log(decoded);
-			var results = [{name: 'name1'},{name: 'name2'}];  
-			return res.send(results);
+			var UsersModel = require('./mongo').UsersModel;
+			return UsersModel.find(function (err, users) {
+				if (!err) {
+					return res.send(users);
+				} else {
+					res.statusCode = 500;
+					return res.send({error: 'Server error'});
+				}
+			});
 		}
 	});
 
