@@ -9,7 +9,10 @@ app.listen(process.env.PORT || 3000, function () {
 });
 
 app.get('/', function (req, res) {
-	res.sendFile(__dirname + '/build/index.html');
+	//res.sendFile(__dirname + '/build/index.html');
+
+	res.sendFile(__dirname + '/users.html');			//	MUST REMOVE !!!
+	
     //res.send('It is just API Server...');
 });
 
@@ -24,6 +27,36 @@ app.use(function (req, res, next) {
 });
 
 //------------------------------------------------------------------------
+
+var jwt = require('jsonwebtoken');
+var secret = 'secret';
+
+var token = jwt.sign({auth:  'magic'}, secret, { expiresIn: 60 * 60 });
+
+app.get('/api/auth', function(req, res) {
+	console.log('token - ' + token);
+	return res.send(token);
+});
+
+app.get('/api/users/get', function(req, res) {
+	var agent = req.headers.authorization;
+	console.log('agent - ' + agent);
+	
+	jwt.verify(agent, secret, function(err, decoded) {
+		if (err) {
+			return res.status(403).send({ 
+				success: false, 
+				message: 'No token provided.' 
+			});
+		} else {
+			console.log(decoded);
+			var results = [{name: 'name1'},{name: 'name2'}];  
+			return res.send(results);
+		}
+	});
+
+});
+
 //------------------------------------------------------------------------
 var fileClients = require('./file-clients').Clients;
 
@@ -150,7 +183,7 @@ app.post('/file/api/users/update', fileUsers.updateItem);
 //------------------------------------------------------------------------
 var mongoUsers = require('./mongo-users').Users;
 
-app.get('/api/users/get', mongoUsers.getUsers);
+//app.get('/api/users/get', mongoUsers.getUsers);
 app.get('/api/users/findByName/:name', mongoUsers.findByName);
 app.post('/api/users/find', mongoUsers.findPostUser);
 app.post('/api/users/update', mongoUsers.updateUser);
