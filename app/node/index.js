@@ -29,12 +29,17 @@ app.use(function (req, res, next) {
 //------------------------------------------------------------------------
 
 var jwt = require('jsonwebtoken');
-var secret = 'secret';
+var secret = 'f3oLigPb3vGCg9lgL0Bs97wySTCCuvYdOZg9zqTY32o';
 
-var token = jwt.sign({auth:  'magic'}, secret, { expiresIn: 60 * 60 * 100000});
+var token = jwt.sign({auth:  'magic'}, secret, { expiresIn: 60 * 60 });
+
+setInterval(function(){
+	token = jwt.sign({auth:  'magic'}, secret, { expiresIn: 60 * 60 });
+	console.log('token - ' + token);
+	}, 1000 * 60 * 60);
+
 
 app.get('/api/auth', function(req, res) {
-	//console.log('token - ' + token);
 	return res.send(token);
 });
 
