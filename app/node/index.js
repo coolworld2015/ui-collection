@@ -35,9 +35,7 @@ var token = jwt.sign({auth:  'magic'}, secret, { expiresIn: 60 * 60 });
 
 setInterval(function(){
 	token = jwt.sign({auth:  'magic'}, secret, { expiresIn: 60 * 60 });
-	console.log('token - ' + token);
 	}, 1000 * 60 * 60);
-
 
 app.get('/api/auth', function(req, res) {
 	return res.send(token);
