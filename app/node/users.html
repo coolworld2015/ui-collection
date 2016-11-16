@@ -69,6 +69,8 @@
 		
         function CollectionCtrl($scope, $state, $rootScope, $http) {
             var vm = this;
+			//var url = 'http://localhost:3000/';
+			var url = 'http://ui-gai.herokuapp.com/';
 			
 			angular.extend(vm, {
 				init: init,
@@ -92,7 +94,7 @@
 					"pass": vm.pass
                 };
 				
-                $http.post('http://localhost:3000/api/login', item)
+                $http.post(url + 'api/login', item)
                         .then(function (results) {
 							$rootScope.loading = false;
 							$rootScope.access_token = results.data;
@@ -110,7 +112,7 @@
 				$rootScope.loading = true;
 				$rootScope.error = false;
 				
-				$http.get('http://localhost:3000/api/users/get',
+				$http.get(url + 'api/users/get',
 					{
 						headers: {'Authorization': $rootScope.access_token}
 					})
@@ -130,7 +132,7 @@
 				$rootScope.loading = true;
 				$rootScope.error = false;
 				
-				$http.get('http://localhost:3000/api/auth')
+				$http.get(url + 'api/auth')
 					.then(function (results) {
 						$rootScope.loading = false;
 						$rootScope.access_token = results.data;
